@@ -1,0 +1,32 @@
+Domain Main RAM
+SystemID NES
+0010	b	u	1	System Bus	Global Timer (256 frames)
+0028	b	u	1	System Bus	X Level Position
+0032	b	u	1	System Bus	Y Position On-screen
+003C	b	s	1	System Bus	X Speed
+0046	b	u	1	System Bus	Y Speed
+0407	b	u	1	System Bus	X Level Subpixels
+0408	b	u	1	System Bus	Enemy #1 X subpixels
+0409	b	u	1	System Bus	Enemy #2 X subpixels
+040A	b	u	1	System Bus	Enemy #3 X subpixels
+040B	b	u	1	System Bus	Enemy #4 X subpixels
+040C	b	u	1	System Bus	X Camera Position
+040C	b	u	1	System Bus	Enemy #4 X subpixels
+040D	b	u	1	System Bus	Object #1 X subpixels
+040E	b	u	1	System Bus	Object #2 X subpixels
+040F	b	u	1	System Bus	Object #3 X subpixels
+0410	b	u	1	System Bus	Object #4 X subpixels
+0411	b	u	1	System Bus	Y Subpixels
+0417	b	u	1	System Bus	Enemy #1 Y subpixels
+0417	b	u	1	System Bus	Object #1 Y subpixels
+0418	b	u	1	System Bus	Enemy #2 Y subpixels
+0418	b	u	1	System Bus	Object #2 X subpixels
+0419	b	u	1	System Bus	Object #3 X subpixels
+0419	b	u	1	System Bus	Enemy #3 Y subpixels
+041A	b	u	1	System Bus	Enemy #4 Y subpixels
+045F	b	u	1	System Bus	Boss Invulnerability Timer #1
+0460	b	u	1	System Bus	Boss Invulnerability Timer #2
+0468	b	u	1	System Bus	Enemy Health #1
+0469	b	u	1	System Bus	Enemy Health #2
+04BF	b	u	1	System Bus	X Level "2nd Byte"
+04CA	b	u	1	System Bus	Squat Timer
