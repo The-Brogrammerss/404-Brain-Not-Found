@@ -14,3 +14,7 @@ class ConnectGenes:
                 'enabled: {enabled}\n'
                 'innovation: {innovation}'
                 ).format(**self.__dict__)
+
+if __name__ == '__main__':
+    cg = ConnectGenes()
+    print(cg)

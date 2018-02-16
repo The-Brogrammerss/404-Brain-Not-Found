@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f5140dc-1fda-478f-8901-95bac5fa561b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NodeGenes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/NodeGenesTes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Genome.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ConnectGenes.py" afterPath="$PROJECT_DIR$/ConnectGenes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/ConnectGenesTest.py" afterPath="$PROJECT_DIR$/tests/ConnectGenesTest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,15 +15,16 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/404_Brain_Not_Found$all_tests_in_test.coverage" NAME="all tests in test Coverage Results" MODIFIED="1518818263756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$tests_in_tests.coverage" NAME="tests in tests Coverage Results" MODIFIED="1518819096822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$Nosetests_in_NodeGenesTes_py.coverage" NAME="Nosetests in NodeGenesTes.py Coverage Results" MODIFIED="1518817342165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$ConnectGenes.coverage" NAME="ConnectGenes Coverage Results" MODIFIED="1518816497364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$Genome.coverage" NAME="Genome Coverage Results" MODIFIED="1518822995922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$tests_in_tests.coverage" NAME="tests in tests Coverage Results" MODIFIED="1518819662114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$Nosetests_in_NodeGenesTes_py.coverage" NAME="Nosetests in NodeGenesTes.py Coverage Results" MODIFIED="1518819196603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$ConnectGenes.coverage" NAME="ConnectGenes Coverage Results" MODIFIED="1518820358906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/404_Brain_Not_Found$Nosetests_in_tests.coverage" NAME="Nosetests in tests Coverage Results" MODIFIED="1518817362483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$ConnectGenesTests.coverage" NAME="ConnectGenesTests Coverage Results" MODIFIED="1518817354793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/404_Brain_Not_Found$ConnectGenesTests.coverage" NAME="ConnectGenesTests Coverage Results" MODIFIED="1518822506340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="NodeGenesTes.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NodeGenesTes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/NodeGenesTes.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="370">
@@ -33,6 +32,48 @@
               <folding>
                 <element signature="e#55#70#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConnectGenesTest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/ConnectGenesTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1073">
+              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding>
+                <element signature="e#55#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Genome.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Genome.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConnectGenes.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ConnectGenes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NodeGenes.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NodeGenes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="9" column="39" lean-forward="true" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,10 +94,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/address-12.wch" />
-        <option value="$PROJECT_DIR$/ConnectGenes.py" />
         <option value="$PROJECT_DIR$/NodeGenes.py" />
-        <option value="$PROJECT_DIR$/tests/ConnectGenesTest.py" />
         <option value="$PROJECT_DIR$/tests/NodeGenesTes.py" />
+        <option value="$PROJECT_DIR$/ConnectGenes.py" />
+        <option value="$PROJECT_DIR$/tests/ConnectGenesTest.py" />
+        <option value="$PROJECT_DIR$/Genome.py" />
       </list>
     </option>
   </component>
@@ -95,11 +137,6 @@
               <item name="404 Brain Not Found" type="b2602c69:ProjectViewProjectNode" />
               <item name="404 Brain Not Found" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="404 Brain Not Found" type="b2602c69:ProjectViewProjectNode" />
-              <item name="404 Brain Not Found" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -109,7 +146,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Genome.py" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -123,7 +160,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.tests in tests">
+  <component name="RunManager" selected="Python.Genome">
     <configuration name="ConnectGenes" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -158,6 +195,40 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/ConnectGenesTest.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
+    <configuration name="Genome" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\DJ\AppData\Local\Programs\Python\Python36\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="404 Brain Not Found" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Genome.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="Nosetests in NodeGenesTes.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="404 Brain Not Found" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/NodeGenesTes.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
     <configuration name="tests in tests" type="tests" factoryName="Nosetests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -174,11 +245,18 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Python.ConnectGenes" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.ConnectGenesTests" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.tests in tests" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.Genome" />
+      <item index="1" class="java.lang.String" itemvalue="Python.ConnectGenes" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.ConnectGenesTests" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.tests in tests" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in NodeGenesTes.py" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetests in NodeGenesTes.py" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -194,46 +272,47 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Nosetests_in_tests - 2018.02.16 at 14h 41m 34s.xml">
-      <configuration name="Nosetests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 21m 42s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_in_tests - 2018.02.16 at 14h 42m 43s.xml">
-      <configuration name="Nosetests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 24m 39s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_in_tests - 2018.02.16 at 14h 49m 23s.xml">
-      <configuration name="Nosetests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 25m 27s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="all_tests_in_test - 2018.02.16 at 14h 56m 26s.xml">
-      <configuration name="all tests in test" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 31m 28s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="all_tests_in_test - 2018.02.16 at 14h 57m 44s.xml">
-      <configuration name="all tests in test" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 33m 17s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="tests_in_tests - 2018.02.16 at 14h 58m 54s.xml">
-      <configuration name="tests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 33m 59s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="tests_in_tests - 2018.02.16 at 15h 00m 59s.xml">
-      <configuration name="tests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 36m 36s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="tests_in_tests - 2018.02.16 at 15h 02m 17s.xml">
-      <configuration name="tests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 36m 58s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="tests_in_tests - 2018.02.16 at 15h 02m 26s.xml">
-      <configuration name="tests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 15h 37m 26s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="tests_in_tests - 2018.02.16 at 15h 11m 37s.xml">
-      <configuration name="tests in tests" configurationId="tests" />
+    <history-entry file="ConnectGenesTests - 2018.02.16 at 16h 08m 26s.xml">
+      <configuration name="ConnectGenesTests" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="76" width="2764" height="1762" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3299595" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12736206" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3299595" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2898715" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25396827" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -272,6 +351,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/address-12.wch" />
+    <entry file="file://$PROJECT_DIR$/tests/NodeGenesTes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#55#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NodeGenes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
@@ -280,27 +369,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ConnectGenes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="15" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/ConnectGenesTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/NodeGenesTes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="1073">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="e#55#70#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConnectGenes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Genome.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
