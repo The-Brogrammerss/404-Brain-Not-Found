@@ -10,5 +10,14 @@ class ConnectGenes:
         self.innovation = None
 
     def __str__(self):
-        return "x:", self.x + "Y:", self.Y, "weight:", self.weight, "status:", self.status, "innovation:", self.innovation
+        return ('x: {x}\n'
+                'Y: {Y}\n'
+                'weight: {weight}\n'
+                'status: {status}\n'
+                'innovation: {innovation}'
+                ).format(**self.__dict__)
 
+
+if __name__ == '__main__':
+    a = ConnectGenes()
+    print (a)
