@@ -4,7 +4,7 @@ from Genome import Genome
 from ConnectGenes import ConnectGenes
 from NodeGenes import NodeGenes
 
-class test_Connect(unittest.TestCase):
+class test_genome(unittest.TestCase):
     global g
     g = Genome()
     g.connections.append(ConnectGenes())

@@ -3,7 +3,7 @@ import unittest
 import ConnectGenes
 
 
-class test_Connect(unittest.TestCase):
+class test_connect_attributes(unittest.TestCase):
     global cg
     cg = ConnectGenes.ConnectGenes()
     cg.x = 1

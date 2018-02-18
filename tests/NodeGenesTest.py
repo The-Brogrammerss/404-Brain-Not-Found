@@ -2,7 +2,7 @@
 import unittest
 import NodeGenes
 
-class test_Connect(unittest.TestCase):
+class test_node_attributes(unittest.TestCase):
     global ng
     ng = NodeGenes.NodeGenes()
     ng.nodeNum = 1
