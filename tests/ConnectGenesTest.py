@@ -1,9 +1,9 @@
-# Kinda redundant as in its testing python but oh well
+# Kinda silly to pretty much test python but needed for code coverageimport unittest
 import unittest
 import ConnectGenes
 
+
 class test_Connect(unittest.TestCase):
-    # Added these test to test making lower case
     global cg
     cg = ConnectGenes.ConnectGenes()
     cg.x = 1

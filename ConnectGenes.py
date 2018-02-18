@@ -15,6 +15,6 @@ class ConnectGenes:
                 'innovation: {innovation}'
                 ).format(**self.__dict__)
 
-if __name__ == '__main__':
-    cg = ConnectGenes()
-    print(cg)
+# if __name__ == '__main__':
+#     cg = ConnectGenes()
+#     print(cg)

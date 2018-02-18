@@ -1,9 +1,8 @@
-# Kinda redundant as in its testing python but oh well
+# Kinda silly to pretty much test python but needed for code coverage
 import unittest
 import NodeGenes
 
 class test_Connect(unittest.TestCase):
-    # Added these test to test making lower case
     global ng
     ng = NodeGenes.NodeGenes()
     ng.nodeNum = 1

@@ -1,0 +1,15 @@
+# Kinda silly to pretty much test python but needed for code coverage
+import unittest
+from Genome import Genome
+from ConnectGenes import ConnectGenes
+from NodeGenes import NodeGenes
+
+class test_Connect(unittest.TestCase):
+    global g
+    g = Genome()
+    g.connections.append(ConnectGenes())
+    g.nodes.append(NodeGenes())
+
+    g.nodes[0].nodeNum = 4
+    def test_x(self):
+        self.assertEqual(g.nodes[0].nodeNum, 4)
