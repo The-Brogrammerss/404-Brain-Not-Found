@@ -5,7 +5,7 @@ class ConnectGenes:
         self.Y = None
         self.weight = None
         self.enabled = None
-        self.innovation = None
+        self.innovation = None  # Historical marker
 
     def __str__(self):
         return ('x: {x}\n'
@@ -14,7 +14,3 @@ class ConnectGenes:
                 'enabled: {enabled}\n'
                 'innovation: {innovation}'
                 ).format(**self.__dict__)
-
-# if __name__ == '__main__':
-#     cg = ConnectGenes()
-#     print(cg)
