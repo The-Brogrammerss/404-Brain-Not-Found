@@ -1,4 +1,4 @@
-class NodeGenes:
+class NodeGenes(object):
 
     def __init__(self):
         self.nodeNum = None

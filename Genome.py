@@ -1,6 +1,6 @@
 from NodeGenes import NodeGenes
 from ConnectGenes import ConnectGenes
-class Genome:
+class Genome(object):
     def __init__(self):
         self.connections = []
         self.nodes = []
