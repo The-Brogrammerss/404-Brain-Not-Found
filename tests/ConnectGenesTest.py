@@ -26,4 +26,3 @@ class test_connect_attributes(unittest.TestCase):
 
     def test_innovation(self):
         self.assertEqual(cg.innovation, 1)
-
