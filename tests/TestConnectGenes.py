@@ -26,3 +26,6 @@ class test_connect_attributes(unittest.TestCase):
 
     def test_innovation(self):
         self.assertEqual(cg.innovation, 1)
+
+    def test_str(self):
+        self.assertEqual(print(cg), None)

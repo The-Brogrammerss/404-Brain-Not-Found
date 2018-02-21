@@ -13,3 +13,6 @@ class test_genome(unittest.TestCase):
     g.nodes[0].nodeNum = 4
     def test_x(self):
         self.assertEqual(g.nodes[0].nodeNum, 4)
+
+    def test_str(self):
+        self.assertEqual(print(g), None)

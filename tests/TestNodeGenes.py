@@ -13,3 +13,6 @@ class test_node_attributes(unittest.TestCase):
 
     def test_Y(self):
         self.assertEqual(ng.type, "Sensor")
+
+    def test_str(self):
+        self.assertEqual(print(ng), None)
