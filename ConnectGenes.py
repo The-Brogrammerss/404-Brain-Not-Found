@@ -1,11 +1,11 @@
 class ConnectGenes(object):
 
-    def __init__(self):
-        self.x = None
-        self.Y = None
-        self.weight = None
-        self.enabled = None
-        self.innovation = None  # Historical marker
+    def __init__(self, x = None, Y = None, weight = None, enabled = None, innovation = None):
+        self.x = x
+        self.Y = Y
+        self.weight = weight
+        self.enabled = enabled
+        self.innovation = innovation  # Historical marker
 
     def __str__(self):
         return ('x: {x}\n'

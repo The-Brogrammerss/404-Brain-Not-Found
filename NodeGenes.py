@@ -1,8 +1,8 @@
 class NodeGenes(object):
 
-    def __init__(self):
-        self.nodeNum = None
-        self.type = None #Sensor, Hidden, Output
+    def __init__(self, nodeNum = None, t = None):
+        self.nodeNum = nodeNum
+        self.type = t #Sensor, Hidden, Output
 
     def __str__(self):
         return ('nodeNum: {nodeNum}\n'
