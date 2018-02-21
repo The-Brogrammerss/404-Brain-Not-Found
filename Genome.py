@@ -16,7 +16,7 @@ class Genome(object):
 
         return(result)
 
-# Test if __str__ works
+#Test if __str__ works
 # if '__main__' == __name__:
 #     g = Genome()
 #
