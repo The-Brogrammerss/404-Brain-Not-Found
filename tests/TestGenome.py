@@ -11,8 +11,12 @@ class test_genome(unittest.TestCase):
     g.nodes.append(NodeGenes())
 
     g.nodes[0].nodeNum = 4
-    def test_x(self):
+    g.nodes[0].type = "Sensor"
+    def test_nodeNum(self):
         self.assertEqual(g.nodes[0].nodeNum, 4)
+
+    def test_type(self):
+        self.assertEqual(g.nodes[0].type, "Sensor")
 
     def test_str(self):
         self.assertEqual(print(g), None)
