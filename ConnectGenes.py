@@ -1,6 +1,6 @@
 class ConnectGenes(object):
 
-    def __init__(self, x = None, Y = None, weight = None, enabled = None, innovation = None):
+    def __init__(self, x: object = None, Y: object = None, weight: object = None, enabled: object = None, innovation: object = None) -> object:
         self.x = x
         self.Y = Y
         self.weight = weight
