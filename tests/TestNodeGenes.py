@@ -15,4 +15,4 @@ class test_node_attributes(unittest.TestCase):
         self.assertEqual(ng.type, "Sensor")
 
     def test_str(self):
-        self.assertEqual(print(ng), None)
+        self.assertNotEqual(ng.__str__(), None)

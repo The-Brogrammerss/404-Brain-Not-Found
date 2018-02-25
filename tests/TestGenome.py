@@ -19,4 +19,5 @@ class test_genome(unittest.TestCase):
         self.assertEqual(g.nodes[0].type, "Sensor")
 
     def test_str(self):
-        self.assertEqual(print(g), None)
+        self.assertNotEqual(g.__str__(), None)
+        print(g)

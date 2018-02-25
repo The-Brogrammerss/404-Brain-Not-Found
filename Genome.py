@@ -1,12 +1,14 @@
 from NodeGenes import NodeGenes
 from ConnectGenes import ConnectGenes
 class Genome(object):
-    def __init__(self):
+    def __init__(self, fitness: int = 0):
         self.connections = []
         self.nodes = []
+        self.fitness = fitness
 
     def __str__(self):
-        result = "Nodes in Genome:\n"
+        result = "fitness: " + str(self.fitness) + '\n'
+        result += "Nodes in Genome:\n"
         for node in self.nodes:
             result += str(node) + '\n'
 
@@ -14,7 +16,7 @@ class Genome(object):
         for connect in self.connections:
             result += str(connect) + '\n\n'
 
-        return(result)
+        return result
 
 #Test if __str__ works
 # if '__main__' == __name__:

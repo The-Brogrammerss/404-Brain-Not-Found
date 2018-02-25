@@ -8,7 +8,7 @@ import cartpole
 
 innovation = 0
 
-def GenerateInitPop():
+def GenerateInitialPopulation():
     gnome = Genome()
 
     for i in range(1, numInputs + 2):
@@ -30,7 +30,6 @@ def GenerateInitPop():
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.random()
-            g.connections[k].enabled = True
         pop.append(g)
 
 
@@ -43,8 +42,9 @@ def GenerateConnections(gnome):
                     cons = ConnectGenes()
                     cons.x = gnome.nodes[k].nodeNum
                     cons.Y = gnome.nodes[j].nodeNum
+                    cons.enabled = True
                     innovation = innovation + 1
-                    cons.innovation = (innovation)
+                    cons.innovation = innovation
                     cons.weight = random.random()
                     gnome.connections.append(cons)
 
@@ -59,4 +59,5 @@ if '__main__' == __name__:
     numY = int(numY)
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
-    GenerateInitPop()
+    GenerateInitialPopulation()
+    # print(pop[0])

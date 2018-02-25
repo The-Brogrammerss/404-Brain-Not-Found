@@ -28,4 +28,4 @@ class test_connect_attributes(unittest.TestCase):
         self.assertEqual(cg.innovation, 1)
 
     def test_str(self):
-        self.assertEqual(print(cg), None)
+        self.assertNotEqual(cg.__str__(), None)
