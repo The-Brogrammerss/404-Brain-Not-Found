@@ -30,9 +30,9 @@ def GenerateInitPop():
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.random()
+            g.connections[k].enabled = True
         pop.append(g)
-    print(pop[0])
-    print(pop[199])
+
 
 def GenerateConnections(gnome):
     global innovation
