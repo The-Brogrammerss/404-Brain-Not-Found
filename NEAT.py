@@ -60,4 +60,3 @@ if '__main__' == __name__:
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
     GenerateInitialPopulation()
-    # print(pop[0])
