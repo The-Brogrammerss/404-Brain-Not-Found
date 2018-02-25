@@ -2,33 +2,37 @@ from ConnectGenes import ConnectGenes
 from Genome import Genome
 from NodeGenes import NodeGenes
 from cartpole import CartPole
+import copy
 import random
 import cartpole
 
 innovation = 0
 
 def GenerateInitPop():
-    for gnum in range(popCap):
-        gnome = Genome()
+    gnome = Genome()
 
-        for i in range(1, numInputs + 2):
-            nodes = NodeGenes()
-            nodes.nodeNum = i
-            nodes.type = "Sensor"
-            gnome.nodes.append(nodes)
+    for i in range(1, numInputs + 2):
+        nodes = NodeGenes()
+        nodes.nodeNum = i
+        nodes.type = "Sensor"
+        gnome.nodes.append(nodes)
 
-        for i in range(1, numY + 1):
-            nodes = NodeGenes()
-            nodes.nodeNum = numInputs + i + 1
-            nodes.type = "Output"
-            gnome.nodes.append(nodes)
+    for i in range(1, numY + 1):
+        nodes = NodeGenes()
+        nodes.nodeNum = numInputs + i + 1
+        nodes.type = "Output"
+        gnome.nodes.append(nodes)
 
+    GenerateConnections(gnome)
 
-
-        GenerateConnections(gnome)
-
-        pop.append(gnome)
-    print(pop[100])
+    pop.append(gnome)
+    for i in range(1, popCap):
+        g = copy.deepcopy(gnome)
+        for k in range(len(g.connections)):
+            g.connections[k].weight = random.random()
+        pop.append(g)
+    print(pop[0])
+    print(pop[199])
 
 def GenerateConnections(gnome):
     global innovation
