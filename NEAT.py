@@ -2,26 +2,57 @@ from ConnectGenes import ConnectGenes
 from Genome import Genome
 from NodeGenes import NodeGenes
 from cartpole import CartPole
+import random
 import cartpole
 
-popCap = 200
-pop = []
+innovation = 0
 
-# os.system("cartpole.py")
-numInputs, numY = CartPole.getXy()
-numY = int(numY)
-print("num ouputs:", numY)
-print("num Inputs:", numInputs)
+def GenerateInitPop():
+    for gnum in range(popCap):
+        gnome = Genome()
 
-for gnum in range(popCap):
-    gnome = Genome()
-    cons = ConnectGenes()
-    nodes = NodeGenes()
+        for i in range(1, numInputs + 2):
+            nodes = NodeGenes()
+            nodes.nodeNum = i
+            nodes.type = "Sensor"
+            gnome.nodes.append(nodes)
 
-    for i in range(numInputs + 1):
-        nodes.nodeNum = i
-        nodes.type = "Sensor"
-    for i in range(numY):
-
+        for i in range(1, numY + 1):
+            nodes = NodeGenes()
+            nodes.nodeNum = numInputs + i + 1
+            nodes.type = "Output"
+            gnome.nodes.append(nodes)
 
 
+
+        GenerateConnections(gnome)
+
+        pop.append(gnome)
+    print(pop[100])
+
+def GenerateConnections(gnome):
+    global innovation
+    for k in range(0, len(gnome.nodes)):
+        if gnome.nodes[k].type == "Sensor":
+            for j in range(1, len(gnome.nodes)):
+                if gnome.nodes[j].type == "Output":
+                    cons = ConnectGenes()
+                    cons.x = gnome.nodes[k].nodeNum
+                    cons.Y = gnome.nodes[j].nodeNum
+                    innovation = innovation + 1
+                    cons.innovation = (innovation)
+                    cons.weight = random.random()
+                    gnome.connections.append(cons)
+
+
+
+
+if '__main__' == __name__:
+    popCap = 200
+    pop = []
+    # os.system("cartpole.py")
+    numInputs, numY = CartPole.getXy()
+    numY = int(numY)
+    print("num ouputs:", numY)
+    print("num Inputs:", numInputs)
+    GenerateInitPop()
