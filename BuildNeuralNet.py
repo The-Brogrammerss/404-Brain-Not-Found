@@ -35,12 +35,19 @@ class NeuralNet(object):
                     else:
                         self.hiddenLayers[con.Y].weights[con.x] = con.weight
 
-    def predict(self, inputs):
-        for i, keyPair in enumerate(self.inputLayer.items()):
-            for Y in keyPair[1].outgoing:
-                self.hiddenLayers[Y].incoming[keyPair[0]] = inputs[i]
 
-        calculation = True
+    def predict(self, inputs):
+        
+        if len(self.hiddenLayers) > 0:
+            for i, keyPair in enumerate(self.inputLayer.items()):
+                for Y in keyPair[1].outgoing:
+                    print("wat")
+                    print(str(Y) + ": " + str(self.hiddenLayers[Y]))
+                    self.hiddenLayers[Y].incoming[keyPair[0]] = inputs[i]
+            calculation = True
+        else:
+            calculation = False
+
         while calculation:
             calculation = False
             for node in self.hiddenLayers:
