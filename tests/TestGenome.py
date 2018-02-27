@@ -20,4 +20,4 @@ class test_genome(unittest.TestCase):
 
     def test_str(self):
         self.assertNotEqual(g.__str__(), None)
-        print(g)
+

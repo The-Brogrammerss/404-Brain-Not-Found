@@ -48,14 +48,15 @@ def GenerateConnections(gnome):
                     cons.innovation = innovation
                     cons.weight = random.random()
                     gnome.connections.append(cons)
-
+''
 
 def RunGame():
     for i in range(len(pop)):
         neuralNet = NeuralNet(pop[i])
+        print(pop[i])
         neuralNet.buildNeuralNet()
         pop[i].fitness = cartpole.get_fitness(neuralNet)
-        print(pop[i].fitness)
+        #print(pop[i].fitness)
 
 if '__main__' == __name__:
     popCap = 200
