@@ -38,7 +38,7 @@ def get_fitness(NN):
     observation = observation.tolist()
     observation.append(1)
     print("observation: " + str(observation))
-    reward = 0
+    fitness = 0
     for x in range(1000):
 
         NN.predict(observation)
@@ -47,7 +47,7 @@ def get_fitness(NN):
         else:
             action = 1
         observation, reward, done, info = env.step(action)
-        reward += reward
+        fitness += reward
         if done:
-            print(reward)
-            return reward
+            print(fitness)
+            return fitness
