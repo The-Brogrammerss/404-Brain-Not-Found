@@ -1,7 +1,8 @@
 from ConnectGenes import ConnectGenes
 from Genome import Genome
 from NodeGenes import NodeGenes
-from cartpole import CartPole
+import cartpole
+from BuildNeuralNet import NeuralNet
 import copy
 import random
 import cartpole
@@ -49,14 +50,20 @@ def GenerateConnections(gnome):
                     gnome.connections.append(cons)
 
 
-
+def RunGame():
+    for i in range(len(pop)):
+        neuralNet = NeuralNet(pop[i])
+        neuralNet.buildNeuralNet()
+        pop[i].fitness = cartpole.get_fitness(neuralNet)
+        print(pop[i].fitness)
 
 if '__main__' == __name__:
     popCap = 200
     pop = []
     # os.system("cartpole.py")
-    numInputs, numY = CartPole.getXy()
+    numInputs, numY = cartpole.get_xy()
     numY = int(numY)
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
     GenerateInitialPopulation()
+    RunGame()
