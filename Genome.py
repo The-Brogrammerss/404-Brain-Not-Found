@@ -1,9 +1,9 @@
 from NodeGenes import NodeGenes
 from ConnectGenes import ConnectGenes
 class Genome(object):
-    def __init__(self, fitness: int = 0):
-        self.connections = []
-        self.nodes = []
+    def __init__(self, fitness: int = 0, connections = [], nodes = []):
+        self.connections = connections
+        self.nodes = nodes
         self.fitness = fitness
 
     def __str__(self):
