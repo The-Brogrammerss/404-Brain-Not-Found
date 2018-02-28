@@ -31,7 +31,7 @@ def get_xy():
         #print("Reward:", fitness)
         x = str(env.action_space)
         x = (x[9]) # action space returns 'Discrete(#)' and we just want the #
-        return len(observation), int(x)
+        return len(observation) + 1, 1
 
 def get_fitness(NN):
     observation = env.reset()
@@ -39,15 +39,12 @@ def get_fitness(NN):
     observation.append(1)
     print("observation: " + str(observation))
     fitness = 0
-    for x in range(1000):
+    for x in range(10000):
 
         NN.predict(observation)
-        print(NN.output)
-        if round(NN.output[0]) == 1:
-            action = 1
-        else:
-            action = 0
-        observation, reward, done, info = env.step(action)
+        observation, reward, done, info = env.step(round(NN.output[0]))
+        observation = observation.tolist()
+        observation.append(1)
         fitness += reward
         if done:
             print(fitness)

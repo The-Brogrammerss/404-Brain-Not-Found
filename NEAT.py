@@ -6,13 +6,15 @@ from BuildNeuralNet import NeuralNet
 import copy
 import random
 import cartpole
+import gym
 
 innovation = 0
 
 def GenerateInitialPopulation():
     gnome = Genome()
 
-    for i in range(1, numInputs + 2):
+    #for i in range(1, numInputs + 2):
+    for i in range(1, numInputs + 1):
         nodes = NodeGenes()
         nodes.nodeNum = i
         nodes.type = "Sensor"
@@ -20,7 +22,7 @@ def GenerateInitialPopulation():
 
     for i in range(1, numY + 1):
         nodes = NodeGenes()
-        nodes.nodeNum = numInputs + i + 1
+        nodes.nodeNum = numInputs + i
         nodes.type = "Output"
         gnome.nodes.append(nodes)
 
@@ -46,7 +48,7 @@ def GenerateConnections(gnome):
                     cons.enabled = True
                     innovation = innovation + 1
                     cons.innovation = innovation
-                    cons.weight = random.random()
+                    cons.weight = random.randint(-10, 10)
                     gnome.connections.append(cons)
 
 
@@ -59,14 +61,16 @@ def RunGame():
         #print(pop[i].fitness)
 
 if '__main__' == __name__:
-    popCap = 1
+    popCap = 200
     pop = []
     # os.system("cartpole.py")
     numInputs, numY = cartpole.get_xy()
+
     numY = int(numY)
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
     GenerateInitialPopulation()
+
     nn = NeuralNet(genome = pop[0])
     nn.buildNeuralNet()
     for key, value in nn.inputLayer.items():
@@ -75,4 +79,26 @@ if '__main__' == __name__:
         print(str(key) +': '+ str(value))
     nn.predict([1,1,1,1,1])
     print(nn.output)
-    #RunGame()
+
+    RunGame()
+    pop.sort(key = lambda x: x.fitness, reverse = True)
+    print(pop[0].fitness)
+    env = gym.make('CartPole-v1')
+    NN = NeuralNet(genome = pop[0])
+    NN.buildNeuralNet()
+
+    observation = env.reset()
+    observation = observation.tolist()
+    observation.append(1)
+    print("observation: " + str(observation))
+    fitness = 0
+    for x in range(10000):
+
+        NN.predict(observation)
+        observation, reward, done, info = env.step(round(NN.output[0]))
+        env.render()
+        observation = observation.tolist()
+        observation.append(1)
+        fitness += reward
+        if done:
+            break

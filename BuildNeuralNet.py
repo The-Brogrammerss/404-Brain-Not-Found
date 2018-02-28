@@ -38,7 +38,6 @@ class NeuralNet(object):
 
 
     def predict(self, inputs):
-
         if len(self.hiddenLayers) > 0:
             for i, keyPair in enumerate(self.inputLayer.items()):
                 for Y in keyPair[1].outgoing:
@@ -64,8 +63,7 @@ class NeuralNet(object):
                     self.hiddenLayers[node].incoming = {}
 
         for node in self.inputLayer:
-            for i in self.inputLayer[node].out
-            going:
+            for i in self.inputLayer[node].outgoing:
                 if i in self.outputLayer:
                     self.outputLayer[i].incoming[node] = inputs[node-1]
 
