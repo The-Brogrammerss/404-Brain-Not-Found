@@ -42,10 +42,11 @@ def get_fitness(NN):
     for x in range(1000):
 
         NN.predict(observation)
-        if NN.output[0] == 1:
-            action = 0
-        else:
+        print(NN.output)
+        if round(NN.output[0]) == 1:
             action = 1
+        else:
+            action = 0
         observation, reward, done, info = env.step(action)
         fitness += reward
         if done:

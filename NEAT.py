@@ -30,7 +30,7 @@ def GenerateInitialPopulation():
     for i in range(1, popCap):
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
-            g.connections[k].weight = random.random()
+            g.connections[k].weight = random.randrange(-100, 100, 1)
         pop.append(g)
 
 
@@ -59,7 +59,7 @@ def RunGame():
         #print(pop[i].fitness)
 
 if '__main__' == __name__:
-    popCap = 200
+    popCap = 1
     pop = []
     # os.system("cartpole.py")
     numInputs, numY = cartpole.get_xy()
@@ -67,4 +67,12 @@ if '__main__' == __name__:
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
     GenerateInitialPopulation()
-    RunGame()
+    nn = NeuralNet(genome = pop[0])
+    nn.buildNeuralNet()
+    for key, value in nn.inputLayer.items():
+        print(str(key) +': '+ str(value))
+    for key, value in nn.outputLayer.items():
+        print(str(key) +': '+ str(value))
+    nn.predict([1,1,1,1,1])
+    print(nn.output)
+    #RunGame()

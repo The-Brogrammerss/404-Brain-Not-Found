@@ -7,13 +7,13 @@ import time
 
 connections = []
 nodes = []
-
 nodes.append(NodeGenes(nodeNum = 1, t = 'Sensor'))
 nodes.append(NodeGenes(nodeNum = 2, t = 'Sensor'))
 nodes.append(NodeGenes(nodeNum = 3, t = 'Sensor'))
 nodes.append(NodeGenes(nodeNum = 4, t = 'Hidden'))
 nodes.append(NodeGenes(nodeNum = 5, t = 'Hidden'))
 nodes.append(NodeGenes(nodeNum = 6, t = 'Output'))
+
 
 connections.append(ConnectGenes(x = 1, Y = 4, weight = -10, enabled = True))
 connections.append(ConnectGenes(x = 1, Y = 6, weight = -30, enabled = True))

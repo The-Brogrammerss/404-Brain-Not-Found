@@ -63,6 +63,12 @@ class NeuralNet(object):
                             self.outputLayer[i].incoming[node] = self.sigmoid(theta)
                     self.hiddenLayers[node].incoming = {}
 
+        for node in self.inputLayer:
+            for i in self.inputLayer[node].out
+            going:
+                if i in self.outputLayer:
+                    self.outputLayer[i].incoming[node] = inputs[node-1]
+
         self.output = []
         for x in self.outputLayer:
             theta = sum(self.outputLayer[x].incoming[k]*self.outputLayer[x].weights[k] for k in self.outputLayer[x].incoming)
