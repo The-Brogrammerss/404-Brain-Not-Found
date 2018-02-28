@@ -1,3 +1,4 @@
+import math
 
 class NeuralNet(object):
 
@@ -37,13 +38,14 @@ class NeuralNet(object):
 
 
     def predict(self, inputs):
-        
+
         if len(self.hiddenLayers) > 0:
             for i, keyPair in enumerate(self.inputLayer.items()):
                 for Y in keyPair[1].outgoing:
-                    print("wat")
-                    print(str(Y) + ": " + str(self.hiddenLayers[Y]))
-                    self.hiddenLayers[Y].incoming[keyPair[0]] = inputs[i]
+                    if Y in self.hiddenLayers:
+                        self.hiddenLayers[Y].incoming[keyPair[0]] = inputs[i]
+                    elif Y in self.outputLayer:
+                        self.outputLayer[Y].incoming[keyPair[0]] = inputs[i]
             calculation = True
         else:
             calculation = False
@@ -68,7 +70,8 @@ class NeuralNet(object):
             self.output.append(self.sigmoid(theta))
 
     def sigmoid(self, x):
-        return x
+        return (1 / ( 1 + math.exp(-x)))
+        #return x
 
             #for Y in node.outgoing:
 
