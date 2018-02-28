@@ -15,7 +15,6 @@ nodes.append(NodeGenes(nodeNum = 4, t = 'Hidden'))
 nodes.append(NodeGenes(nodeNum = 5, t = 'Hidden'))
 nodes.append(NodeGenes(nodeNum = 6, t = 'Output'))
 
-
 connections.append(ConnectGenes(x = 1, Y = 4, weight = -10, enabled = True))
 connections.append(ConnectGenes(x = 1, Y = 6, weight = -30, enabled = True))
 connections.append(ConnectGenes(x = 1, Y = 5, weight = 30, enabled = True))
@@ -51,6 +50,3 @@ nn.predict([1,0,1])
 print("0 1 ", nn.output)
 nn.predict([1,1,0])
 print("1 0 ", nn.output)
-
-
-print(int(round(0.09)))
