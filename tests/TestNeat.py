@@ -7,7 +7,7 @@ class TestNeat(unittest.TestCase):
     NEAT.numY = 10
     NEAT.popCap = 2
     NEAT.population = []
-    genPop = NEAT.generate_initial_population()
+    genPop = NEAT.generate_initial_genome()
 
     def test_generate_population(self):
         self.assertEqual(len(NEAT.population), 2)

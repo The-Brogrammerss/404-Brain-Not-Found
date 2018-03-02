@@ -10,7 +10,7 @@ import gym
 
 innovation = 0
 
-def generate_initial_population():
+def generate_initial_genome():
     gnome = Genome()
     #for i in range(1, numInputs + 2):
     for i in range(1, numInputs + 1):
@@ -26,14 +26,15 @@ def generate_initial_population():
         gnome.nodes.append(nodes)
 
     generate_connections(gnome)
-
     population.append(gnome)
+    copy_to_popCap(gnome)
+
+def copy_to_popCap(gnome):
     for i in range(1, popCap):
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.randrange(-100, 100, 1)
         population.append(g)
-
 
 def generate_connections(gnome):
     global innovation
@@ -54,10 +55,8 @@ def generate_connections(gnome):
 def run_game():
     for i in range(len(population)):
         neuralNet = NeuralNet(population[i])
-        #print(pop[i])
         neuralNet.buildNeuralNet()
         population[i].fitness = cartpole.get_fitness(neuralNet)
-        #print(pop[i].fitness)
 
 if '__main__' == __name__:
     popCap = 200
@@ -68,7 +67,7 @@ if '__main__' == __name__:
     numY = int(numY)
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
-    generate_initial_population()
+    generate_initial_genome()
 
     nn = NeuralNet(genome = population[0])
     nn.buildNeuralNet()
