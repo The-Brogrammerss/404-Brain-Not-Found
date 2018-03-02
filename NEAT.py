@@ -10,9 +10,8 @@ import gym
 
 innovation = 0
 
-def GenerateInitialPopulation():
+def generate_initial_population():
     gnome = Genome()
-
     #for i in range(1, numInputs + 2):
     for i in range(1, numInputs + 1):
         nodes = NodeGenes()
@@ -26,17 +25,17 @@ def GenerateInitialPopulation():
         nodes.type = "Output"
         gnome.nodes.append(nodes)
 
-    GenerateConnections(gnome)
+    generate_connections(gnome)
 
-    pop.append(gnome)
+    population.append(gnome)
     for i in range(1, popCap):
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.randrange(-100, 100, 1)
-        pop.append(g)
+        population.append(g)
 
 
-def GenerateConnections(gnome):
+def generate_connections(gnome):
     global innovation
     for k in range(0, len(gnome.nodes)):
         if gnome.nodes[k].type == "Sensor":
@@ -52,26 +51,26 @@ def GenerateConnections(gnome):
                     gnome.connections.append(cons)
 
 
-def RunGame():
-    for i in range(len(pop)):
-        neuralNet = NeuralNet(pop[i])
+def run_game():
+    for i in range(len(population)):
+        neuralNet = NeuralNet(population[i])
         #print(pop[i])
         neuralNet.buildNeuralNet()
-        pop[i].fitness = cartpole.get_fitness(neuralNet)
+        population[i].fitness = cartpole.get_fitness(neuralNet)
         #print(pop[i].fitness)
 
 if '__main__' == __name__:
     popCap = 200
-    pop = []
+    population = []
     # os.system("cartpole.py")
     numInputs, numY = cartpole.get_xy()
 
     numY = int(numY)
     print("num ouputs:", numY)
     print("num Inputs:", numInputs)
-    GenerateInitialPopulation()
+    generate_initial_population()
 
-    nn = NeuralNet(genome = pop[0])
+    nn = NeuralNet(genome = population[0])
     nn.buildNeuralNet()
     for key, value in nn.inputLayer.items():
         print(str(key) +': '+ str(value))
@@ -80,11 +79,11 @@ if '__main__' == __name__:
     nn.predict([1,1,1,1,1])
     print(nn.output)
 
-    RunGame()
-    pop.sort(key = lambda x: x.fitness, reverse = True)
-    print(pop[0].fitness)
+    run_game()
+    population.sort(key = lambda x: x.fitness, reverse = True)
+    print(population[0].fitness)
     env = gym.make('CartPole-v1')
-    NN = NeuralNet(genome = pop[0])
+    NN = NeuralNet(genome = population[0])
     NN.buildNeuralNet()
 
     observation = env.reset()
