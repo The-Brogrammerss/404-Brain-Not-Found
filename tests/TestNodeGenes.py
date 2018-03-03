@@ -1,6 +1,8 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
-import NodeGenes
+
+from src import NodeGenes
+
 
 class test_node_attributes(unittest.TestCase):
     global ng

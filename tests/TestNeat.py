@@ -1,5 +1,7 @@
 import unittest
-import NEAT
+
+from src import NEAT
+
 
 class TestNeat(unittest.TestCase):
 

@@ -1,6 +1,5 @@
 import gym
-import numpy
-import BuildNeuralNet
+
 env = gym.make('CartPole-v1')
 '''
 env.reset()

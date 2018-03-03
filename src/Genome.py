@@ -1,5 +1,4 @@
-from NodeGenes import NodeGenes
-from ConnectGenes import ConnectGenes
+# Going off of the Papers structure, a gnome is one 
 class Genome(object):
     def __init__(self, fitness: int = 0, connections = [], nodes = []):
         self.connections = connections

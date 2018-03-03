@@ -1,9 +1,8 @@
-from NodeGenes import NodeGenes
-from ConnectGenes import ConnectGenes
 from Genome import Genome
-from BuildNeuralNet import NeuralNet
-import time
 
+from src.BuildNeuralNet import NeuralNet
+from src.ConnectGenes import ConnectGenes
+from src.NodeGenes import NodeGenes
 
 connections = []
 nodes = []

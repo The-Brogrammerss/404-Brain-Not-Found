@@ -1,8 +1,11 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
+
 from Genome import Genome
-from ConnectGenes import ConnectGenes
-from NodeGenes import NodeGenes
+
+from src.ConnectGenes import ConnectGenes
+from src.NodeGenes import NodeGenes
+
 
 class test_genome(unittest.TestCase):
     global g
