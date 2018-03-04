@@ -1,7 +1,7 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
 
-from Genome import Genome
+from src.Genome import Genome
 
 from src.ConnectGenes import ConnectGenes
 from src.NodeGenes import NodeGenes

@@ -1,6 +1,6 @@
 import unittest
 
-from Genome import Genome
+from src.Genome import Genome
 
 from src.BuildNeuralNet import NeuralNet
 from src.ConnectGenes import ConnectGenes
