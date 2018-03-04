@@ -45,7 +45,6 @@ class NeuralNet(object):
                     else:
                         self.hiddenLayers[con.Y].weights[con.x] = con.weight
 
-
     def predict(self, inputs):
         if len(self.hiddenLayers) > 0:
             for i, keyPair in enumerate(self.inputLayer.items()):

@@ -5,8 +5,7 @@ import random
 import cartpole
 import gym
 from Genome import Genome
-
-from misc.ToJSON import to_json
+import misc.Json
 from src.BuildNeuralNet import NeuralNet
 from src.ConnectGenes import ConnectGenes
 from src.NodeGenes import NodeGenes
@@ -68,38 +67,17 @@ if '__main__' == __name__:
     numInputs, numY = cartpole.get_xy()
 
     numY = int(numY)
-    print("num ouputs:", numY)
-    print("num Inputs:", numInputs)
     generate_initial_genome()
 
-    nn = NeuralNet(genome = population[0])
-    nn.build_neural_net()
-    print(nn)
-    nn.predict([1,1,1,1,1])
-    print(nn.output)
+    # nn = NeuralNet(genome = population[0])
+    # nn.build_neural_net()
+    # print(nn)
+    # nn.predict([1,1,1,1,1])
+    # print(nn.output)
 
     run_game()
     population.sort(key = lambda x: x.fitness, reverse = True)
 
-    to_json(population[0])
-
-    print(population[0].fitness)
-    env = gym.make('CartPole-v1')
-    NN = NeuralNet(genome = population[0])
-    NN.build_neural_net()
-
-    observation = env.reset()
-    observation = observation.tolist()
-    observation.append(1)
-    print("observation: " + str(observation))
-    fitness = 0
-    for x in range(10000):
-
-        NN.predict(observation)
-        observation, reward, done, info = env.step(round(NN.output[0]))
-        env.render()
-        observation = observation.tolist()
-        observation.append(1)
-        fitness += reward
-        if done:
-            break
+    # to_json(population[0])
+    # cartpole.render_game(population[0])
+    cartpole.render_game(misc.Json.from_jason())

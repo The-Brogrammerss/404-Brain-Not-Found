@@ -1,21 +1,6 @@
 import gym
-
+from BuildNeuralNet import NeuralNet
 env = gym.make('CartPole-v1')
-'''
-env.reset()
-global fitness
-fitness = 0
-for x in range(1000):
-    env.render()
-    action = x % 2
-    print(env.action_space)
-    observation, reward, done, info = env.step(action)
-    fitness += reward
-    print("Obv:", observation)
-    print("Reward:", fitness)
-    if done:
-        break
-'''
 
 def get_xy():
     env.reset()
@@ -36,7 +21,7 @@ def get_fitness(NN):
     observation = env.reset()
     observation = observation.tolist()
     observation.append(1)
-    print("observation: " + str(observation))
+    # print("observation: " + str(observation))
     fitness = 0
     for x in range(10000):
 
@@ -46,5 +31,31 @@ def get_fitness(NN):
         observation.append(1)
         fitness += reward
         if done:
-            print(fitness)
+            # print(fitness)
             return fitness
+
+def render_game(gnome):
+    print(gnome.fitness)
+    env = gym.make('CartPole-v1')
+    NN = NeuralNet(gnome)
+    NN.build_neural_net()
+
+    observation = env.reset()
+    observation = observation.tolist()
+    observation.append(1)
+    print("observation: " + str(observation))
+    fitness = 0
+
+
+
+
+    for x in range(10000):
+
+        NN.predict(observation)
+        observation, reward, done, info = env.step(round(NN.output[0]))
+        env.render()
+        observation = observation.tolist()
+        observation.append(1)
+        fitness += reward
+        if done:
+            break
