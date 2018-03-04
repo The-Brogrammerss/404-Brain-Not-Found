@@ -79,5 +79,5 @@ if '__main__' == __name__:
     population.sort(key = lambda x: x.fitness, reverse = True)
 
     # to_json(population[0])
-    # cartpole.render_game(population[0])
-    cartpole.render_game(misc.Json.from_jason())
+    cartpole.render_game(population[0])
+    # cartpole.render_game(misc.Json.from_jason())
