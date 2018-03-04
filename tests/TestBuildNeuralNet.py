@@ -32,7 +32,7 @@ class test_build_neural_net(unittest.TestCase):
     nn = NeuralNet(genome = genome)
 
     def test_buildNueralNet(self):
-        nn.buildNeuralNet()
+        nn.build_neural_net()
         self.assertEqual(nn.inputLayer[2].outgoing, [4, 5])
         self.assertEqual(nn.hiddenLayers[4].weights[2], 20)
         self.assertEqual(nn.outputLayer[6].type, 'Output')

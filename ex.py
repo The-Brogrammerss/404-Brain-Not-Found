@@ -31,7 +31,7 @@ g.nodes = nodes
 
 nn = NeuralNet(g)
 
-nn.buildNeuralNet()
+nn.build_neural_net()
 
 for key, value in nn.inputLayer.items():
     print(str(key) +': '+ str(value))

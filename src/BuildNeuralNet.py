@@ -9,7 +9,16 @@ class NeuralNet(object):
         self.hiddenLayers = {}
         self.outputLayer = {}
         self.output = []
-    def buildNeuralNet(self):
+
+    def __str__(self):
+        s = ""
+        for key, value in self.inputLayer.items():
+            s += (str(key) + ': ' + str(value) + '\n')
+        for key, value in self.outputLayer.items():
+            s += (str(key) + ': ' + str(value) + '\n')
+        return s
+
+    def build_neural_net(self):
         for node in self.nodes:
             if node.type is 'Sensor':
                 self.inputLayer[node.nodeNum] = Neuron(t = 'Sensor')

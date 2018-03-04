@@ -58,7 +58,7 @@ def generate_connections(gnome):
 def run_game():
     for i in range(len(population)):
         neuralNet = NeuralNet(population[i])
-        neuralNet.buildNeuralNet()
+        neuralNet.build_neural_net()
         population[i].fitness = cartpole.get_fitness(neuralNet)
 
 if '__main__' == __name__:
@@ -73,11 +73,8 @@ if '__main__' == __name__:
     generate_initial_genome()
 
     nn = NeuralNet(genome = population[0])
-    nn.buildNeuralNet()
-    for key, value in nn.inputLayer.items():
-        print(str(key) +': '+ str(value))
-    for key, value in nn.outputLayer.items():
-        print(str(key) +': '+ str(value))
+    nn.build_neural_net()
+    print(nn)
     nn.predict([1,1,1,1,1])
     print(nn.output)
 
@@ -89,7 +86,7 @@ if '__main__' == __name__:
     print(population[0].fitness)
     env = gym.make('CartPole-v1')
     NN = NeuralNet(genome = population[0])
-    NN.buildNeuralNet()
+    NN.build_neural_net()
 
     observation = env.reset()
     observation = observation.tolist()
