@@ -6,7 +6,7 @@ from src import NEAT
 class TestNeat(unittest.TestCase):
 
     NEAT.numInputs = 2
-    NEAT.numY = 2
+    NEAT.numY = 1
     NEAT.popCap = 2
     NEAT.population = []
     genPop = NEAT.generate_initial_genome()
@@ -15,10 +15,10 @@ class TestNeat(unittest.TestCase):
         self.assertEqual(len(NEAT.population), 2)
 
     def test_generated_connections_x(self):
-        self.assertEqual(NEAT.population[0].connections[0].x, 1)
+        self.assertEqual(NEAT.population[0].connections[0].x, 3)
 
     def test_generated_connections_Y(self):
-        self.assertEqual(NEAT.population[0].connections[0].Y, 3)
+        self.assertEqual(NEAT.population[0].connections[0].Y, 1)
 
     def test_generated_connections_enabled(self):
         self.assertEqual(NEAT.population[0].connections[1].enabled, True)

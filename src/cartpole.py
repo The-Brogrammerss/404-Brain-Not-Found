@@ -1,5 +1,5 @@
 import gym
-from BuildNeuralNet import NeuralNet
+from src.BuildNeuralNet import NeuralNet
 env = gym.make('CartPole-v1')
 
 def get_xy():

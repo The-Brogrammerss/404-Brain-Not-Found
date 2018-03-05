@@ -1,6 +1,6 @@
 import unittest
 
-import NEAT
+from src import NEAT
 
 
 class test_many_sizes(unittest.TestCase):
