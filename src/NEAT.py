@@ -1,11 +1,12 @@
 # This is where most if not all of the GA and NEAT logic will happen.
 import copy
 import random
-from src import cartpole
-from src.BuildNeuralNet import NeuralNet
-from src.ConnectGenes import ConnectGenes
-from src.Genome import Genome
-from src.NodeGenes import NodeGenes
+import cartpole
+from misc.Json import to_json
+from BuildNeuralNet import NeuralNet
+from ConnectGenes import ConnectGenes
+from Genome import Genome
+from NodeGenes import NodeGenes
 
 innovation = 0
 
@@ -71,6 +72,6 @@ if '__main__' == __name__:
         run_game()
         population.sort(key = lambda x: x.fitness, reverse = True)
 
-        # to_json(population[0])
+        to_json(population[0])
         cartpole.render_game(population[0])
         # cartpole.render_game(misc.Json.from_jason())
