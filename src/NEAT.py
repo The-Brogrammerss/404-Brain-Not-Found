@@ -59,19 +59,19 @@ def run_game():
         population[i].fitness = cartpole.get_fitness(neuralNet)
 
 if '__main__' == __name__:
-    popCap = 10000
+    popCap = 200
 
-    while True:
-        population = []
-        # os.system("cartpole.py")
-        numInputs, numY = cartpole.get_xy()
 
-        numY = int(numY)
-        generate_initial_genome()
+    population = []
+    # os.system("cartpole.py")
+    numInputs, numY = cartpole.get_xy()
 
-        run_game()
-        population.sort(key = lambda x: x.fitness, reverse = True)
+    numY = int(numY)
+    generate_initial_genome()
 
-        to_json(population[0])
-        cartpole.render_game(population[0])
-        # cartpole.render_game(misc.Json.from_jason())
+    run_game()
+    population.sort(key = lambda x: x.fitness, reverse = True)
+
+    to_json(population[0])
+    cartpole.render_game(population[0])
+    # cartpole.render_game(misc.Json.from_jason())
