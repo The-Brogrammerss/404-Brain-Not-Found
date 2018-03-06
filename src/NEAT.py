@@ -59,7 +59,7 @@ def run_game():
         population[i].fitness = cartpole.get_fitness(neuralNet)
 
 if '__main__' == __name__:
-    popCap = 500
+    popCap = 10000
 
     while True:
         population = []

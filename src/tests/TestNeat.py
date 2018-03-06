@@ -4,12 +4,12 @@ from src import NEAT
 
 
 class TestNeat(unittest.TestCase):
-
-    NEAT.numInputs = 2
-    NEAT.numY = 1
-    NEAT.popCap = 2
-    NEAT.population = []
-    genPop = NEAT.generate_initial_genome()
+    def setUp(self):
+        NEAT.numInputs = 2
+        NEAT.numY = 1
+        NEAT.popCap = 2
+        NEAT.population = []
+        genPop = NEAT.generate_initial_genome()
 
     def test_generate_population(self):
         self.assertEqual(len(NEAT.population), 2)

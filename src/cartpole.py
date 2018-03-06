@@ -43,7 +43,7 @@ def render_game(gnome):
     observation = env.reset()
     observation = observation.tolist()
     observation.append(1)
-    print("observation: " + str(observation))
+    # print("observation: " + str(observation))
     fitness = 0
 
 
