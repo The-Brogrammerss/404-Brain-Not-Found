@@ -6,6 +6,7 @@ from Genome import Genome
 connections = []
 nodes = []
 
+
 nodes.append(NodeGenes(nodeNum = 1, t = 'Sensor'))
 nodes.append(NodeGenes(nodeNum = 2, t = 'Sensor'))
 nodes.append(NodeGenes(nodeNum = 3, t = 'Sensor'))
