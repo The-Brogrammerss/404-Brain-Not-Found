@@ -3,7 +3,6 @@ from src.NodeGenes import NodeGenes
 
 from BuildNeuralNet import NeuralNet
 from Genome import Genome
-
 connections = []
 nodes = []
 nodes.append(NodeGenes(nodeNum = 1, t = 'Sensor'))
