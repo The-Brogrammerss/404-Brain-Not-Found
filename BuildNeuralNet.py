@@ -2,6 +2,7 @@ import math
 
 class NeuralNet(object):
 
+
     def __init__(self, genome):
         self.connections = genome.connections
         self.nodes = genome.nodes
