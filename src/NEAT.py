@@ -1,14 +1,15 @@
 # This is where most if not all of the GA and NEAT logic will happen.
 import copy
 import random
-import cartpole
-from misc.Json import to_json
-from BuildNeuralNet import NeuralNet
-from ConnectGenes import ConnectGenes
-from Genome import Genome
-from NodeGenes import NodeGenes
+from src import cartpole
+from src.misc.Json import to_json
+from src.BuildNeuralNet import NeuralNet
+from src.ConnectGenes import ConnectGenes
+from src.Genome import Genome
+from src.NodeGenes import NodeGenes
 
 innovation = 0
+
 
 def generate_initial_genome():
     gnome = Genome()
@@ -29,12 +30,14 @@ def generate_initial_genome():
     population.append(gnome)
     copy_to_popCap(gnome)
 
+
 def copy_to_popCap(gnome):
     for i in range(1, popCap):
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.randrange(-100, 100, 1)
         population.append(g)
+
 
 def generate_connections(gnome):
     global innovation
