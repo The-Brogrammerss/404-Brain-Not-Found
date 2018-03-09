@@ -1,4 +1,5 @@
-# Going off of the Papers structure, a gnome is one 
+import random
+# Going off of the Papers structure, a gnome is one
 class Genome(object):
     def __init__(self, fitness: int = 0, connections = [], nodes = []):
         self.connections = connections
@@ -16,6 +17,13 @@ class Genome(object):
             result += str(connect) + '\n\n'
 
         return result
+
+
+    def mutate(self):
+        perturb_rate = 0.9
+        peturb_chance = random.random()
+        if peturb_chance <= perturb_rate:
+            pass
 
 #Test if __str__ works
 # if '__main__' == __name__:

@@ -1,0 +1,66 @@
+{
+    "connections": [
+        {
+            "Y": 6,
+            "enabled": true,
+            "innovation": 1,
+            "weight": -21,
+            "x": 1
+        },
+        {
+            "Y": 6,
+            "enabled": true,
+            "innovation": 2,
+            "weight": 30,
+            "x": 2
+        },
+        {
+            "Y": 6,
+            "enabled": true,
+            "innovation": 3,
+            "weight": 99,
+            "x": 3
+        },
+        {
+            "Y": 6,
+            "enabled": true,
+            "innovation": 4,
+            "weight": 81,
+            "x": 4
+        },
+        {
+            "Y": 6,
+            "enabled": true,
+            "innovation": 5,
+            "weight": 3,
+            "x": 5
+        }
+    ],
+    "fitness": 363.0,
+    "nodes": [
+        {
+            "nodeNum": 1,
+            "type": "Sensor"
+        },
+        {
+            "nodeNum": 2,
+            "type": "Sensor"
+        },
+        {
+            "nodeNum": 3,
+            "type": "Sensor"
+        },
+        {
+            "nodeNum": 4,
+            "type": "Sensor"
+        },
+        {
+            "nodeNum": 5,
+            "type": "Sensor"
+        },
+        {
+            "nodeNum": 6,
+            "type": "Output"
+        }
+    ]
+}

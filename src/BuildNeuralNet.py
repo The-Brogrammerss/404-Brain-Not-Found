@@ -83,9 +83,8 @@ class NeuralNet(object):
 
     def sigmoid(self, x):
         return (1 / ( 1 + math.exp(-x)))
-        #return x
+        # return (1 / (1 + math.exp(-4.9 * x)))
 
-            #for Y in node.outgoing:
 
 class Neuron(object):
 
