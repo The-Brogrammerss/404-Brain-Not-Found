@@ -1,12 +1,14 @@
 # This is where most if not all of the GA and NEAT logic will happen.
 import copy
 import random
-from src import cartpole
-from src.misc.Json import to_json
-from src.BuildNeuralNet import NeuralNet
-from src.ConnectGenes import ConnectGenes
-from src.Genome import Genome
-from src.NodeGenes import NodeGenes
+
+from ConnectGenes import ConnectGenes
+from Genome import Genome
+from NodeGenes import NodeGenes
+
+from BuildNeuralNet import NeuralNet
+import cartpole
+from misc.Json import to_json
 
 innovation = 0
 

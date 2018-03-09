@@ -1,8 +1,8 @@
-from Genome import Genome
-
-from src.BuildNeuralNet import NeuralNet
 from src.ConnectGenes import ConnectGenes
 from src.NodeGenes import NodeGenes
+
+from BuildNeuralNet import NeuralNet
+from Genome import Genome
 
 connections = []
 nodes = []
