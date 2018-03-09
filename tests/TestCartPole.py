@@ -1,6 +1,6 @@
 import unittest
 
-from src import cartpole
+import cartpole
 
 
 class test_cartPole(unittest.TestCase):

@@ -1,7 +1,7 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
 
-from src import NodeGenes
+import NodeGenes
 
 
 class test_node_attributes(unittest.TestCase):

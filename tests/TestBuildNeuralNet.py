@@ -1,10 +1,9 @@
 import unittest
 
-from src.Genome import Genome
-
-from src.BuildNeuralNet import NeuralNet
-from src.ConnectGenes import ConnectGenes
-from src.NodeGenes import NodeGenes
+from Genome import Genome
+from BuildNeuralNet import NeuralNet
+from ConnectGenes import ConnectGenes
+from NodeGenes import NodeGenes
 
 
 class test_build_neural_net(unittest.TestCase):

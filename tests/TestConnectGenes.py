@@ -1,7 +1,7 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
 
-from src import ConnectGenes
+import ConnectGenes
 
 
 class test_connect_attributes(unittest.TestCase):
