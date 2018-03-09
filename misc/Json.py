@@ -1,3 +1,4 @@
+import json
 def to_json(gnome):
 
     with open('best.json', 'w') as jsonfile:
