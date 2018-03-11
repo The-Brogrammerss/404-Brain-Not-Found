@@ -11,8 +11,6 @@ from BuildNeuralNet import NeuralNet
 import cartpole
 from misc.Json import to_json
 
-innovation = 0
-
 
 def generate_initial_genome():
     gnome = Genome()
@@ -25,6 +23,7 @@ def generate_initial_genome():
     for i in range(1, numY + 1):
         nodes = NodeGenes()
         nodes.nodeNum = numInputs + i
+        population.maxNodes =+ numInputs + i
         nodes.type = "Output"
         gnome.nodes.append(nodes)
 
@@ -42,7 +41,6 @@ def copy_to_popCap(gnome):
 
 
 def generate_connections(gnome):
-    global innovation
     for k in range(0, len(gnome.nodes)):
         if gnome.nodes[k].type == "Sensor":
             for j in range(1, len(gnome.nodes)):
@@ -51,10 +49,12 @@ def generate_connections(gnome):
                     cons.x = gnome.nodes[k].nodeNum
                     cons.Y = gnome.nodes[j].nodeNum
                     cons.enabled = True
-                    innovation = innovation + 1
-                    cons.innovation = innovation
-                    cons.weight = random.randint(-10, 10)
+                    population.innovationCounter = population.innovationCounter + 1
+                    cons.innovation = population.innovationCounter
+                    cons.weight = random.randrange(-100, 100, 1)
                     gnome.connections.append(cons)
+                    population.connectionList.append(cons)
+
 
 
 def run_game():
@@ -67,19 +67,14 @@ def run_game():
 
         # print(w.connections)
 
+
 if '__main__' == __name__:
     popCap = 200
-
     population = Population([])
-    # os.system("cartpole.py")
     numInputs, numY = cartpole.get_xy()
-
     numY = int(numY)
     generate_initial_genome()
-
     run_game()
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-
     to_json(population.currentPop[0])
     cartpole.render_game(population.currentPop[0])
-    # cartpole.render_game(misc.Json.from_jason())

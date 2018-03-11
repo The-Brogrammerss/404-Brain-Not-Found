@@ -4,39 +4,39 @@
             "Y": 6,
             "enabled": true,
             "innovation": 1,
-            "weight": 5,
+            "weight": 40,
             "x": 1
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 2,
-            "weight": 11,
+            "weight": 54,
             "x": 2
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 3,
-            "weight": 53,
+            "weight": 70,
             "x": 3
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 4,
-            "weight": 13,
+            "weight": 95,
             "x": 4
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 5,
-            "weight": -5,
+            "weight": -3,
             "x": 5
         }
     ],
-    "fitness": 500.0,
+    "fitness": 188.0,
     "nodes": [
         {
             "nodeNum": 1,
