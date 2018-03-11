@@ -1,6 +1,6 @@
 # import unittest
 #
-# from src import NEAT
+# import NEAT
 #
 #
 # class TestNeat(unittest.TestCase):
@@ -15,10 +15,10 @@
 #         self.assertEqual(len(NEAT.population), 2)
 #
 #     def test_generated_connections_x(self):
-#         self.assertEqual(NEAT.population[0].connections[0].x, 3)
+#         self.assertEqual(NEAT.population[0].connections[0].x, 1)
 #
 #     def test_generated_connections_Y(self):
-#         self.assertEqual(NEAT.population[0].connections[0].Y, 1)
+#         self.assertEqual(NEAT.population[0].connections[0].Y, 3)
 #
 #     def test_generated_connections_enabled(self):
 #         self.assertEqual(NEAT.population[0].connections[1].enabled, True)

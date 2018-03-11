@@ -5,6 +5,7 @@ import random
 from ConnectGenes import ConnectGenes
 from Genome import Genome
 from NodeGenes import NodeGenes
+from Population import Population
 
 from BuildNeuralNet import NeuralNet
 import cartpole
@@ -15,7 +16,6 @@ innovation = 0
 
 def generate_initial_genome():
     gnome = Genome()
-    #for i in range(1, numInputs + 2):
     for i in range(1, numInputs + 1):
         nodes = NodeGenes()
         nodes.nodeNum = i
@@ -29,7 +29,7 @@ def generate_initial_genome():
         gnome.nodes.append(nodes)
 
     generate_connections(gnome)
-    population.append(gnome)
+    population.currentPop.append(gnome)
     copy_to_popCap(gnome)
 
 
@@ -38,7 +38,7 @@ def copy_to_popCap(gnome):
         g = copy.deepcopy(gnome)
         for k in range(len(g.connections)):
             g.connections[k].weight = random.randrange(-100, 100, 1)
-        population.append(g)
+        population.currentPop.append(g)
 
 
 def generate_connections(gnome):
@@ -58,16 +58,19 @@ def generate_connections(gnome):
 
 
 def run_game():
-    for i in range(len(population)):
-        neuralNet = NeuralNet(population[i])
+    for i in range(len(population.currentPop)):
+        neuralNet = NeuralNet(population.currentPop[i])
         neuralNet.build_neural_net()
-        population[i].fitness = cartpole.get_fitness(neuralNet)
+        population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
+        population.currentPop[i].mutate_weight()
+        w = population.currentPop[i]
+
+        # print(w.connections)
 
 if '__main__' == __name__:
     popCap = 200
 
-
-    population = []
+    population = Population([])
     # os.system("cartpole.py")
     numInputs, numY = cartpole.get_xy()
 
@@ -75,8 +78,8 @@ if '__main__' == __name__:
     generate_initial_genome()
 
     run_game()
-    population.sort(key = lambda x: x.fitness, reverse = True)
+    population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
 
-    to_json(population[0])
-    cartpole.render_game(population[0])
+    to_json(population.currentPop[0])
+    cartpole.render_game(population.currentPop[0])
     # cartpole.render_game(misc.Json.from_jason())
