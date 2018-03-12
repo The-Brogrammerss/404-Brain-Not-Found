@@ -38,17 +38,19 @@ class Population(object):
         front_half.Y = new_node_num
         front_half.enabled = True
         front_half.weight = Config.dict["max_weight"]
-        front_half.Y = Y
 
         back_half.x = new_node_num
+        back_half.Y = Y
         back_half.enabled = True
         back_half.weight = random.randrange(Config.dict["min_weight"],
                                             Config.dict["max_weight"],
                                             Config.dict["weight_step"])
-
-        for gene in self.connectionList:
-            if gene.x == front_half.x:
-                if gene.Y == Y and gene.enabled == True:
+        cl = self.connectionList
+        for gene in range (len(self.connectionList)):
+            if cl[gene].x == front_half.x:
+                print("\n", cl[gene].x, "matches,", front_half.x)
+                if cl[gene].Y == Y and cl[gene].enabled == True:
+                    print("new gene baby")
                     genome.connections[random_connection].enabled = False
 
                     self.innovationCounter = self.innovationCounter + 1
@@ -62,12 +64,16 @@ class Population(object):
                     self.connectionList.append(back_half)
 
                 else:
-                    for gene2 in self.connectionList:
-                        if gene2.Y == Y:
+                    for gene2 in range (len(self.connectionList)):
+                        if cl[gene2].Y == Y:
+                            print("lame old gene!!")
                             front_half.innovation = gene.innovation
                             back_half.innovation = gene2.innovation
                             genome.connections.append(front_half)
                             genome.connections.append(back_half)
+                            self.connectionList.append(front_half)
+                            self.connectionList.append(back_half)
+
 
 
 def crossbreed(genome_one, genome_two):
