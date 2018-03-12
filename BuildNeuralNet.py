@@ -1,5 +1,6 @@
 import math
 
+
 class NeuralNet(object):
 
 

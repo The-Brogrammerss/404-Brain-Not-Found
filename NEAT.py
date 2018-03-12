@@ -6,8 +6,9 @@ from ConnectGenes import ConnectGenes
 from Genome import Genome
 from NodeGenes import NodeGenes
 from Population import Population
-
+from Config import Config
 from BuildNeuralNet import NeuralNet
+
 import cartpole
 from misc.Json import to_json
 
@@ -23,7 +24,7 @@ def generate_initial_genome():
     for i in range(1, numY + 1):
         nodes = NodeGenes()
         nodes.nodeNum = numInputs + i
-        population.maxNodes =+ numInputs + i
+        population.maxNodes = numInputs + i
         nodes.type = "Output"
         gnome.nodes.append(nodes)
 
@@ -51,7 +52,8 @@ def generate_connections(gnome):
                     cons.enabled = True
                     population.innovationCounter = population.innovationCounter + 1
                     cons.innovation = population.innovationCounter
-                    cons.weight = random.randrange(-100, 100, 1)
+                    cons.weight = random.randrange(Config.dict["min_weight"],
+                                                   100, 1)
                     gnome.connections.append(cons)
                     population.connectionList.append(cons)
 
@@ -62,8 +64,9 @@ def run_game():
         neuralNet = NeuralNet(population.currentPop[i])
         neuralNet.build_neural_net()
         population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
-        population.currentPop[i].mutate_weight()
-        w = population.currentPop[i]
+        # population.currentPop[i].mutate_weight()
+        population.mutate_weight(population.currentPop[i])
+        # w = population.currentPop[i]
 
         # print(w.connections)
 
