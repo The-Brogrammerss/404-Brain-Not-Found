@@ -37,8 +37,8 @@ def get_fitness(NN):
             return fitness
 
 def render_game(gnome):
-    print(gnome.fitness)
-    env = gym.make('CartPole-v1')
+    global env
+    env.reset()
     NN = NeuralNet(gnome)
     NN.build_neural_net()
 
