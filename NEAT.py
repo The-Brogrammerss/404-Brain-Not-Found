@@ -2,6 +2,7 @@
 import copy
 import random
 import gc
+from time import clock
 
 from ConnectGenes import ConnectGenes
 from Genome import Genome
@@ -18,7 +19,6 @@ population = Population()
 def generate_initial_population():
     global population
     population = Population()
-    print("entered generate_initial_genome")
     for _ in range(popCap):
         nodes = []
         for i in range(1, numInputs + 1):
@@ -59,13 +59,21 @@ def run_game():
 
 
 if '__main__' == __name__:
-    popCap = 50
+    popCap = 200
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
+    i = 1
     while True:
+        print("On generation ", i)
+        start = clock()
         generate_initial_population()
+        print("     generate_initial_population() time: ", clock() - start)
         run_game()
+        start = clock()
+
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+        print("     population.currentPop.sort() time: ", clock() - start)
         #to_json(population.currentPop[0])
-        print(population.currentPop[0].fitness)
+        print("     Best fitness for this generation: ", population.currentPop[0].fitness)
         cartpole.render_game(population.currentPop[0])
+        i += 1
