@@ -15,8 +15,9 @@ from misc.Json import to_json
 
 population = Population()
 
-def generate_initial_genome():
-    print(popCap)
+def generate_initial_population():
+    global population
+    population = Population()
     print("entered generate_initial_genome")
     for _ in range(popCap):
         nodes = []
@@ -30,11 +31,10 @@ def generate_initial_genome():
             for j in range(numInputs + 1, numInputs + numY + 1):
                 connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True))
 
-        print(Genome(connections = connections, nodes = nodes))
-    #population.currentPop.append(Genome(connections = connections, nodes = nodes))
+        population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
 
-
+#lolwut?
 def copy_to_popCap(gnome):
     for i in range(1, popCap):
         g = copy.deepcopy(gnome)
@@ -42,7 +42,7 @@ def copy_to_popCap(gnome):
             g.connections[k].weight = random.randrange(-100, 100, 1)
         population.currentPop.append(g)
 
-
+#lolol alsowut?
 def generate_connections(gnome):
     print('wut')
 
@@ -59,14 +59,13 @@ def run_game():
 
 
 if '__main__' == __name__:
-    popCap = 10
-
-
+    popCap = 50
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
-    generate_initial_genome()
-    #run_game()
-    #population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-    #to_json(population.currentPop[0])
-    #print(population.currentPop[0].fitness)
-        #cartpole.render_game(population.currentPop[0])
+    while True:
+        generate_initial_population()
+        run_game()
+        population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+        #to_json(population.currentPop[0])
+        print(population.currentPop[0].fitness)
+        cartpole.render_game(population.currentPop[0])

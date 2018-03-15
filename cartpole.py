@@ -33,7 +33,7 @@ def get_fitness(NN):
         observation.append(1)
         fitness += reward
         if done:
-            print(fitness)
+            #print(fitness)
             return fitness
 
 def render_game(gnome):
