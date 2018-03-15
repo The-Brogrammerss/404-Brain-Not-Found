@@ -7,7 +7,7 @@ from Config import Config
 
 class Population(object):
 
-    def __init__(self, pop):
+    def __init__(self, pop = []):
         self.currentPop = pop
         self.innovationCounter = 0
         self.connectionList = []
