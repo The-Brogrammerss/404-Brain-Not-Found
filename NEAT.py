@@ -8,6 +8,7 @@ from NodeGenes import NodeGenes
 from Population import Population
 from Config import Config
 from BuildNeuralNet import NeuralNet
+from Population import crossbreed
 
 import cartpole
 from misc.Json import to_json
@@ -58,6 +59,17 @@ def generate_connections(gnome):
                     population.connectionList.append(cons)
 
 
+def git_gud():
+    for gnome in range(int(round(.1 * popCap))):
+        next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
+    for gnome in range(int(round(.9 * popCap))):
+        next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
+                                              random.choice(population.currentPop[:popCap])))
+    for gnome in range(int(round(.4 * popCap))):
+        next_gen.mutate_weight(random.choice(next_gen.currentPop))
+
+    for gnome in range(int(round(.01 * popCap))):
+        next_gen.mutate_add_node()
 
 def run_game():
     for i in range(len(population.currentPop)):
@@ -72,12 +84,16 @@ def run_game():
 
 
 if '__main__' == __name__:
-    popCap = 200
+    popCap = 100
     population = Population([])
-    numInputs, numY = cartpole.get_xy()
-    numY = int(numY)
-    generate_initial_genome()
-    run_game()
-    population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-    to_json(population.currentPop[0])
-    cartpole.render_game(population.currentPop[0])
+    next_gen = Population([])
+    while True:
+        numInputs, numY = cartpole.get_xy()
+        numY = int(numY)
+        generate_initial_genome()
+        run_game()
+        population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+        cartpole.render_game(population.currentPop[0])
+        git_gud()
+        population = next_gen
+        to_json(population.currentPop[0])

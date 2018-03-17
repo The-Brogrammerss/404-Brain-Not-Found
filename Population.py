@@ -14,6 +14,7 @@ class Population(object):
         self.maxNodes = 0
 
     def mutate_weight(self, genome):
+        genome = copy.deepcopy(genome)
         perturb_rate = 0.9
         perturb_chance = random.random()
         random_connection = random.randint(0, len(genome.connections) - 1)
@@ -26,6 +27,7 @@ class Population(object):
         self.currentPop.append(genome)
 
     def mutate_add_node(self, genome):
+        genome = copy.deepcopy(genome)
         front_half = ConnectGenes()
         back_half = ConnectGenes()
         random_connection = random.randint(0, len(genome.connections) - 1)
@@ -72,7 +74,6 @@ class Population(object):
                             self.connectionList.append(back_half)
                             break
         self.currentPop.append(genome)
-
 
 
 def crossbreed(genome_one, genome_two):
