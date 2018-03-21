@@ -19,6 +19,7 @@ def generate_initial_genome():
     for i in range(1, numInputs + 1):
         nodes = NodeGenes()
         nodes.nodeNum = i
+        population.maxNodes = population.maxNodes + i
         nodes.type = "Sensor"
         gnome.nodes.append(nodes)
 
@@ -66,10 +67,12 @@ def git_gud():
         next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
     for gnome in range(int(round(.4 * popCap))):
-        next_gen.mutate_weight(random.choice(next_gen.currentPop))
+        next_gen.mutate_weight(gnome)
 
     for gnome in range(int(round(.01 * popCap))):
-        next_gen.mutate_add_node()
+        next_gen.mutate_add_node(random.randint(0, popCap))
+    # next_gen.mutate_add_node(random.choice(population.currentPop[:popCap]))
+
 
 def run_game():
     for i in range(len(population.currentPop)):
@@ -77,7 +80,7 @@ def run_game():
         neuralNet.build_neural_net()
         population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
         # population.currentPop[i].mutate_weight()
-        population.mutate_weight(population.currentPop[i])
+        # population.mutate_weight(population.currentPop[i])
         # w = population.currentPop[i]
 
         # print(w.connections)
@@ -87,13 +90,21 @@ if '__main__' == __name__:
     popCap = 100
     population = Population([])
     next_gen = Population([])
-    while True:
-        numInputs, numY = cartpole.get_xy()
-        numY = int(numY)
-        generate_initial_genome()
+    numInputs, numY = cartpole.get_xy()
+    numY = int(numY)
+    generate_initial_genome()
+    # while True:
+    for i in range(3):
+
         run_game()
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-        cartpole.render_game(population.currentPop[0])
+        # cartpole.render_game(population.currentPop[0])
+        next_gen.maxNodes = population.maxNodes
+        next_gen.innovationCounter = population.innovationCounter
+        next_gen.connectionList = population.connectionList
         git_gud()
         population = next_gen
         to_json(population.currentPop[0])
+    print("_____________________Connection list___________________")
+    for con in range (len(next_gen.connectionList)):
+        print(next_gen.connectionList[con])

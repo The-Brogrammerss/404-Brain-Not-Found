@@ -4,21 +4,21 @@
             "Y": 6,
             "enabled": true,
             "innovation": 1,
-            "weight": 16,
+            "weight": 4,
             "x": 1
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 2,
-            "weight": 48,
+            "weight": 77,
             "x": 2
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 3,
-            "weight": 96,
+            "weight": 55,
             "x": 3
         },
         {
@@ -32,7 +32,7 @@
             "Y": 6,
             "enabled": true,
             "innovation": 5,
-            "weight": -7,
+            "weight": 4,
             "x": 5
         }
     ],
