@@ -4,35 +4,35 @@
             "Y": 6,
             "enabled": true,
             "innovation": 1,
-            "weight": 4,
+            "weight": 37,
             "x": 1
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 2,
-            "weight": 77,
+            "weight": 68,
             "x": 2
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 3,
-            "weight": 55,
+            "weight": 79,
             "x": 3
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 4,
-            "weight": 85,
+            "weight": 58,
             "x": 4
         },
         {
             "Y": 6,
             "enabled": true,
             "innovation": 5,
-            "weight": 4,
+            "weight": 5,
             "x": 5
         }
     ],

@@ -38,8 +38,9 @@ class Population(object):
         random_connection = random.randint(0, len(genome.connections) - 1)
         Y = genome.connections[random_connection].Y
         x = genome.connections[random_connection].x
-        self.maxNodes = self.maxNodes + 1
-        new_node_num = self.maxNodes
+        # self.maxNodes = self.maxNodes + 1
+        # new_node_num = self.maxNodes
+        new_node_num = len(self.currentPop[index].nodes) + 1
         new_node.nodeNum = new_node_num
         new_node.type = "Hidden"
         genome.nodes.append(new_node)
@@ -58,30 +59,31 @@ class Population(object):
         cl = self.connectionList
         for gene in range (len(self.connectionList)):
             if cl[gene].x == front_half.x:
-                if cl[gene].Y == Y:
-                    # genome.connections[random_connection].enabled = False
-                    genome.connections[random_connection].enabled = False
-                    self.innovationCounter = self.innovationCounter + 1
-                    front_half.innovation = self.innovationCounter
-                    genome.connections.append(front_half)
-                    self.connectionList.append(front_half)
+                for gene2 in range (len(self.connectionList)):
+                    if cl[gene].Y == cl[gene2].x and cl[gene2].Y == Y:
+                        front_half.innovation = cl[gene].innovation
+                        back_half.innovation = cl[gene2].innovation
+                        genome.connections.append(front_half)
+                        genome.connections.append(back_half)
+                        # self.connectionList.append(front_half)
+                        # self.connectionList.append(back_half)
+                        break
 
-                    self.innovationCounter = self.innovationCounter + 1
-                    back_half.innovation = self.innovationCounter
-                    genome.connections.append(back_half)
-                    self.connectionList.append(back_half)
-                    break
+                    elif cl[gene].Y == Y:
+                        # genome.connections[random_connection].enabled = False
+                        genome.connections[random_connection].enabled = False
+                        self.innovationCounter = self.innovationCounter + 1
+                        front_half.innovation = self.innovationCounter
+                        genome.connections.append(front_half)
+                        self.connectionList.append(front_half)
 
-                else:
-                    for gene2 in range (len(self.connectionList)):
-                        if cl[gene2].Y == Y:
-                            front_half.innovation = cl[gene].innovation
-                            back_half.innovation = cl[gene2].innovation
-                            genome.connections.append(front_half)
-                            genome.connections.append(back_half)
-                            # self.connectionList.append(front_half)
-                            # self.connectionList.append(back_half)
-                            break
+                        self.innovationCounter = self.innovationCounter + 1
+                        back_half.innovation = self.innovationCounter
+                        genome.connections.append(back_half)
+                        self.connectionList.append(back_half)
+                        break
+
+
         print("After__________________________", len(self.connectionList))
         for con in range(len(self.currentPop[index].connections)):
             print(self.currentPop[index].connections[con])

@@ -94,7 +94,7 @@ if '__main__' == __name__:
     numY = int(numY)
     generate_initial_genome()
     # while True:
-    for i in range(3):
+    for i in range(10):
 
         run_game()
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
