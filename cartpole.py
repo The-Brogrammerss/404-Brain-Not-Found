@@ -33,12 +33,12 @@ def get_fitness(NN):
         observation.append(1)
         fitness += reward
         if done:
-            # print(fitness)
+            #print(fitness)
             return fitness
 
 def render_game(gnome):
-    print(gnome.fitness)
-    env = gym.make('CartPole-v1')
+    global env
+    env.reset()
     NN = NeuralNet(gnome)
     NN.build_neural_net()
 

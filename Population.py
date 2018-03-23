@@ -8,8 +8,8 @@ from NodeGenes import NodeGenes
 
 class Population(object):
 
-    def __init__(self, pop):
-        self.currentPop = pop
+    def __init__(self):
+        self.currentPop = []
         self.innovationCounter = 0
         self.connectionList = []
         self.maxNodes = 0

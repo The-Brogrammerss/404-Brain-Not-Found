@@ -3,40 +3,40 @@
         {
             "Y": 6,
             "enabled": true,
-            "innovation": 1,
-            "weight": 37,
+            "innovation": null,
+            "weight": -18,
             "x": 1
         },
         {
             "Y": 6,
             "enabled": true,
-            "innovation": 2,
-            "weight": 68,
+            "innovation": null,
+            "weight": 91,
             "x": 2
         },
         {
             "Y": 6,
             "enabled": true,
-            "innovation": 3,
-            "weight": 79,
+            "innovation": null,
+            "weight": 35,
             "x": 3
         },
         {
             "Y": 6,
             "enabled": true,
-            "innovation": 4,
-            "weight": 58,
+            "innovation": null,
+            "weight": 96,
             "x": 4
         },
         {
             "Y": 6,
             "enabled": true,
-            "innovation": 5,
-            "weight": 5,
+            "innovation": null,
+            "weight": 24,
             "x": 5
         }
     ],
-    "fitness": 500.0,
+    "fitness": 271.0,
     "nodes": [
         {
             "nodeNum": 1,

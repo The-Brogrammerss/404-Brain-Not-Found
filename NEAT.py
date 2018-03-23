@@ -1,6 +1,8 @@
 # This is where most if not all of the GA and NEAT logic will happen.
 import copy
 import random
+import gc
+from time import clock
 
 from ConnectGenes import ConnectGenes
 from Genome import Genome
@@ -13,26 +15,25 @@ from Population import crossbreed
 import cartpole
 from misc.Json import to_json
 
+population = Population()
 
-def generate_initial_genome():
-    gnome = Genome()
-    for i in range(1, numInputs + 1):
-        nodes = NodeGenes()
-        nodes.nodeNum = i
-        population.maxNodes = population.maxNodes + i
-        nodes.type = "Sensor"
-        gnome.nodes.append(nodes)
 
-    for i in range(1, numY + 1):
-        nodes = NodeGenes()
-        nodes.nodeNum = numInputs + i
-        population.maxNodes = numInputs + i
-        nodes.type = "Output"
-        gnome.nodes.append(nodes)
+def generate_initial_population():
+    global population
+    population = Population()
+    for _ in range(popCap):
+        nodes = []
+        for i in range(1, numInputs + 1):
+            nodes.append(NodeGenes(nodeNum = i, t = 'Sensor'))
+        for i in range(1, numY + 1):
+            nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output'))
 
-    generate_connections(gnome)
-    population.currentPop.append(gnome)
-    copy_to_popCap(gnome)
+        connections = []
+        for i in range(1, numInputs + 1):
+            for j in range(numInputs + 1, numInputs + numY + 1):
+                connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True))
+
+        population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
 
 def copy_to_popCap(gnome):
@@ -66,12 +67,13 @@ def git_gud():
     for gnome in range(int(round(.9 * popCap))):
         next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
-    for gnome in range(int(round(.4 * popCap))):
-        next_gen.mutate_weight(gnome)
+    # for gnome in range(int(round(.4 * popCap))):
+    #     next_gen.mutate_weight(gnome)
 
     for gnome in range(int(round(.01 * popCap))):
         next_gen.mutate_add_node(random.randint(0, popCap))
     # next_gen.mutate_add_node(random.choice(population.currentPop[:popCap]))
+
 
 
 def run_game():
@@ -79,20 +81,15 @@ def run_game():
         neuralNet = NeuralNet(population.currentPop[i])
         neuralNet.build_neural_net()
         population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
-        # population.currentPop[i].mutate_weight()
-        # population.mutate_weight(population.currentPop[i])
-        # w = population.currentPop[i]
-
-        # print(w.connections)
 
 
 if '__main__' == __name__:
     popCap = 100
-    population = Population([])
-    next_gen = Population([])
+    population = Population()
+    next_gen = Population()
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
-    generate_initial_genome()
+    generate_initial_population()
     # while True:
     for i in range(10):
 
@@ -108,3 +105,4 @@ if '__main__' == __name__:
     print("_____________________Connection list___________________")
     for con in range (len(next_gen.connectionList)):
         print(next_gen.connectionList[con])
+
