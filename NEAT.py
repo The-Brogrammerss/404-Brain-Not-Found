@@ -80,7 +80,7 @@ def git_gud():
     #     next_gen.mutate_weight(gnome)
 
     for gnome in range(int(round(.01 * popCap))):
-        next_gen.mutate_add_node(random.randint(0, popCap))
+        next_gen.mutate_add_node(random.randint(0, popCap - 1))
     # next_gen.mutate_add_node(random.choice(population.currentPop[:popCap]))
 
 
@@ -102,10 +102,11 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     print(population.currentPop[0])
 
-    for i in range(50):
+    for i in range(10):
         start_time = time.time()
         next_gen = Population()
         run_game()
+        print("time", time.time() - start_time)
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
         # cartpole.render_game(population.currentPop[0])
         # MountainCar.render_game(population.currentPop[0])
@@ -116,12 +117,14 @@ if '__main__' == __name__:
 
         population = next_gen
         print("\nepoch:", i)
-        print("time", time.time() - start_time)
-        # print("con length", len(population.connectionList))
+        print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
         print("fitness:", population.currentPop[0].fitness)
         # to_json(population.currentPop[0])
 
+    print("_____________________Connection list___________________")
+    for con in range (len(next_gen.connectionList)):
+        print(next_gen.connectionList[con])
     # while True:
 
     '''

@@ -28,9 +28,9 @@ class Population(object):
         self.currentPop[index] = genome
 
     def mutate_add_node(self, index):
-        print("Before______________________", len(self.connectionList))
-        for con in range(len(self.currentPop[index].connections)):
-            print(self.currentPop[index].connections[con])
+        # print("Before______________________", len(self.connectionList))
+        # for con in range(len(self.currentPop[index].connections)):
+        #     print(self.currentPop[index].connections[con])
         genome = self.currentPop[index]
         front_half = ConnectGenes()
         back_half = ConnectGenes()
@@ -57,9 +57,9 @@ class Population(object):
                                             Config.dict["max_weight"],
                                             Config.dict["weight_step"])
         cl = self.connectionList
-        for gene in range (len(self.connectionList)):
+        for gene in range(len(self.connectionList)):
             if cl[gene].x == front_half.x:
-                for gene2 in range (len(self.connectionList)):
+                for gene2 in range(len(self.connectionList)):
                     if cl[gene].Y == cl[gene2].x and cl[gene2].Y == Y:
                         front_half.innovation = cl[gene].innovation
                         back_half.innovation = cl[gene2].innovation
@@ -67,27 +67,29 @@ class Population(object):
                         genome.connections.append(back_half)
                         # self.connectionList.append(front_half)
                         # self.connectionList.append(back_half)
-                        break
+                        self.currentPop[index] = genome
+                        return
 
-                    elif cl[gene].Y == Y:
-                        # genome.connections[random_connection].enabled = False
-                        genome.connections[random_connection].enabled = False
-                        self.innovationCounter = self.innovationCounter + 1
-                        front_half.innovation = self.innovationCounter
-                        genome.connections.append(front_half)
-                        self.connectionList.append(front_half)
+                if cl[gene].Y == Y:
+                    # genome.connections[random_connection].enabled = False
+                    genome.connections[random_connection].enabled = False
+                    self.innovationCounter = self.innovationCounter + 1
+                    front_half.innovation = self.innovationCounter
+                    genome.connections.append(front_half)
+                    self.connectionList.append(front_half)
 
-                        self.innovationCounter = self.innovationCounter + 1
-                        back_half.innovation = self.innovationCounter
-                        genome.connections.append(back_half)
-                        self.connectionList.append(back_half)
-                        break
+                    self.innovationCounter = self.innovationCounter + 1
+                    back_half.innovation = self.innovationCounter
+                    genome.connections.append(back_half)
+                    self.connectionList.append(back_half)
+                    self.currentPop[index] = genome
+                    return
 
 
-        print("After__________________________", len(self.connectionList))
-        for con in range(len(self.currentPop[index].connections)):
-            print(self.currentPop[index].connections[con])
-        self.currentPop[index] = genome
+                    # print("After__________________________", len(self.connectionList))
+                    # for con in range(len(self.currentPop[index].connections)):
+                    #     print(self.currentPop[index].connections[con])
+                    # self.currentPop[index] = genome
 
 
 def crossbreed(genome_one, genome_two):
