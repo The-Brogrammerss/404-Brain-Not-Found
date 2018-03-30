@@ -32,8 +32,12 @@ def generate_initial_population():
 
         for i in range(1, numInputs + 1):
             for j in range(numInputs + 1, numInputs + numY + 1):
-                innovation = len(population.connectionList)
-                population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
+                innovation = None
+                if any(x.x == i and x.Y == j for x in population.connectionList):
+                    innovation = (z for z,x in enumerate(population.connectionList) if x.x == i and x.Y == j)
+                else:
+                    innovation = len(population.connectionList)
+                    population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
                 connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
