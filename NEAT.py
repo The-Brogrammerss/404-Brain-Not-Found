@@ -13,6 +13,7 @@ from BuildNeuralNet import NeuralNet
 from Population import crossbreed
 
 import cartpole
+import time
 from misc.Json import to_json
 
 population = Population()
@@ -43,34 +44,35 @@ def generate_initial_population():
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
 
-def copy_to_popCap(gnome):
-    for i in range(1, popCap):
-        g = copy.deepcopy(gnome)
-        for k in range(len(g.connections)):
-            g.connections[k].weight = random.randrange(-100, 100, 1)
-        population.currentPop.append(g)
+# def copy_to_popCap(gnome):
+#     for i in range(1, popCap):
+#         g = copy.deepcopy(gnome)
+#         for k in range(len(g.connections)):
+#             g.connections[k].weight = random.randrange(-100, 100, 1)
+#         population.currentPop.append(g)
 
-
-def generate_connections(gnome):
-    for k in range(0, len(gnome.nodes)):
-        if gnome.nodes[k].type == "Sensor":
-            for j in range(1, len(gnome.nodes)):
-                if gnome.nodes[j].type == "Output":
-                    cons = ConnectGenes()
-                    cons.x = gnome.nodes[k].nodeNum
-                    cons.Y = gnome.nodes[j].nodeNum
-                    cons.enabled = True
-                    population.innovationCounter = population.innovationCounter + 1
-                    cons.innovation = population.innovationCounter
-                    cons.weight = random.randrange(Config.dict["min_weight"],
-                                                   100, 1)
-                    gnome.connections.append(cons)
-                    population.connectionList.append(cons)
+#
+# def generate_connections(gnome):
+#     for k in range(0, len(gnome.nodes)):
+#         if gnome.nodes[k].type == "Sensor":
+#             for j in range(1, len(gnome.nodes)):
+#                 if gnome.nodes[j].type == "Output":
+#                     cons = ConnectGenes()
+#                     cons.x = gnome.nodes[k].nodeNum
+#                     cons.Y = gnome.nodes[j].nodeNum
+#                     cons.enabled = True
+#                     population.innovationCounter = population.innovationCounter + 1
+#                     cons.innovation = population.innovationCounter
+#                     cons.weight = random.randrange(Config.dict["min_weight"],
+#                                                    100, 1)
+#                     gnome.connections.append(cons)
+#                     population.connectionList.append(cons)
 
 
 def git_gud():
     for gnome in range(int(round(.1 * popCap))):
-        next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
+        # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
+        next_gen.currentPop.append(population.currentPop[gnome])
     for gnome in range(int(round(.9 * popCap))):
         next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
@@ -93,15 +95,32 @@ def run_game():
 if '__main__' == __name__:
     popCap = 100
     population = Population()
-    next_gen = Population()
+    # next_gen = Population()
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
     generate_initial_population()
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-
     print(population.currentPop[0])
 
+    for i in range(50):
+        start_time = time.time()
+        next_gen = Population()
+        run_game()
+        population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+        # cartpole.render_game(population.currentPop[0])
+        # MountainCar.render_game(population.currentPop[0])
+        next_gen.maxNodes = population.maxNodes
+        next_gen.innovationCounter = population.innovationCounter
+        next_gen.connectionList = copy.deepcopy(population.connectionList)
+        git_gud()
 
+        population = next_gen
+        print("\nepoch:", i)
+        print("time", time.time() - start_time)
+        # print("con length", len(population.connectionList))
+        # print("winner con length", len(population.currentPop[0].connections))
+        print("fitness:", population.currentPop[0].fitness)
+        # to_json(population.currentPop[0])
 
     # while True:
 
