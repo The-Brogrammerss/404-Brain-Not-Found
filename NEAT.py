@@ -29,9 +29,12 @@ def generate_initial_population():
             nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output'))
 
         connections = []
+
         for i in range(1, numInputs + 1):
             for j in range(numInputs + 1, numInputs + numY + 1):
-                connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True))
+                innovation = len(population.connectionList)
+                population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
+                connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
@@ -90,7 +93,15 @@ if '__main__' == __name__:
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
     generate_initial_population()
+    population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+
+    print(population.currentPop[0])
+
+
+
     # while True:
+
+    '''
     for i in range(10):
 
         run_game()
@@ -106,3 +117,4 @@ if '__main__' == __name__:
     for con in range (len(next_gen.connectionList)):
         print(next_gen.connectionList[con])
 
+    '''
