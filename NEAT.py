@@ -35,7 +35,7 @@ def generate_initial_population():
             for j in range(numInputs + 1, numInputs + numY + 1):
                 innovation = None
                 if any(x.x == i and x.Y == j for x in population.connectionList):
-                    innovation = (z for z,x in enumerate(population.connectionList) if x.x == i and x.Y == j)
+                    innovation = [z for z,x in enumerate(population.connectionList) if x.x == i and x.Y == j][0]
                 else:
                     innovation = len(population.connectionList)
                     population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
