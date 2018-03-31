@@ -118,6 +118,7 @@ class Population(object):
                                         weight = 100, enabled = True ))
             genome.connections.append(ConnectGenes(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
                                         weight = connection.weight, enabled = True))
+            genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden"))
         else:
             self.maxNodes += 1
             self.innovationCounter += 1

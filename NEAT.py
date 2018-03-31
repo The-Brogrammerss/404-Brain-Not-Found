@@ -2,6 +2,7 @@
 import copy
 import random
 import gc
+import sys
 from time import clock
 
 from ConnectGenes import ConnectGenes
@@ -91,7 +92,14 @@ def git_gud():
 def run_game():
     for i in range(len(population.currentPop)):
         neuralNet = NeuralNet(population.currentPop[i])
-        neuralNet.build_neural_net()
+        try:
+            neuralNet.build_neural_net()
+        except Exception as e:
+            print("Entered Exception block")
+            print("key", e)
+            print(population.currentPop[i])
+            sys.exit()
+
         population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
 
 
@@ -104,7 +112,6 @@ if '__main__' == __name__:
     generate_initial_population()
 
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-    print(population.currentPop[0])
 
     for i in range(10):
         start_time = time.time()
