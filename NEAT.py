@@ -44,6 +44,8 @@ def generate_initial_population():
 
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
+    population.maxNodes = numInputs + numY + 1
+
 
 # def copy_to_popCap(gnome):
 #     for i in range(1, popCap):
@@ -100,6 +102,7 @@ if '__main__' == __name__:
     numInputs, numY = cartpole.get_xy()
     numY = int(numY)
     generate_initial_population()
+
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     print(population.currentPop[0])
 
@@ -127,21 +130,3 @@ if '__main__' == __name__:
     for con in range (len(next_gen.connectionList)):
         print(next_gen.connectionList[con])
     # while True:
-
-    '''
-    for i in range(10):
-
-        run_game()
-        population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-        # cartpole.render_game(population.currentPop[0])
-        next_gen.maxNodes = population.maxNodes
-        next_gen.innovationCounter = population.innovationCounter
-        next_gen.connectionList = population.connectionList
-        git_gud()
-        population = next_gen
-        to_json(population.currentPop[0])
-    print("_____________________Connection list___________________")
-    for con in range (len(next_gen.connectionList)):
-        print(next_gen.connectionList[con])
-
-    '''
