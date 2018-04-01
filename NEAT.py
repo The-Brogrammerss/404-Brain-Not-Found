@@ -47,31 +47,6 @@ def generate_initial_population():
     population.maxNodes = numInputs + numY + 1
 
 
-# def copy_to_popCap(gnome):
-#     for i in range(1, popCap):
-#         g = copy.deepcopy(gnome)
-#         for k in range(len(g.connections)):
-#             g.connections[k].weight = random.randrange(-100, 100, 1)
-#         population.currentPop.append(g)
-
-#
-# def generate_connections(gnome):
-#     for k in range(0, len(gnome.nodes)):
-#         if gnome.nodes[k].type == "Sensor":
-#             for j in range(1, len(gnome.nodes)):
-#                 if gnome.nodes[j].type == "Output":
-#                     cons = ConnectGenes()
-#                     cons.x = gnome.nodes[k].nodeNum
-#                     cons.Y = gnome.nodes[j].nodeNum
-#                     cons.enabled = True
-#                     population.innovationCounter = population.innovationCounter + 1
-#                     cons.innovation = population.innovationCounter
-#                     cons.weight = random.randrange(Config.dict["min_weight"],
-#                                                    100, 1)
-#                     gnome.connections.append(cons)
-#                     population.connectionList.append(cons)
-
-
 def inbreed():
 
     for gnome in range(int(round(.1 * popCap))):
