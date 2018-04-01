@@ -5,9 +5,9 @@ import gc
 import sys
 import time
 
-from ConnectGenes import ConnectGenes
+from ConnectGene import ConnectGenes
 from Genome import Genome
-from NodeGenes import NodeGenes
+from NodeGene import NodeGenes
 from Population import Population
 from Config import Config
 from BuildNeuralNet import NeuralNet
@@ -72,7 +72,7 @@ def generate_initial_population():
 #                     population.connectionList.append(cons)
 
 
-def git_gud():
+def inbreed():
 
     for gnome in range(int(round(.1 * popCap))):
         # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
@@ -135,7 +135,7 @@ if '__main__' == __name__:
 
         next_gen.connectionList = copy.deepcopy(population.connectionList)
         start_time = time.time()
-        git_gud()
+        inbreed()
 
         population = next_gen
         print("\nepoch:", i)

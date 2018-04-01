@@ -3,8 +3,8 @@ import copy
 import NEAT
 
 from Genome import Genome
-from ConnectGenes import ConnectGenes
-from NodeGenes import NodeGenes
+from ConnectGene import ConnectGenes
+from NodeGene import NodeGenes
 from Population import Population
 
 

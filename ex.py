@@ -1,5 +1,5 @@
-from ConnectGenes import ConnectGenes
-from NodeGenes import NodeGenes
+from ConnectGene import ConnectGenes
+from NodeGene import NodeGenes
 from Population import crossbreed
 
 from BuildNeuralNet import NeuralNet

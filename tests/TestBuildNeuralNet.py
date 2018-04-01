@@ -2,8 +2,8 @@ import unittest
 
 from Genome import Genome
 from BuildNeuralNet import NeuralNet
-from ConnectGenes import ConnectGenes
-from NodeGenes import NodeGenes
+from ConnectGene import ConnectGenes
+from NodeGene import NodeGenes
 
 
 class test_build_neural_net(unittest.TestCase):

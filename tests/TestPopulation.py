@@ -1,6 +1,6 @@
 import unittest
 from Population import Population
-from ConnectGenes import ConnectGenes
+from ConnectGene import ConnectGenes
 from Genome import Genome
 from Config import Config
 import copy

@@ -1,9 +1,9 @@
 import random
 import copy
 from Genome import Genome
-from ConnectGenes import ConnectGenes
+from ConnectGene import ConnectGenes
 from Config import Config
-from NodeGenes import NodeGenes
+from NodeGene import NodeGenes
 
 
 class Population(object):
