@@ -3,7 +3,7 @@ import copy
 import random
 import gc
 import sys
-from time import clock
+import time
 
 from ConnectGenes import ConnectGenes
 from Genome import Genome
@@ -14,7 +14,6 @@ from BuildNeuralNet import NeuralNet
 from Population import crossbreed
 
 import cartpole
-import time
 from misc.Json import to_json
 
 population = Population()
@@ -26,9 +25,9 @@ def generate_initial_population():
     for _ in range(popCap):
         nodes = []
         for i in range(1, numInputs + 1):
-            nodes.append(NodeGenes(nodeNum = i, t = 'Sensor'))
+            nodes.append(NodeGenes(nodeNum = i, t = 'Sensor', layer = float('-inf')))
         for i in range(1, numY + 1):
-            nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output'))
+            nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output', layer = float('inf')))
 
         connections = []
 
@@ -74,18 +73,26 @@ def generate_initial_population():
 
 
 def git_gud():
+
     for gnome in range(int(round(.1 * popCap))):
         # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
         next_gen.currentPop.append(population.currentPop[gnome])
+
+
+    start_time = time.time()
     for gnome in range(int(round(.9 * popCap))):
         next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
-    # for gnome in range(int(round(.4 * popCap))):
-    #     next_gen.mutate_weight(gnome)
-
+    print("time", time.time() - start_time)
+    start_time = time.time()
+    for gnome in range(int(round(.4 * popCap))):
+        next_gen.mutate_weight(gnome)
+    print("time", time.time() - start_time)
+    start_time = time.time()
     for gnome in range(int(round(.01 * popCap))):
         next_gen.mutate_add_node(random.randint(0, popCap - 1))
     # next_gen.mutate_add_node(random.choice(population.currentPop[:popCap]))
+    print("time", time.time() - start_time)
 
 
 
@@ -113,17 +120,21 @@ if '__main__' == __name__:
 
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
 
-    for i in range(10):
-        start_time = time.time()
+    for i in range(30):
+
         next_gen = Population()
+        print(len(population.currentPop))
+
         run_game()
-        print("time", time.time() - start_time)
+
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
         # cartpole.render_game(population.currentPop[0])
         # MountainCar.render_game(population.currentPop[0])
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
+
         next_gen.connectionList = copy.deepcopy(population.connectionList)
+        start_time = time.time()
         git_gud()
 
         population = next_gen
@@ -136,4 +147,6 @@ if '__main__' == __name__:
     print("_____________________Connection list___________________")
     for con in range (len(next_gen.connectionList)):
         print(next_gen.connectionList[con])
+
+    print(population.currentPop[99])
     # while True:

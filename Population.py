@@ -27,69 +27,14 @@ class Population(object):
             genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
         self.currentPop[index] = genome
 
-    # def mutate_add_node(self, index):
-    #     # print("Before______________________", len(self.connectionList))
-    #     # for con in range(len(self.currentPop[index].connections)):
-    #     #     print(self.currentPop[index].connections[con])
-    #     genome = self.currentPop[index]
-    #     front_half = ConnectGenes()
-    #     back_half = ConnectGenes()
-    #     new_node = NodeGenes()
-    #     random_connection = random.randint(0, len(genome.connections) - 1)
-    #     Y = genome.connections[random_connection].Y
-    #     x = genome.connections[random_connection].x
-    #     # self.maxNodes = self.maxNodes + 1
-    #     # new_node_num = self.maxNodes
-    #     new_node_num = len(self.currentPop[index].nodes) + 1
-    #     new_node.nodeNum = new_node_num
-    #     new_node.type = "Hidden"
-    #     genome.nodes.append(new_node)
-    #
-    #     front_half.x = x
-    #     front_half.Y = new_node_num
-    #     front_half.enabled = True
-    #     front_half.weight = Config.dict["max_weight"]
-    #
-    #     back_half.x = new_node_num
-    #     back_half.Y = Y
-    #     back_half.enabled = True
-    #     back_half.weight = random.randrange(Config.dict["min_weight"],
-    #                                         Config.dict["max_weight"],
-    #                                         Config.dict["weight_step"])
-    #     cl = self.connectionList
-    #     for gene in range(len(self.connectionList)):
-    #         if cl[gene].x == front_half.x:
-    #             for gene2 in range(len(self.connectionList)):
-    #                 if cl[gene].Y == cl[gene2].x and cl[gene2].Y == Y:
-    #                     front_half.innovation = cl[gene].innovation
-    #                     back_half.innovation = cl[gene2].innovation
-    #                     genome.connections.append(front_half)
-    #                     genome.connections.append(back_half)
-    #                     # self.connectionList.append(front_half)
-    #                     # self.connectionList.append(back_half)
-    #                     self.currentPop[index] = genome
-    #                     return
-    #
-    #             if cl[gene].Y == Y:
-    #                 # genome.connections[random_connection].enabled = False
-    #                 genome.connections[random_connection].enabled = False
-    #                 self.innovationCounter = self.innovationCounter + 1
-    #                 front_half.innovation = self.innovationCounter
-    #                 genome.connections.append(front_half)
-    #                 self.connectionList.append(front_half)
-    #
-    #                 self.innovationCounter = self.innovationCounter + 1
-    #                 back_half.innovation = self.innovationCounter
-    #                 genome.connections.append(back_half)
-    #                 self.connectionList.append(back_half)
-    #                 self.currentPop[index] = genome
-    #                 return
-
-
-                    # print("After__________________________", len(self.connectionList))
-                    # for con in range(len(self.currentPop[index].connections)):
-                    #     print(self.currentPop[index].connections[con])
-                    # self.currentPop[index] = genome
+    def mutate_add_connection(self, index):
+         '''
+        check to see if any hidden layers exist
+            if no, returns
+        look to always add a connections
+            make sure you dont loop foreva
+        allow for 'skip-connectons'
+         '''
 
 
     def mutate_add_node(self, index):
@@ -114,15 +59,23 @@ class Population(object):
 
         if len(back_half) == 1:
             front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half[0].x][0]
+
+            node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == front_half.x][0]
+            layer = 1 if node.layer == float('-inf') else node.layer + 1
+
             genome.connections.append(ConnectGenes(x = front_half.x, Y = front_half.Y, innovation = front_half.innovation,
                                         weight = 100, enabled = True ))
             genome.connections.append(ConnectGenes(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
                                         weight = connection.weight, enabled = True))
-            genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden"))
+            genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden", layer = layer))
         else:
             self.maxNodes += 1
             self.innovationCounter += 1
-            genome.nodes.append(NodeGenes(nodeNum = self.maxNodes, t = "Hidden"))
+
+            node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == connection.x][0]
+            layer = 1 if node.layer == float('-inf') else node.layer + 1
+
+            genome.nodes.append(NodeGenes(nodeNum = self.maxNodes, t = "Hidden", layer = layer))
             genome.connections.append(ConnectGenes(x = connection.x, Y = self.maxNodes, weight = 100,
                                         innovation = self.innovationCounter, enabled = True))
             self.connectionList.append(ConnectGenes(x = connection.x, Y = self.maxNodes, innovation = self.innovationCounter))
