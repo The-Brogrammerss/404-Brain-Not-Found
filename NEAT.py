@@ -15,6 +15,7 @@ from Population import crossbreed
 
 
 import cartpole
+import MountainCar
 from misc.Json import to_json
 
 population = Population()
@@ -58,7 +59,7 @@ def inbreed():
 
     for gnome in range(int(round(.9 * popCap))):
         inbred_genome = (crossbreed(population.currentPop[gnome],
-                                              random.choice(population.currentPop[:popCap])))
+                         random.choice(population.currentPop[:popCap - int(round(popCap * .8))])))
         chance = random.random()
 
         # not sure if this is the proper way of doing chances.
@@ -88,14 +89,16 @@ def run_game():
             print(population.currentPop[i])
             sys.exit()
 
-        population.currentPop[i].fitness = cartpole.get_fitness(neuralNet)
+        population.currentPop[i].fitness = game.get_fitness(neuralNet)
 
 
 if '__main__' == __name__:
-    popCap = 10
+    game = MountainCar
+    # game = cartpole
+    popCap = 100
     population = Population()
     # next_gen = Population()
-    numInputs, numY = cartpole.get_xy()
+    numInputs, numY = game.get_xy()
     numY = int(numY)
     generate_initial_population()
 
@@ -109,8 +112,7 @@ if '__main__' == __name__:
         run_game()
 
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-        # cartpole.render_game(population.currentPop[0])
-        # MountainCar.render_game(population.currentPop[0])
+        # game.render_game(population.currentPop[0])
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
 
@@ -119,7 +121,7 @@ if '__main__' == __name__:
         inbreed()
 
         population = next_gen
-        print("\nepoch:", i)
+        print("\nepoch:", i + 1)
         print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
         print("fitness:", population.currentPop[0].fitness)
