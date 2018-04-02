@@ -13,6 +13,7 @@ from Config import Config
 from BuildNeuralNet import NeuralNet
 from Population import crossbreed
 
+
 import cartpole
 from misc.Json import to_json
 
