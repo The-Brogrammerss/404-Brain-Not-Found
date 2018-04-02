@@ -92,8 +92,8 @@ def run_game():
 
 
 if '__main__' == __name__:
-    game = MountainCar
-    # game = cartpole
+    # game = MountainCar
+    game = cartpole
     popCap = 100
     population = Population()
     # next_gen = Population()
@@ -102,23 +102,23 @@ if '__main__' == __name__:
     generate_initial_population()
 
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+    run_game()
 
-    for i in range(40):
+    for i in range(10):
 
         next_gen = Population()
         # print(len(population.currentPop))
 
-        run_game()
+
 
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
-
         next_gen.connectionList = copy.deepcopy(population.connectionList)
         start_time = time.time()
         inbreed()
-
         population = next_gen
+        run_game()
         print("\nepoch:", i + 1)
         print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
@@ -131,6 +131,8 @@ if '__main__' == __name__:
         # to_json(population.currentPop[0])
 
     print("____________________Population Fitness__________________________")
+    population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
+
     for guy in population.currentPop:
         print(guy.fitness)
     # print("_____________________Connection list___________________")
