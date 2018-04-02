@@ -49,6 +49,8 @@ def generate_initial_population():
 
 def inbreed():
 
+    # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
+    #   our best genome cant handle every situation in cartpole.
     for gnome in range(int(round(.1 * popCap))):
         # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
         next_gen.currentPop.append(population.currentPop[gnome])
@@ -57,11 +59,20 @@ def inbreed():
         inbred_genome = (crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
         chance = random.random()
-        if chance < .4:
-            next_gen.mutate_weight(inbred_genome)
-        elif chance < .01:
-            next_gen.mutate_add_node(inbred_genome)
 
+        # not sure if this is the proper way of doing chances.
+
+        # with smaller populations .03 was used in the paper.
+        #   There needs to be a greater chance of adding a connection than a new node
+        if chance < .03:
+            next_gen.mutate_add_node(inbred_genome)
+        elif chance < .8:  # 80% chance of having is connection weights mutated
+            next_gen.mutate_weight(inbred_genome)
+        # TODO interspecies crossbreeding rate will be .001
+
+        # TODO the probability of adding a new link will be .05 for smaller populations
+        #   with larger populations it was .03 because they can handle greater diversity.
+        #   this seems like a typo but i cross checked the paper.
         next_gen.currentPop.append(inbred_genome)
 
 
@@ -89,7 +100,7 @@ if '__main__' == __name__:
 
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
 
-    for i in range(100):
+    for i in range(40):
 
         next_gen = Population()
         # print(len(population.currentPop))
