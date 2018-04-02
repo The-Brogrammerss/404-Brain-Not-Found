@@ -54,7 +54,6 @@ def inbreed():
     # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
     #   our best genome cant handle every situation in cartpole.
     for gnome in range(int(round(.1 * popCap))):
-        # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
         next_gen.currentPop.append(population.currentPop[gnome])
 
     for gnome in range(int(round(.9 * popCap))):
@@ -112,7 +111,6 @@ if '__main__' == __name__:
         run_game()
 
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-        # game.render_game(population.currentPop[0])
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
 
@@ -125,6 +123,9 @@ if '__main__' == __name__:
         print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
         print("fitness:", population.currentPop[0].fitness)
+        if population.currentPop[0].fitness > -200:
+            game.render_game(population.currentPop[0])
+
         # to_json(population.currentPop[0])
 
     # print("_____________________Connection list___________________")

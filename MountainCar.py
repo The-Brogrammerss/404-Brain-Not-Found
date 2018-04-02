@@ -59,11 +59,9 @@ def get_fitness(NN):
         observation.append(1)
         fitness += reward
         if done:
-            # print(fitness)
             return fitness
 
 def render_game(gnome):
-    print(gnome.fitness)
     env = gym.make('MountainCar-v0')
     NN = NeuralNet(gnome)
     NN.build_neural_net()
