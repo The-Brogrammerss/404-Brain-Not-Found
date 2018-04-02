@@ -123,14 +123,16 @@ if '__main__' == __name__:
         print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
         print("fitness:", population.currentPop[0].fitness)
-        if population.currentPop[0].fitness > -200:
+        if i == 0:
+            old_fitness = population.currentPop[0].fitness
+        if population.currentPop[0].fitness > old_fitness + 5:
             game.render_game(population.currentPop[0])
-
+            old_fitness = population.currentPop[0].fitness
         # to_json(population.currentPop[0])
 
+    print("____________________Population Fitness__________________________")
+    for guy in population.currentPop:
+        print(guy.fitness)
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
     #     print(next_gen.connectionList[con])
-
-
-    # while True:
