@@ -14,8 +14,8 @@ class Population(object):
         self.connectionList = []
         self.maxNodes = 0
 
-    def mutate_weight(self, index):
-        genome = self.currentPop[index]
+    def mutate_weight(self, genome):
+
         perturb_rate = 0.9
         perturb_chance = random.random()
         random_connection = random.randint(0, len(genome.connections) - 1)
@@ -25,9 +25,9 @@ class Population(object):
 
         else:
             genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
-        self.currentPop[index] = genome
+        return genome
 
-    def mutate_add_connection(self, index):
+    def mutate_add_connection(self, gnome):
          '''
         check to see if any hidden layers exist
             if no, returns
@@ -37,7 +37,7 @@ class Population(object):
          '''
 
 
-    def mutate_add_node(self, index):
+    def mutate_add_node(self, genome):
 
         '''
         Grab genome from pop
@@ -48,7 +48,7 @@ class Population(object):
             grab all connections with correct x
         generate new connection
         '''
-        genome = self.currentPop[index]
+        # genome = self.currentPop[index]
 
         connection = genome.connections[random.randint(0, len(genome.connections) - 1)]
 
@@ -68,6 +68,8 @@ class Population(object):
             genome.connections.append(ConnectGenes(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
                                         weight = connection.weight, enabled = True))
             genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden", layer = layer))
+
+            return genome
         else:
             self.maxNodes += 1
             self.innovationCounter += 1
@@ -84,6 +86,8 @@ class Population(object):
             genome.connections.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, weight = connection.weight,
                                         innovation = self.innovationCounter, enabled = True))
             self.connectionList.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
+
+            return genome
 
 def crossbreed(genome_one, genome_two):
     child_connections = []

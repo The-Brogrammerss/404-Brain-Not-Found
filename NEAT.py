@@ -53,22 +53,16 @@ def inbreed():
         # next_gen.currentPop.append(copy.deepcopy(population.currentPop[gnome]))
         next_gen.currentPop.append(population.currentPop[gnome])
 
-
-    start_time = time.time()
     for gnome in range(int(round(.9 * popCap))):
-        next_gen.currentPop.append(crossbreed(population.currentPop[gnome],
+        inbred_genome = (crossbreed(population.currentPop[gnome],
                                               random.choice(population.currentPop[:popCap])))
-    print("time", time.time() - start_time)
-    start_time = time.time()
-    for gnome in range(int(round(.4 * popCap))):
-        next_gen.mutate_weight(gnome)
-    print("time", time.time() - start_time)
-    start_time = time.time()
-    for gnome in range(int(round(.01 * popCap))):
-        next_gen.mutate_add_node(random.randint(0, popCap - 1))
-    # next_gen.mutate_add_node(random.choice(population.currentPop[:popCap]))
-    print("time", time.time() - start_time)
+        chance = random.random()
+        if chance < .4:
+            next_gen.mutate_weight(inbred_genome)
+        elif chance < .01:
+            next_gen.mutate_add_node(inbred_genome)
 
+        next_gen.currentPop.append(inbred_genome)
 
 
 def run_game():
@@ -86,7 +80,7 @@ def run_game():
 
 
 if '__main__' == __name__:
-    popCap = 100
+    popCap = 10
     population = Population()
     # next_gen = Population()
     numInputs, numY = cartpole.get_xy()
@@ -95,10 +89,10 @@ if '__main__' == __name__:
 
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
 
-    for i in range(30):
+    for i in range(100):
 
         next_gen = Population()
-        print(len(population.currentPop))
+        # print(len(population.currentPop))
 
         run_game()
 
@@ -119,9 +113,9 @@ if '__main__' == __name__:
         print("fitness:", population.currentPop[0].fitness)
         # to_json(population.currentPop[0])
 
-    print("_____________________Connection list___________________")
-    for con in range (len(next_gen.connectionList)):
-        print(next_gen.connectionList[con])
+    # print("_____________________Connection list___________________")
+    # for con in range (len(next_gen.connectionList)):
+    #     print(next_gen.connectionList[con])
 
-    print(population.currentPop[99])
+
     # while True:
