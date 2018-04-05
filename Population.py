@@ -27,14 +27,20 @@ class Population(object):
         return genome
 
 
-    def mutate_add_connection(self, gnome):
-         '''
-        check to see if any hidden layers exist
-            if no, returns
-        look to always add a connections
-            make sure you dont loop foreva
-        allow for 'skip-connectons'
-         '''
+    def mutate_add_connection(self, genome):
+        available_connections = []
+
+        for nodeX in genome.nodes:
+            for nodeY in genome.nodes:
+                if nodeY.layer > nodeX.layer and not any(for con in genome.connections if con.x == nodeX.nodeNum and con.Y == nodeY.nodeNum):
+                    available_connections.append([nodeX.x, nodeY.Y])
+
+        if len(available_connections) > 0:
+            connection = available_connections[random.randint(len(available_connections))]
+            innovation = con.innovation for con in self.connectionList if con.x == connection[0] and con.Y == connection[1] else self.innovationCounter + 1
+            self.innovationCounter += 1
+
+
 
 
     def mutate_add_node(self, genome):
