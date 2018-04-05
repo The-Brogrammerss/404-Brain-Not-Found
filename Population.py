@@ -24,7 +24,7 @@ class Population(object):
 
         else:
             genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
-        return genome
+
 
 
     def mutate_add_connection(self, genome):
@@ -32,19 +32,20 @@ class Population(object):
 
         for nodeX in genome.nodes:
             for nodeY in genome.nodes:
-                if nodeY.layer > nodeX.layer and not any(for con in genome.connections if con.x == nodeX.nodeNum and con.Y == nodeY.nodeNum):
+                if nodeY.layer > nodeX.layer and not any(con.x == nodeX.nodeNum and con.Y == nodeY.nodeNum for con in genome.connections):
                     available_connections.append([nodeX.x, nodeY.Y])
 
         if len(available_connections) > 0:
             connection = available_connections[random.randint(len(available_connections))]
-            innovation = con.innovation for con in self.connectionList if con.x == connection[0] and con.Y == connection[1] else self.innovationCounter + 1
-            self.innovationCounter += 1
-
-
-
+            master_connection = next((con for con in self.connectionList if con.x == connection[0] and con.Y == connection[1]), None)
+            if master_connection != None:
+                genome.connections.append(x = connection[0], Y = connection[1], weight = random.randrange(-100, 100, 1), enabled = True, innovation = master_connection.innovation)
+            else:
+                self.innovationCounter += 1
+                self.connectionList.append(x = connection[0], Y = connection[1], innovation = self.innovationCounter)
+                genome.connections.append(x = connection[0], Y = connection[1], innovation = self.innovationCounter, weight = random.randrange(-100, 100, 1), enabled = True)
 
     def mutate_add_node(self, genome):
-
         '''
         Grab genome from pop
 
@@ -75,7 +76,7 @@ class Population(object):
                                         weight = connection.weight, enabled = True))
             genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden", layer = layer))
 
-            return genome
+            #return genome
         else:
             self.maxNodes += 1
             self.innovationCounter += 1
@@ -93,7 +94,7 @@ class Population(object):
                                         innovation = self.innovationCounter, enabled = True))
             self.connectionList.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
 
-            return genome
+            #return genome
 
 
 def crossbreed(genome_one, genome_two):

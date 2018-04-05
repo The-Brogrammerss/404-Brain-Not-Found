@@ -35,19 +35,19 @@ def get_fitness(NN):
         if nno[0] == 1 and nno[1] == 1:
             # print("pick me!!!!!!!!!!!!!\n")
             observation, reward, done, info = env.step(0)
-            # return fitness
+            return fitness
         elif nno[0] == 1 and nno[2] == 1:
             # print("pick me!!!!!!!!!!!!!\n")
             observation, reward, done, info = env.step(0)
-            # return fitness
+            return fitness
         elif nno[1] == 1 and nno[2] == 1:
             # print("pick me!!!!!!!!!!!!!\n")
             observation, reward, done, info = env.step(0)
-            # return fitness
+            return fitness
         elif nno[0] == 0 and nno[1] == 0 and nno[2] == 0:
             # print("pick me!!!!!!!!!!!!!\n")
             observation, reward, done, info = env.step(0)
-            # return fitness
+            return fitness
         else:
             for index in range(3):
                 if nno[index] == 1:

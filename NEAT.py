@@ -65,9 +65,9 @@ def inbreed():
 
         # with smaller populations .03 was used in the paper.
         #   There needs to be a greater chance of adding a connection than a new node
-        if chance < .03:
+        if random.random() < .03:
             next_gen.mutate_add_node(inbred_genome)
-        elif chance < .8:  # 80% chance of having is connection weights mutated
+        elif random.random() < .8:  # 80% chance of having is connection weights mutated
             next_gen.mutate_weight(inbred_genome)
         # TODO interspecies crossbreeding rate will be .001
 
@@ -92,9 +92,9 @@ def run_game():
 
 
 if '__main__' == __name__:
-    # game = MountainCar
-    game = cartpole
-    popCap = 100
+    game = MountainCar
+    # game = cartpole
+    popCap = 25
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -104,7 +104,7 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(10):
+    for i in range(200):
 
         next_gen = Population()
         # print(len(population.currentPop))
@@ -135,6 +135,8 @@ if '__main__' == __name__:
 
     for guy in population.currentPop:
         print(guy.fitness)
+
+    print(population.currentPop[9])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
     #     print(next_gen.connectionList[con])
