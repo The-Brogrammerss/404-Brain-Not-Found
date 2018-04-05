@@ -67,7 +67,7 @@ def inbreed():
         #   There needs to be a greater chance of adding a connection than a new node
         if random.random() < .03:
             next_gen.mutate_add_node(inbred_genome)
-        elif random.random() < .05:
+        elif random.random() < .05: #the probability of adding a new link will be .05 for smaller populations
             next_gen.mutate_add_connection(inbred_genome)
         elif random.random() < .8:  # 80% chance of having is connection weights mutated
             next_gen.mutate_weight(inbred_genome)
@@ -97,7 +97,7 @@ def run_game():
 if '__main__' == __name__:
     game = MountainCar
     # game = cartpole
-    popCap = 100
+    popCap = 50
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -139,7 +139,7 @@ if '__main__' == __name__:
     for guy in population.currentPop:
         print(guy.fitness)
 
-    # print(population.currentPop[9])
+    print(population.currntPop[49])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
     #     print(next_gen.connectionList[con])

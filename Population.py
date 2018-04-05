@@ -33,17 +33,17 @@ class Population(object):
         for nodeX in genome.nodes:
             for nodeY in genome.nodes:
                 if nodeY.layer > nodeX.layer and not any(con.x == nodeX.nodeNum and con.Y == nodeY.nodeNum for con in genome.connections):
-                    available_connections.append([nodeX.x, nodeY.Y])
+                    available_connections.append([nodeX.nodeNum, nodeY.nodeNum])
 
         if len(available_connections) > 0:
-            connection = available_connections[random.randint(len(available_connections))]
+            connection = available_connections[random.randint(0, len(available_connections) - 1)]
             master_connection = next((con for con in self.connectionList if con.x == connection[0] and con.Y == connection[1]), None)
             if master_connection != None:
-                genome.connections.append(x = connection[0], Y = connection[1], weight = random.randrange(-100, 100, 1), enabled = True, innovation = master_connection.innovation)
+                genome.connections.append(ConnectGenes(x = connection[0], Y = connection[1], weight = random.randrange(-100, 100, 1), enabled = True, innovation = master_connection.innovation))
             else:
                 self.innovationCounter += 1
-                self.connectionList.append(x = connection[0], Y = connection[1], innovation = self.innovationCounter)
-                genome.connections.append(x = connection[0], Y = connection[1], innovation = self.innovationCounter, weight = random.randrange(-100, 100, 1), enabled = True)
+                self.connectionList.append(ConnectGenes(x = connection[0], Y = connection[1], innovation = self.innovationCounter))
+                genome.connections.append(ConnectGenes(x = connection[0], Y = connection[1], innovation = self.innovationCounter, weight = random.randrange(-100, 100, 1), enabled = True))
 
     def mutate_add_node(self, genome):
         '''
