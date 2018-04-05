@@ -22,41 +22,17 @@ def get_xy():
 def get_fitness(NN):
     observation = env.reset()
     observation = observation.tolist()
-    observation.append(1)
+    # observation.append(1)
     # print("observation: " + str(observation))
     fitness = 0
     for x in range(10000):
+        observation.append(1)
         NN.predict(observation)
-
         nno = NN.output
-        # print("output from nn:", NN.output[0])
-        # if nno[0] == 1 and nno[1] == 1:
-        #     # print("pick me!!!!!!!!!!!!!\n")
-        #     observation, reward, done, info = env.step(0)
-        #     # return fitness
-        # elif nno[0] == 1 and nno[2] == 1:
-        #     # print("pick me!!!!!!!!!!!!!\n")
-        #     observation, reward, done, info = env.step(0)
-        #     # return fitness
-        # elif nno[1] == 1 and nno[2] == 1:
-        #     # print("pick me!!!!!!!!!!!!!\n")
-        #     observation, reward, done, info = env.step(0)
-        #     # return fitness
-        # elif nno[0] == 0 and nno[1] == 0 and nno[2] == 0:
-        #     # print("pick me!!!!!!!!!!!!!\n")
-        #     observation, reward, done, info = env.step(0)
-            # return fitness
-        # else:
-        #     for index in range(3):
-        #         if nno[index] == 1:
-        #             # print(index)
-        #             # print("no me*************\n")
-        #             observation, reward, done, info = env.step(index)
-        choice = nno.index(max(nno))
+        choice = nno.index(max(nno)) # index of max numbers first instance
         observation, reward, done, info = env.step(round(choice))
         if type(observation) is not list:
             observation = observation.tolist()
-        observation.append(1)
         fitness += reward
         if done:
             return fitness
