@@ -97,7 +97,7 @@ def run_game():
 if '__main__' == __name__:
     game = MountainCar
     # game = cartpole
-    popCap = 50
+    popCap = 100
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -107,7 +107,7 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(200):
+    for i in range(100):
 
         next_gen = Population()
         # print(len(population.currentPop))
@@ -138,8 +138,8 @@ if '__main__' == __name__:
 
     for guy in population.currentPop:
         print(guy.fitness)
-
-    print(population.currntPop[49])
+    input("play last genome hit key")
+    game.render_game(population.currentPop[0])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
     #     print(next_gen.connectionList[con])

@@ -27,33 +27,33 @@ def get_fitness(NN):
     fitness = 0
     for x in range(10000):
         NN.predict(observation)
-        for index in range(3):
-            NN.output[index] = round(NN.output[index])
 
         nno = NN.output
         # print("output from nn:", NN.output[0])
-        if nno[0] == 1 and nno[1] == 1:
-            # print("pick me!!!!!!!!!!!!!\n")
-            observation, reward, done, info = env.step(0)
+        # if nno[0] == 1 and nno[1] == 1:
+        #     # print("pick me!!!!!!!!!!!!!\n")
+        #     observation, reward, done, info = env.step(0)
+        #     # return fitness
+        # elif nno[0] == 1 and nno[2] == 1:
+        #     # print("pick me!!!!!!!!!!!!!\n")
+        #     observation, reward, done, info = env.step(0)
+        #     # return fitness
+        # elif nno[1] == 1 and nno[2] == 1:
+        #     # print("pick me!!!!!!!!!!!!!\n")
+        #     observation, reward, done, info = env.step(0)
+        #     # return fitness
+        # elif nno[0] == 0 and nno[1] == 0 and nno[2] == 0:
+        #     # print("pick me!!!!!!!!!!!!!\n")
+        #     observation, reward, done, info = env.step(0)
             # return fitness
-        elif nno[0] == 1 and nno[2] == 1:
-            # print("pick me!!!!!!!!!!!!!\n")
-            observation, reward, done, info = env.step(0)
-            # return fitness
-        elif nno[1] == 1 and nno[2] == 1:
-            # print("pick me!!!!!!!!!!!!!\n")
-            observation, reward, done, info = env.step(0)
-            # return fitness
-        elif nno[0] == 0 and nno[1] == 0 and nno[2] == 0:
-            # print("pick me!!!!!!!!!!!!!\n")
-            observation, reward, done, info = env.step(0)
-            # return fitness
-        else:
-            for index in range(3):
-                if nno[index] == 1:
-                    # print(index)
-                    # print("no me*************\n")
-                    observation, reward, done, info = env.step(index)
+        # else:
+        #     for index in range(3):
+        #         if nno[index] == 1:
+        #             # print(index)
+        #             # print("no me*************\n")
+        #             observation, reward, done, info = env.step(index)
+        choice = nno.index(max(nno))
+        observation, reward, done, info = env.step(round(choice))
         if type(observation) is not list:
             observation = observation.tolist()
         observation.append(1)
