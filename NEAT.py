@@ -4,6 +4,7 @@ import random
 import gc
 import sys
 import time
+import numpy as np
 
 from ConnectGene import ConnectGenes
 from Genome import Genome
@@ -16,6 +17,7 @@ from Population import crossbreed
 
 import cartpole
 import MountainCar
+import XOR
 from misc.Json import to_json
 
 population = Population()
@@ -95,9 +97,9 @@ def run_game():
 
 
 if '__main__' == __name__:
-    game = MountainCar
+    game = XOR
     # game = cartpole
-    popCap = 100
+    popCap = 10
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -107,39 +109,45 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(100):
-
+    for i in range(200):
+        print(i)
         next_gen = Population()
         # print(len(population.currentPop))
 
 
-
+        np.random.shuffle(population.currentPop)
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
-        next_gen.connectionList = copy.deepcopy(population.connectionList)
+        next_gen.connectionList = population.connectionList
+        next_gen.pair = population.pair
         start_time = time.time()
         inbreed()
         population = next_gen
         run_game()
-        print("\nepoch:", i + 1)
-        print("con length", len(population.connectionList))
+        #print("\nepoch:", i + 1)
+        #print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
-        print("fitness:", population.currentPop[0].fitness)
+        #print("fitness:", population.currentPop[0].fitness)
         if i == 0:
             old_fitness = population.currentPop[0].fitness
         if population.currentPop[0].fitness > old_fitness + 5:
-            game.render_game(population.currentPop[0])
+            #game.render_game(population.currentPop[0])
             old_fitness = population.currentPop[0].fitness
         # to_json(population.currentPop[0])
 
+    print(population.currentPop[0])
     print("____________________Population Fitness__________________________")
     population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
 
     for guy in population.currentPop:
         print(guy.fitness)
+
+    for guy in population.currentPop:
+        #print(guy)
+        pass
     input("play last genome hit key")
-    game.render_game(population.currentPop[0])
+    #game.render_game(population.currentPop[0])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
     #     print(next_gen.connectionList[con])

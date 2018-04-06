@@ -12,6 +12,7 @@ class Population(object):
         self.currentPop = []
         self.innovationCounter = 0
         self.connectionList = []
+        self.pair = 1
 
 
     def mutate_weight(self, genome):
@@ -21,7 +22,10 @@ class Population(object):
         if perturb_chance <= perturb_rate:
             genome.connections[random_connection].weight = round(
                 genome.connections[random_connection].weight * random.uniform(0.8, 1.2))
-
+            if genome.connections[random_connection].weight > 100:
+                genome.connections[random_connection].weight = 100
+            elif genome.connections[random_connection].weight < -100:
+                genome.connections[random_connection].weight = -100
         else:
             genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
 
@@ -86,14 +90,14 @@ class Population(object):
 
             genome.nodes.append(NodeGenes(nodeNum = self.maxNodes, t = "Hidden", layer = layer))
             genome.connections.append(ConnectGenes(x = connection.x, Y = self.maxNodes, weight = 100,
-                                        innovation = self.innovationCounter, enabled = True))
+                                        innovation = self.innovationCounter, enabled = True, pair = self.pair))
             self.connectionList.append(ConnectGenes(x = connection.x, Y = self.maxNodes, innovation = self.innovationCounter))
 
             self.innovationCounter += 1
             genome.connections.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, weight = connection.weight,
-                                        innovation = self.innovationCounter, enabled = True))
+                                        innovation = self.innovationCounter, enabled = True, pair = self.pair))
             self.connectionList.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
-
+            self.pair += 1
             #return genome
 
 
@@ -104,6 +108,7 @@ def crossbreed(genome_one, genome_two):
 
     g1 = copy.deepcopy(genome_one.connections)
     g2 = copy.deepcopy(genome_two.connections)
+
 
     for i, gene1 in enumerate(g1):
         gene2 = next((x for x in g2 if x.innovation == gene1.innovation), None)
