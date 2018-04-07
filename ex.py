@@ -1,17 +1,11 @@
 
 
-class thing(object):
-
-    def __init__(self, x=None):
-        self.x = x
 
 
-y = thing(x='huh')
+listy1 = [1, 2, 7, 6]
+listy2 = [1, 2, 4, 7]
+whatever = [abs(x - y) for x in listy1 for y in listy2 if x == y]
+print("whatever:", whatever)
+W = sum(whatever) / len(whatever)
+print(W)
 
-def wut(x):
-    x.x = 'wut'
-
-
-wut(y)
-
-print(y.x)

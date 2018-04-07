@@ -141,3 +141,25 @@ def crossbreed(genome_one, genome_two):
     child_nodes.sort(key=lambda x: x.nodeNum)
 
     return Genome(connections = child_connections, nodes = child_nodes)
+
+
+def get_delta(genome, genome2):
+    c1 = 1
+    c2 = 0
+    c3 = 1
+    E = 0  # num excess genes
+    D = 0  # num disjoint genes, ignoring for now
+    W = 0  # average weight differences of matching genes
+    delta_threshhold = .5
+
+    if len(genome.connections) > 20 or len(genome2.connections) > 20:
+        N = max([len(genome.connections), len(genome2.connections)])
+    else:
+        N = 1
+
+    whatever = [abs(x.weight - y.weight) for x in genome.connections for y in genome2.connections if x.innovation == y.innovation]
+    W = sum(whatever)/len(whatever)
+    num_similarities = sum([1 for x in genome.connections for y in genome2.connections if x.innovation == y.innovation])
+    E = len(genome.connections) + len(genome2.connections) - 2 * num_similarities
+
+    return (c1 * E / N) + c3 * W

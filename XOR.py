@@ -11,7 +11,7 @@ def get_fitness(NN):
     _output = [0,0,1,1]
     for i, inp in enumerate(_input):
         NN.predict(inp)
-        if NN.output[0] == _output[i]:
+        if round(NN.output[0]) == _output[i]:
             fitness += 1
 
     return fitness
