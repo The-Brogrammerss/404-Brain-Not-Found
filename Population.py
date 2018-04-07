@@ -102,6 +102,12 @@ class Population(object):
             #return genome
 
 
+    def calc_pop_adjusted_fitness(self):
+        for genome in self.currentPop:
+            num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
+            genome.adjusted_fitness = genome.fitness / num_in_species
+
+
 def crossbreed(genome_one, genome_two):
     # TODO There was a 75% chance that an inherited gene was disabled if it was disabled in either parent.
     child_connections = []
@@ -143,10 +149,6 @@ def crossbreed(genome_one, genome_two):
 
     return Genome(connections = child_connections, nodes = child_nodes)
 
-    def calc_pop_adjusted_fitness():
-        for genome in self.currentPop:
-            num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
-            genome.adjusted_fitness = genome.fitness / num_in_species
 
 def get_delta(genome, genome2):
     c1 = 1
