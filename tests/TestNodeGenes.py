@@ -6,7 +6,7 @@ import NodeGene
 
 class test_node_attributes(unittest.TestCase):
     global ng
-    ng = NodeGene.NodeGenes()
+    ng = NodeGene.NodeGene()
     ng.nodeNum = 1
     ng.type = "Sensor"
 

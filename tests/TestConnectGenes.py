@@ -6,7 +6,7 @@ import ConnectGene
 
 class test_connect_attributes(unittest.TestCase):
     global cg
-    cg = ConnectGene.ConnectGenes()
+    cg = ConnectGene.ConnectGene()
     cg.x = 1
     cg.Y = 2
     cg.weight = 0.7

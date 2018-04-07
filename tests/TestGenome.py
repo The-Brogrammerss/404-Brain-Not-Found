@@ -3,16 +3,16 @@ import copy
 import NEAT
 
 from Genome import Genome
-from ConnectGene import ConnectGenes
-from NodeGene import NodeGenes
+from ConnectGene import ConnectGene
+from NodeGene import NodeGene
 from Population import Population
 
 
 class test_genome(unittest.TestCase):
     global g
     g = Genome()
-    g.connections.append(ConnectGenes())
-    g.nodes.append(NodeGenes())
+    g.connections.append(ConnectGene())
+    g.nodes.append(NodeGene())
     g.nodes[0].nodeNum = 4
     g.nodes[0].type = "Sensor"
 
@@ -20,8 +20,8 @@ class test_genome(unittest.TestCase):
         NEAT.numInputs = 2
         NEAT.numY = 1
         NEAT.popCap = 2
-        NEAT.population = Population([])
-        NEAT.generate_initial_genome()
+        NEAT.population = Population()
+        NEAT.generate_initial_population()
 
     def test_nodeNum(self):
         self.assertEqual(g.nodes[0].nodeNum, 4)

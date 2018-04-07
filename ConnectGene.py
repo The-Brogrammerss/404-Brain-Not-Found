@@ -1,4 +1,4 @@
-class ConnectGenes(object):
+class ConnectGene(object):
 
     def __init__(self, x=None, Y=None, weight=None, enabled=None, innovation=None, pair = None):
         self.x = x

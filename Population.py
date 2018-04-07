@@ -1,9 +1,9 @@
 import random
 import copy
 from Genome import Genome
-from ConnectGene import ConnectGenes
+from ConnectGene import ConnectGene
 from Config import Config
-from NodeGene import NodeGenes
+from NodeGene import NodeGene
 
 
 class Population(object):
@@ -43,11 +43,11 @@ class Population(object):
             connection = available_connections[random.randint(0, len(available_connections) - 1)]
             master_connection = next((con for con in self.connectionList if con.x == connection[0] and con.Y == connection[1]), None)
             if master_connection != None:
-                genome.connections.append(ConnectGenes(x = connection[0], Y = connection[1], weight = random.randrange(-100, 100, 1), enabled = True, innovation = master_connection.innovation))
+                genome.connections.append(ConnectGene(x = connection[0], Y = connection[1], weight = random.randrange(-100, 100, 1), enabled = True, innovation = master_connection.innovation))
             else:
                 self.innovationCounter += 1
-                self.connectionList.append(ConnectGenes(x = connection[0], Y = connection[1], innovation = self.innovationCounter))
-                genome.connections.append(ConnectGenes(x = connection[0], Y = connection[1], innovation = self.innovationCounter, weight = random.randrange(-100, 100, 1), enabled = True))
+                self.connectionList.append(ConnectGene(x = connection[0], Y = connection[1], innovation = self.innovationCounter))
+                genome.connections.append(ConnectGene(x = connection[0], Y = connection[1], innovation = self.innovationCounter, weight = random.randrange(-100, 100, 1), enabled = True))
 
     def mutate_add_node(self, genome):
         '''
@@ -74,11 +74,11 @@ class Population(object):
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == front_half.x][0]
             layer = 1 if node.layer == float('-inf') else node.layer + 1
 
-            genome.connections.append(ConnectGenes(x = front_half.x, Y = front_half.Y, innovation = front_half.innovation,
-                                        weight = 100, enabled = True ))
-            genome.connections.append(ConnectGenes(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
-                                        weight = connection.weight, enabled = True))
-            genome.nodes.append(NodeGenes(nodeNum = front_half.Y, t = "Hidden", layer = layer))
+            genome.connections.append(ConnectGene(x = front_half.x, Y = front_half.Y, innovation = front_half.innovation,
+                                                  weight = 100, enabled = True))
+            genome.connections.append(ConnectGene(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
+                                                  weight = connection.weight, enabled = True))
+            genome.nodes.append(NodeGene(nodeNum = front_half.Y, t ="Hidden", layer = layer))
 
             #return genome
         else:
@@ -88,15 +88,15 @@ class Population(object):
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == connection.x][0]
             layer = 1 if node.layer == float('-inf') else node.layer + 1
 
-            genome.nodes.append(NodeGenes(nodeNum = self.maxNodes, t = "Hidden", layer = layer))
-            genome.connections.append(ConnectGenes(x = connection.x, Y = self.maxNodes, weight = 100,
-                                        innovation = self.innovationCounter, enabled = True, pair = self.pair))
-            self.connectionList.append(ConnectGenes(x = connection.x, Y = self.maxNodes, innovation = self.innovationCounter))
+            genome.nodes.append(NodeGene(nodeNum = self.maxNodes, t ="Hidden", layer = layer))
+            genome.connections.append(ConnectGene(x = connection.x, Y = self.maxNodes, weight = 100,
+                                                  innovation = self.innovationCounter, enabled = True, pair = self.pair))
+            self.connectionList.append(ConnectGene(x = connection.x, Y = self.maxNodes, innovation = self.innovationCounter))
 
             self.innovationCounter += 1
-            genome.connections.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, weight = connection.weight,
-                                        innovation = self.innovationCounter, enabled = True, pair = self.pair))
-            self.connectionList.append(ConnectGenes(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
+            genome.connections.append(ConnectGene(x = self.maxNodes, Y = connection.Y, weight = connection.weight,
+                                                  innovation = self.innovationCounter, enabled = True, pair = self.pair))
+            self.connectionList.append(ConnectGene(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
             self.pair += 1
             #return genome
 

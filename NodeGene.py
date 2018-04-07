@@ -1,4 +1,4 @@
-class NodeGenes(object):
+class NodeGene(object):
 
     def __init__(self, nodeNum = None, t = None, layer = None):
         self.nodeNum = nodeNum

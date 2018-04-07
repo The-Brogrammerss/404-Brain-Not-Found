@@ -6,9 +6,9 @@ import sys
 import time
 import numpy as np
 
-from ConnectGene import ConnectGenes
+from ConnectGene import ConnectGene
 from Genome import Genome
-from NodeGene import NodeGenes
+from NodeGene import NodeGene
 from Population import Population
 from Config import Config
 from BuildNeuralNet import NeuralNet
@@ -29,9 +29,9 @@ def generate_initial_population():
     for _ in range(popCap):
         nodes = []
         for i in range(1, numInputs + 1):
-            nodes.append(NodeGenes(nodeNum = i, t = 'Sensor', layer = float('-inf')))
+            nodes.append(NodeGene(nodeNum = i, t ='Sensor', layer = float('-inf')))
         for i in range(1, numY + 1):
-            nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output', layer = float('inf')))
+            nodes.append(NodeGene(nodeNum =numInputs + i, t ='Output', layer = float('inf')))
 
         connections = []
 
@@ -43,8 +43,8 @@ def generate_initial_population():
                 else:
                     innovation = population.innovationCounter
                     population.innovationCounter += 1
-                    population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
-                connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
+                    population.connectionList.append(ConnectGene(x = i, Y = j, innovation = innovation))
+                connections.append(ConnectGene(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
