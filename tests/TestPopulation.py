@@ -89,4 +89,4 @@ class test_population(unittest.TestCase):
         genome1 = Genome(connections = con1)
         genome2 = Genome(connections = con2)
 
-        print(get_delta(genome1, genome2))
+        self.assertEqual(get_delta(genome1, genome2), 20)
