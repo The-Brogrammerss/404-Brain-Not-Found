@@ -78,7 +78,6 @@ def inbreed():
         #   with larger populations it was .03 because they can handle greater diversity.
         #   this seems like a typo but i cross checked the paper.
         next_gen.currentPop.append(inbred_genome)
-        print(get_delta(inbred_genome, population.currentPop[0]))
 
 def run_game():
     for i in range(len(population.currentPop)):
