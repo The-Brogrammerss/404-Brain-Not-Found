@@ -5,6 +5,7 @@ from ConnectGene import ConnectGene
 from Config import Config
 from NodeGene import NodeGene
 
+delta_threshhold = .5
 
 class Population(object):
 
@@ -142,6 +143,10 @@ def crossbreed(genome_one, genome_two):
 
     return Genome(connections = child_connections, nodes = child_nodes)
 
+    def calc_pop_adjusted_fitness():
+        for genome in self.currentPop:
+            num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
+            genome.adjusted_fitness = genome.fitness / num_in_species
 
 def get_delta(genome, genome2):
     c1 = 1
