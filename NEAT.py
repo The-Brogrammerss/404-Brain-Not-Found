@@ -33,6 +33,7 @@ def generate_initial_population():
         for i in range(1, numY + 1):
             nodes.append(NodeGenes(nodeNum = numInputs + i, t = 'Output', layer = float('inf')))
 
+        nodes.append(NodeGenes(nodeNum = numInputs + numY + 1, t = 'Hidden', layer = 1))
         connections = []
 
         for i in range(1, numInputs + 1):
@@ -46,6 +47,12 @@ def generate_initial_population():
                     population.connectionList.append(ConnectGenes(x = i, Y = j, innovation = innovation))
                 connections.append(ConnectGenes(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
+
+        connections.append(ConnectGenes(x = 1, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter))
+        connections.append(ConnectGenes(x = 2, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 1))
+        connections.append(ConnectGenes(x = 3, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 2))
+
+        connections.append(ConnectGenes(x = numInputs + numY + 1, Y = 4 , weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 3))
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.maxNodes = numInputs + numY + 1
@@ -99,7 +106,7 @@ def run_game():
 if '__main__' == __name__:
     game = XOR
     # game = cartpole
-    popCap = 10
+    popCap = 20
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -109,13 +116,13 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(200):
+    for i in range(100):
         print(i)
         next_gen = Population()
         # print(len(population.currentPop))
 
 
-        np.random.shuffle(population.currentPop)
+        #np.random.shuffle(population.currentPop)
         population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
@@ -146,7 +153,21 @@ if '__main__' == __name__:
     for guy in population.currentPop:
         #print(guy)
         pass
+    print(len(population.currentPop))
+    nn = NeuralNet(population.currentPop[0])
+    nn.build_neural_net()
+
+    nn.predict([1,0,0])
+    print("0 0 :", round(nn.output[0]))
+    nn.predict([1,1,1])
+    print("1 1 :", round(nn.output[0]))
+    nn.predict([1,0,1])
+    print("0 1 :", round(nn.output[0]))
+    nn.predict([1,1,0])
+    print("1 0 :", round(nn.output[0]))
     input("play last genome hit key")
+
+    print(pop)
     #game.render_game(population.currentPop[0])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
