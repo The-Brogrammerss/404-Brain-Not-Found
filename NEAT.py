@@ -164,10 +164,10 @@ if '__main__' == __name__:
     nn.predict([1,0,1])
     print("0 1 :", round(nn.output[0]))
     nn.predict([1,1,0])
+    
     print("1 0 :", round(nn.output[0]))
     input("play last genome hit key")
 
-    print(pop)
     #game.render_game(population.currentPop[0])
     # print("_____________________Connection list___________________")
     # for con in range (len(next_gen.connectionList)):
