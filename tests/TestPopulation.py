@@ -81,12 +81,16 @@ class test_population(unittest.TestCase):
     #     self.assertEqual(self.next_gen.currentPop[0].connections[2].enabled, True)
 
     def test_get_delta(self):
+        from Population import get_delta
         genome1 = Genome()
         genome2 = Genome()
-        con1 =
+        con1 = ConnectGene(innovation=1, weight=30)
+        con2 = ConnectGene(innovation=1, weight=20)
 
+        genome1.connections.append(con1)
+        genome2.connections.append(con2)
 
-
+        print(get_delta(genome1, genome2))
 
 
 

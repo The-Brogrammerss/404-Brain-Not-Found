@@ -13,6 +13,7 @@ from Population import Population
 from Config import Config
 from BuildNeuralNet import NeuralNet
 from Population import crossbreed
+from Population import get_delta
 
 
 import cartpole
@@ -61,9 +62,6 @@ def inbreed():
     for gnome in range(int(round(.9 * popCap))):
         inbred_genome = (crossbreed(population.currentPop[gnome],
                          random.choice(population.currentPop[:popCap - int(round(popCap * .8))])))
-        chance = random.random()
-
-        # not sure if this is the proper way of doing chances.
 
         # with smaller populations .03 was used in the paper.
         #   There needs to be a greater chance of adding a connection than a new node
@@ -80,7 +78,7 @@ def inbreed():
         #   with larger populations it was .03 because they can handle greater diversity.
         #   this seems like a typo but i cross checked the paper.
         next_gen.currentPop.append(inbred_genome)
-
+        print(get_delta(inbred_genome, population.currentPop[0]))
 
 def run_game():
     for i in range(len(population.currentPop)):

@@ -150,14 +150,13 @@ def get_delta(genome, genome2):
     E = 0  # num excess genes
     D = 0  # num disjoint genes, ignoring for now
     W = 0  # average weight differences of matching genes
-    delta_threshhold = .5
 
     if len(genome.connections) > 20 or len(genome2.connections) > 20:
         N = max([len(genome.connections), len(genome2.connections)])
     else:
         N = 1
 
-    whatever = [abs(x.weight - y.weight) for x in genome.connections for y in genome2.connections if x.innovation == y.innovation]
+    whatever = [abs(g1con.weight - g2con.weight) for g1con in genome.connections for g2con in genome2.connections if g1con.innovation == g2con.innovation]
     W = sum(whatever)/len(whatever)
     num_similarities = sum([1 for x in genome.connections for y in genome2.connections if x.innovation == y.innovation])
     E = len(genome.connections) + len(genome2.connections) - 2 * num_similarities
