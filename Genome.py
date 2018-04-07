@@ -4,11 +4,11 @@ import math
 
 
 class Genome(object):
-    def __init__(self, fitness: int = 0, connections = [], nodes = [], delta: int = 0):
+    def __init__(self, fitness: int = 0, connections = [], nodes = []):
         self.connections = connections
         self.nodes = nodes
         self.fitness = fitness
-        self.delta = delta
+        self.adjusted_fitness = 0
 
     def __str__(self):
         result = "fitness: " + str(self.fitness) + '\n'
@@ -21,5 +21,3 @@ class Genome(object):
             result += str(connect) + '\n\n'
 
         return result
-
-

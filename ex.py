@@ -9,3 +9,6 @@ print("whatever:", whatever)
 W = sum(whatever) / len(whatever)
 print(W)
 
+
+num = sum([1 if x%2 == 0 else 0 for x in listy1])
+print(num)
