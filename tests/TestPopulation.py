@@ -82,16 +82,11 @@ class test_population(unittest.TestCase):
 
     def test_get_delta(self):
         from Population import get_delta
-        genome1 = Genome()
-        genome2 = Genome()
-        con1 = ConnectGene(innovation=1, weight=30)
-        con2 = ConnectGene(innovation=1, weight=20)
 
-        genome1.connections.append(con1)
-        genome2.connections.append(con2)
+        con1 = [ConnectGene(x = 1, Y = 2, innovation=1, weight=30, enabled = True)]
+        con2 = [ConnectGene(x = 1, Y = 2, innovation=1, weight=10, enabled = True)]
+
+        genome1 = Genome(connections = con1)
+        genome2 = Genome(connections = con2)
 
         print(get_delta(genome1, genome2))
-
-
-
-
