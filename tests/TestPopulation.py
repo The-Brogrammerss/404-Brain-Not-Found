@@ -80,7 +80,7 @@ class test_population(unittest.TestCase):
     #     self.assertEqual(self.next_gen.currentPop[0].connections[2].Y, 2)
     #     self.assertEqual(self.next_gen.currentPop[0].connections[2].enabled, True)
 
-    def test_get_delta(self):
+    def test_get_delta_weights(self):
         from Population import get_delta
 
         con1 = [ConnectGene(x = 1, Y = 2, innovation=1, weight=30, enabled = True)]
@@ -89,4 +89,17 @@ class test_population(unittest.TestCase):
         genome1 = Genome(connections = con1)
         genome2 = Genome(connections = con2)
 
-        self.assertEqual(get_delta(genome1, genome2), 20)
+        # If i fail check constant 3
+        self.assertEqual(get_delta(genome1, genome2), 2)
+
+
+    def test_get_delta_inno(self):
+        from Population import get_delta
+
+        con1 = [ConnectGene(x = 1, Y = 2, innovation=2, weight=30, enabled = True)]
+        con2 = [ConnectGene(x = 1, Y = 2, innovation=1, weight=30, enabled = True)]
+
+        genome1 = Genome(connections = con1)
+        genome2 = Genome(connections = con2)
+
+        self.assertEqual(get_delta(genome1, genome2), 2)

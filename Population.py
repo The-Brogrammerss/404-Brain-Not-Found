@@ -14,6 +14,7 @@ class Population(object):
         self.innovationCounter = 0
         self.connectionList = []
         self.pair = 1
+        self.delta_threshold = 10
 
 
     def mutate_weight(self, genome):
@@ -153,7 +154,7 @@ def crossbreed(genome_one, genome_two):
 def get_delta(genome, genome2):
     c1 = 1
     c2 = 0
-    c3 = 1
+    c3 = .1
     E = 0  # num excess genes
     D = 0  # num disjoint genes, ignoring for now
     W = 0  # average weight differences of matching genes
@@ -164,7 +165,8 @@ def get_delta(genome, genome2):
         N = 1
 
     list_weight_diffs = [abs(g1con.weight - g2con.weight) for g1con in genome.connections for g2con in genome2.connections if g1con.innovation == g2con.innovation]
-    W = sum(list_weight_diffs)/len(list_weight_diffs)
+    if list_weight_diffs: # if not empty
+        W = sum(list_weight_diffs)/len(list_weight_diffs)
     num_similarities = sum([1 for x in genome.connections for y in genome2.connections if x.innovation == y.innovation])
     E = len(genome.connections) + len(genome2.connections) - 2 * num_similarities
 

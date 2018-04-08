@@ -79,6 +79,22 @@ def inbreed():
         #   this seems like a typo but i cross checked the paper.
         next_gen.currentPop.append(inbred_genome)
 
+
+def speciate():
+    species = []
+    if len(population.currentPop) is not popCap:
+        for listy in population.currentPop:
+            species.append(random.choice(listy))
+
+    next_species = [[] for _ in range(len(species))]
+
+    for genome in next_gen.currentPop:
+        for index, representative in enumerate(species):
+            if get_delta(genome, representative) < population.delta_threshold:
+                next_species[index].append(genome)
+                continue
+            elif index == len(species):
+                next_species.append([genome])
 def run_game():
     for i in range(len(population.currentPop)):
         neuralNet = NeuralNet(population.currentPop[i])
