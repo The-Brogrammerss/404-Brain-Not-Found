@@ -155,9 +155,9 @@ def get_delta(genome, genome2):
     c1 = 1
     c2 = 0
     c3 = .1
-    E = 0  # num excess genes
-    D = 0  # num disjoint genes, ignoring for now
-    W = 0  # average weight differences of matching genes
+    # E = num excess genes
+    # D =  num disjoint genes, ignoring for now
+    # W = average weight differences of matching genes
 
     if len(genome.connections) > 20 or len(genome2.connections) > 20:
         N = max([len(genome.connections), len(genome2.connections)])
@@ -169,5 +169,11 @@ def get_delta(genome, genome2):
         W = sum(list_weight_diffs)/len(list_weight_diffs)
     num_similarities = sum([1 for x in genome.connections for y in genome2.connections if x.innovation == y.innovation])
     E = len(genome.connections) + len(genome2.connections) - 2 * num_similarities
-
+    # print("genome1__________________________")
+    # print(genome)
+    # print("genome2_________________________")
+    # print(genome2)
+    print("len g1:", len(genome.connections), "len g2", len(genome2.connections))
+    print("num sims:", num_similarities)
+    print("E", E)
     return (c1 * E / N) + c3 * W

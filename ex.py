@@ -15,10 +15,9 @@ import random
 # num = sum([1 if x%2 == 0 else 0 for x in listy1])
 # print(num)
 
-a = [1, 2, 3, 4]
-for num in a:
-    if num is 4:
-        print("hello world")
-        continue
-    elif num == 4:
-        print("shit")
+
+
+a = [11, 22, 33, 44]
+for index, genome in enumerate(a):
+    print(index, genome)
+

@@ -81,20 +81,33 @@ def inbreed():
 
 
 def speciate():
+
     species = []
+
     if len(population.currentPop) is not popCap:
         for listy in population.currentPop:
             species.append(random.choice(listy))
+    else:
+        species.append(random.choice(population.currentPop))
 
     next_species = [[] for _ in range(len(species))]
 
-    for genome in next_gen.currentPop:
+    for pompe, genome in enumerate(next_gen.currentPop):
+        next_gen.currentPop.pop(pompe)
+        # print("genome:", genome)
         for index, representative in enumerate(species):
+            # print("delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
+                print("below threshold")
                 next_species[index].append(genome)
                 continue
             elif index == len(species):
+                print("above threashold")
                 next_species.append([genome])
+            else:
+                "something went wrong"
+    next_gen.currentPop = next_species
+
 def run_game():
     for i in range(len(population.currentPop)):
         neuralNet = NeuralNet(population.currentPop[i])
