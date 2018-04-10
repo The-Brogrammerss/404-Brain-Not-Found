@@ -81,7 +81,6 @@ def inbreed():
 
 
 def speciate():
-
     species = []
 
     if len(population.currentPop) is not popCap:
@@ -125,7 +124,7 @@ def run_game():
 if '__main__' == __name__:
     game = XOR
     # game = cartpole
-    popCap = 1000
+    popCap = 100
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -164,16 +163,16 @@ if '__main__' == __name__:
 
     print(population.currentPop[0])
     print("____________________Population Fitness__________________________")
-    population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
-    print(len(population.currentPop))
-    for guy in population.currentPop:
-        print(guy.fitness)
-
-    for guy in population.currentPop:
-        #print(guy)
-        pass
+    # population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
+    # print(len(population.currentPop))
+    # for guy in population.currentPop:
+    #     print(guy.fitness)
+    #
+    # for guy in population.currentPop:
+    #     #print(guy)
+    #     pass
     # input("play last genome hit key")
     #game.render_game(population.currentPop[0])
-    # print("_____________________Connection list___________________")
-    # for con in range (len(next_gen.connectionList)):
-    #     print(next_gen.connectionList[con])
+    print("_____________________Connection list___________________")
+    for con in range (len(next_gen.connectionList)):
+        print(next_gen.connectionList[con])
