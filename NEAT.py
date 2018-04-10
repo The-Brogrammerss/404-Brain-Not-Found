@@ -163,11 +163,11 @@ if '__main__' == __name__:
 
     print(population.currentPop[0])
     print("____________________Population Fitness__________________________")
-    # population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
-    # print(len(population.currentPop))
-    # for guy in population.currentPop:
-    #     print(guy.fitness)
-    #
+    population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
+    print(len(population.currentPop))
+    for guy in population.currentPop:
+        print(guy.fitness)
+
     # for guy in population.currentPop:
     #     #print(guy)
     #     pass

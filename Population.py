@@ -64,28 +64,52 @@ class Population(object):
         # genome = self.currentPop[index]
 
         connection = genome.connections[random.randint(0, len(genome.connections) - 1)]
+        # print("Connection to add node between____________")
+        # print(connection)
 
         startingNodesToCheck = [conGene for conGene in self.connectionList if conGene.x == connection.x]
+
+
+        # print("Starting Nodes to check__________________")
+        # for con in startingNodesToCheck:
+        #     print(con)
         nodesToCheck = [conGene.Y for conGene in startingNodesToCheck]
         back_half = [conGene for conGene in self.connectionList if conGene.x in nodesToCheck and conGene.Y == connection.Y]
         connection.enabled = False
-
-        if len(back_half) == 1:
-            front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half[0].x][0]
+        # print("length of back_half: ", len(back_half))
+        # for con in back_half:
+        #     print(con)
+        if len(back_half) >= 1:
+            back_half = back_half[random.randint(0, len(back_half)-1)]
+            # print("Node Exists_________________________________________________________")
+            # print(genome)
+            #input()
+            front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half.x]
+            front_half = front_half[random.randint(0,len(front_half)-1)]
 
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == front_half.x][0]
             layer = 1 if node.layer == float('-inf') else node.layer + 1
 
             genome.connections.append(ConnectGene(x = front_half.x, Y = front_half.Y, innovation = front_half.innovation,
                                                   weight = 100, enabled = True))
-            genome.connections.append(ConnectGene(x = back_half[0].x, Y = back_half[0].Y, innovation = back_half[0].innovation,
+            genome.connections.append(ConnectGene(x = back_half.x, Y = back_half.Y, innovation = back_half.innovation,
                                                   weight = connection.weight, enabled = True))
             genome.nodes.append(NodeGene(nodeNum = front_half.Y, t ="Hidden", layer = layer))
-
-            #return genome
+            # print("Genome after add Node__________________________________________________")
+            # print(genome)
+            # #input()
+            # #return genome
         else:
+
+            # print("Creating new node__________________________________________________")
+            # print(genome)
+            # input()
             self.maxNodes += 1
             self.innovationCounter += 1
+            if self.maxNodes == 9:
+                print("Printing master List")
+                for con in self.connectionList:
+                    print(con)
 
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == connection.x][0]
             layer = 1 if node.layer == float('-inf') else node.layer + 1
@@ -100,6 +124,9 @@ class Population(object):
                                                   innovation = self.innovationCounter, enabled = True, pair = self.pair))
             self.connectionList.append(ConnectGene(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
             self.pair += 1
+            # print("New node: ", self.maxNodes)
+            # print(genome)
+            # input()
             #return genome
 
 
