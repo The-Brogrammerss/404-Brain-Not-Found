@@ -128,9 +128,10 @@ class Population(object):
 
 
     def calc_pop_adjusted_fitness(self):
-        for genome in self.currentPop:
-            num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
-            genome.adjusted_fitness = genome.fitness / num_in_species
+        for list in self.currentPop:
+            for genome in list:
+                num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
+                genome.adjusted_fitness = genome.fitness / num_in_species
 
 
 def crossbreed(genome_one, genome_two):

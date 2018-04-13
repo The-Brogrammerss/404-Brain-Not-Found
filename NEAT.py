@@ -108,17 +108,19 @@ def speciate():
     next_gen.currentPop = next_species
 
 def run_game():
-    for i in range(len(population.currentPop)):
-        neuralNet = NeuralNet(population.currentPop[i])
-        try:
-            neuralNet.build_neural_net()
-        except Exception as e:
-            print("Entered Exception block")
-            print("key", e)
-            print(population.currentPop[i])
-            sys.exit()
 
-        population.currentPop[i].fitness = game.get_fitness(neuralNet)
+    for species in population.currentPop:
+        for genome in list:
+            neuralNet = NeuralNet(genome)
+            try:
+                neuralNet.build_neural_net()
+            except Exception as e:
+                print("Entered Exception block")
+                print("key", e)
+                print(genome)
+                sys.exit()
+
+            genome.fitness = game.get_fitness(neuralNet)
 
 
 if '__main__' == __name__:
