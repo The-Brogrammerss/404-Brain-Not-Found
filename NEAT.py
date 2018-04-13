@@ -49,6 +49,7 @@ def generate_initial_population():
 
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
+    population.currentPop = [population.currentPop]
     population.maxNodes = numInputs + numY + 1
 
 
@@ -56,28 +57,30 @@ def inbreed():
 
     # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
     #   our best genome cant handle every situation in cartpole.
-    for gnome in range(int(round(.1 * popCap))):
-        next_gen.currentPop.append(population.currentPop[gnome])
+    for listy in population.currentPop:
+        if len(listy) >= 5:
+            iter_pop = iter(listy)
+            next_gen.currentPop.append(next(iter_pop))
 
-    for gnome in range(int(round(.9 * popCap))):
-        inbred_genome = (crossbreed(population.currentPop[gnome],
-                         random.choice(population.currentPop[:popCap - int(round(popCap * .8))])))
+        for gnome in iter_pop:
+            inbred_genome = (crossbreed(population.currentPop[gnome],
+                             random.choice(population.currentPop[:popCap - int(round(len(listy) * .8))])))
 
-        # with smaller populations .03 was used in the paper.
-        #   There needs to be a greater chance of adding a connection than a new node
-        if random.random() < .03:
-            next_gen.mutate_add_node(inbred_genome)
-        elif random.random() < .05: #the probability of adding a new link will be .05 for smaller populations
-            next_gen.mutate_add_connection(inbred_genome)
-        elif random.random() < .8:  # 80% chance of having is connection weights mutated
-            next_gen.mutate_weight(inbred_genome)
+            # with smaller populations .03 was used in the paper.
+            #   There needs to be a greater chance of adding a connection than a new node
+            if random.random() < .03:
+                next_gen.mutate_add_node(inbred_genome)
+            elif random.random() < .05: #the probability of adding a new link will be .05 for smaller populations
+                next_gen.mutate_add_connection(inbred_genome)
+            elif random.random() < .8:  # 80% chance of having is connection weights mutated
+                next_gen.mutate_weight(inbred_genome)
 
-        # TODO interspecies crossbreeding rate will be .001
+            # TODO interspecies crossbreeding rate will be .001
 
-        # TODO the probability of adding a new link will be .05 for smaller populations
-        #   with larger populations it was .03 because they can handle greater diversity.
-        #   this seems like a typo but i cross checked the paper.
-        next_gen.currentPop.append(inbred_genome)
+            # TODO the probability of adding a new link will be .05 for smaller populations
+            #   with larger populations it was .03 because they can handle greater diversity.
+            #   this seems like a typo but i cross checked the paper.
+            next_gen.currentPop.append(inbred_genome)
 
 
 def speciate():
@@ -101,7 +104,7 @@ def speciate():
                 next_species[index].append(genome)
                 continue
             elif index == len(species):
-                print("above threashold")
+                print("above threshold")
                 next_species.append([genome])
             else:
                 "something went wrong"
@@ -124,7 +127,8 @@ def run_game():
 
 
 if '__main__' == __name__:
-    game = MountainCar
+    game = XOR
+    # game = MountainCar
     # game = cartpole
     popCap = 100
     population = Population()
@@ -133,7 +137,9 @@ if '__main__' == __name__:
     numY = int(numY)
     generate_initial_population()
 
-    population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+    for listy in population.currentPop:
+        listy.sort(key = lambda x: x.fitness, reverse = True)
+    # population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
     for i in range(50):
@@ -143,7 +149,8 @@ if '__main__' == __name__:
 
 
         # np.random.shuffle(population.currentPop)
-        population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
+        for listy in population.currentPop:
+            listy.sort(key=lambda x: x.fitness, reverse=True)
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
         next_gen.connectionList = population.connectionList
