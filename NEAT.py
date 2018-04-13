@@ -74,7 +74,7 @@ def inbreed():
             #   There needs to be a greater chance of adding a connection than a new node
             if random.random() < .03:
                 next_gen.mutate_add_node(inbred_genome)
-            elif random.random() < .05: #the probability of adding a new link will be .05 for smaller populations
+            elif random.random() < .05: # the probability of adding a new link will be .05 for smaller populations
                 next_gen.mutate_add_connection(inbred_genome)
             elif random.random() < .8:  # 80% chance of having is connection weights mutated
                 next_gen.mutate_weight(inbred_genome)
@@ -85,21 +85,20 @@ def inbreed():
             #   with larger populations it was .03 because they can handle greater diversity.
             #   this seems like a typo but i cross checked the paper.
             next_gen.currentPop.append(inbred_genome)
-
+    # print("inbreed, len(cur_pop of first list):", len(population.currentPop[0]))
 
 def speciate():
     species = []
+    # print("speciate, len(cur_pop):", len(population.currentPop))
 
-    if len(population.currentPop) is not popCap:
-        for listy in population.currentPop:
-            species.append(random.choice(listy))
-    else:
-        species.append(random.choice(population.currentPop))
+
+    for listy in population.currentPop:
+        # print("speciate, len(listy in cur_pop):", len(listy))
+        species.append(random.choice(listy))
 
     next_species = [[] for _ in range(len(species))]
 
-    for pompe, genome in enumerate(next_gen.currentPop):
-        next_gen.currentPop.pop(pompe)
+    for genome in next_gen.currentPop:
         # print("genome:", genome)
         for index, representative in enumerate(species):
             # print("delta:", get_delta(genome, representative))
@@ -107,12 +106,14 @@ def speciate():
                 # print("below threshold")
                 next_species[index].append(genome)
                 continue
-            elif index == len(species):
+            elif index == len(species) - 1:
                 # print("above threshold")
                 next_species.append([genome])
-            else:
-                "something went wrong"
+
+
     next_gen.currentPop = next_species
+    # print("speciate, len(listy in cur_pop):", len(population.currentPop[0]))
+
 
 def run_game():
     # print("length of cur_pop in run_game: ", len(population.currentPop))
@@ -146,10 +147,10 @@ if '__main__' == __name__:
     # population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(50):
+    for i in range(5):
         print("epoch:", i)
         next_gen = Population()
-        # print(len(population.currentPop))
+        print("main, len(cur_pop):", len(population.currentPop))
 
 
         # np.random.shuffle(population.currentPop)

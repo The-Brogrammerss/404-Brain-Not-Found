@@ -180,7 +180,7 @@ def crossbreed(genome_one, genome_two):
 def get_delta(genome, genome2):
     c1 = 1
     c2 = 0
-    c3 = .1
+    c3 = .01
     # E = num excess genes
     # D =  num disjoint genes, ignoring for now
     # W = average weight differences of matching genes
