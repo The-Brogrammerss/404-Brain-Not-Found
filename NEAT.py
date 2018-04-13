@@ -97,18 +97,17 @@ def speciate():
         species.append(random.choice(listy))
 
     next_species = [[] for _ in range(len(species))]
-
+    #print("speciate(): len(species): ",len(species))
     for genome in next_gen.currentPop:
         # print("genome:", genome)
         for index, representative in enumerate(species):
-            # print("delta:", get_delta(genome, representative))
+            #print("speciate(): delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
                 # print("below threshold")
                 next_species[index].append(genome)
-                continue
-            elif index == len(species) - 1:
-                # print("above threshold")
-                next_species.append([genome])
+            else:
+                print("above threshold")
+                #next_species.append([genome])
 
 
     next_gen.currentPop = next_species
@@ -142,29 +141,30 @@ if '__main__' == __name__:
     numY = int(numY)
     generate_initial_population()
 
-    for listy in population.currentPop:
-        listy.sort(key = lambda x: x.fitness, reverse = True)
+
     # population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-    run_game()
+
 
     for i in range(5):
         print("epoch:", i)
         next_gen = Population()
-        print("main, len(cur_pop):", len(population.currentPop))
+        print(len(next_gen.currentPop))
+        print("main, len(cur_pop):", len(population.currentPop[0]))
 
-
+        run_game()
         # np.random.shuffle(population.currentPop)
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
-        next_gen.maxNodes = population.maxNodes
-        next_gen.innovationCounter = population.innovationCounter
-        next_gen.connectionList = population.connectionList
-        next_gen.pair = population.pair
+        next_gen = copy.deepcopy(population)
+        next_gen.currentPop = []
+        print("main(): len(next_gen.currentPop):", len(next_gen.currentPop))
+        for i, x in enumerate(population.currentPop):
+            print("main(): species " + str(i) + " has a population of " + str(len(x)))
         start_time = time.time()
         inbreed()
         speciate()
         population = next_gen
-        run_game()
+
         #print("\nepoch:", i + 1)
         #print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
@@ -177,14 +177,14 @@ if '__main__' == __name__:
         # to_json(population.currentPop[0])
 
     print("num species:", len(population.currentPop))
-    print("____________________Population Fitness__________________________")
-
-    for listy in population.currentPop:
-        listy.sort(key=lambda x: x.fitness, reverse=True)
-    for listy in population.currentPop:
-        print("num genomes:", len(listy))
-        for guy in listy:
-            print(guy.fitness)
+    # print("____________________Population Fitness__________________________")
+    #
+    # for listy in population.currentPop:
+    #     listy.sort(key=lambda x: x.fitness, reverse=True)
+    # for listy in population.currentPop:
+    #     print("num genomes:", len(listy))
+    #     for guy in listy:
+    #         print(guy.fitness)
 
     # for guy in population.currentPop:
     #     #print(guy)
