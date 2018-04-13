@@ -88,7 +88,6 @@ def inbreed():
 
 def speciate():
     species = []
-
     for listy in population.currentPop:
         species.append(random.choice(listy))
 
@@ -100,12 +99,18 @@ def speciate():
             if get_delta(genome, representative) < population.delta_threshold:
                 # print("below threshold")
                 next_species[index].append(genome)
+                break
 
             elif index == len(species) - 1:
                 # print("above threshold")
                 species.append(genome)
                 next_species.append([genome])
+                break
 
+    # TODO im going to remove any empty lists here we are going to have to remember to blow off that species object also
+    for index, listy in enumerate(next_species):
+        if len(listy) == 0:
+            del(next_species[index])
     next_gen.currentPop = next_species
 
 
@@ -142,7 +147,7 @@ if '__main__' == __name__:
     for i in range(5):
         next_gen = Population()
         print("\n")
-        print("main(), epoch:", i)
+        print("main(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
 
         for listy in population.currentPop:
@@ -169,14 +174,15 @@ if '__main__' == __name__:
         # to_json(population.currentPop[0])
 
 
-    # print("____________________Population Fitness__________________________")
-    #
-    # for listy in population.currentPop:
-    #     listy.sort(key=lambda x: x.fitness, reverse=True)
-    # for listy in population.currentPop:
-    #     print("num genomes:", len(listy))
-    #     for guy in listy:
-    #         print(guy.fitness)
+    print("____________________Population Fitness__________________________")
+    print("main(), num species", len(population.currentPop))
+    for listy in population.currentPop:
+        listy.sort(key=lambda x: x.fitness, reverse=True)
+    for species_num, listy in enumerate(population.currentPop):
+        print("species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
+        print("fitness of champion:", listy[0].fitness)
+        # for guy in listy:
+        #     print("fitness:", guy.fitness)
 
     # for guy in population.currentPop:
     #     #print(guy)

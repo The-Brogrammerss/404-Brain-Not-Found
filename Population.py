@@ -19,17 +19,17 @@ class Population(object):
     def mutate_weight(self, genome):
         # TODO change so it mutates all weights
         perturb_rate = 0.9
-        perturb_chance = random.random()
-        random_connection = random.randint(0, len(genome.connections) - 1)
-        if perturb_chance <= perturb_rate:
-            genome.connections[random_connection].weight = round(
-                genome.connections[random_connection].weight * random.uniform(0.8, 1.2))
-            if genome.connections[random_connection].weight > 100:
-                genome.connections[random_connection].weight = 100
-            elif genome.connections[random_connection].weight < -100:
-                genome.connections[random_connection].weight = -100
-        else:
-            genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
+        for connection in genome.connections:
+            perturb_chance = random.random()
+            if perturb_chance <= perturb_rate:
+                connection.weight = round(
+                    connection.weight * random.uniform(0.8, 1.2))
+                if connection.weight > 100:
+                    connection.weight = 100
+                elif connection.weight < -100:
+                    connection.weight = -100
+            else:
+                connection.weight = random.randrange(-100, 100, 1)
 
 
 
