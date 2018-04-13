@@ -5,7 +5,6 @@ from ConnectGene import ConnectGene
 from Config import Config
 from NodeGene import NodeGene
 
-delta_threshhold = .5
 
 class Population(object):
 
@@ -14,7 +13,7 @@ class Population(object):
         self.innovationCounter = 0
         self.connectionList = []
         self.pair = 1
-        self.delta_threshold = 10
+        self.delta_threshold = 3
 
 
     def mutate_weight(self, genome):
@@ -180,7 +179,7 @@ def crossbreed(genome_one, genome_two):
 def get_delta(genome, genome2):
     c1 = 1
     c2 = 0
-    c3 = .01
+    c3 = .004
     # E = num excess genes
     # D =  num disjoint genes, ignoring for now
     # W = average weight differences of matching genes
