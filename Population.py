@@ -84,10 +84,11 @@ class Population(object):
             # print("Node Exists_________________________________________________________")
             # print(genome)
             #input()
-            front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half.x]
-            front_half = front_half[random.randint(0,len(front_half)-1)]
+            front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half.x][0]
+
 
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == front_half.x][0]
+
             layer = 1 if node.layer == float('-inf') else node.layer + 1
 
             genome.connections.append(ConnectGene(x = front_half.x, Y = front_half.Y, innovation = front_half.innovation,
@@ -106,10 +107,6 @@ class Population(object):
             # input()
             self.maxNodes += 1
             self.innovationCounter += 1
-            if self.maxNodes == 9:
-                print("Printing master List")
-                for con in self.connectionList:
-                    print(con)
 
             node = [nodeGene for nodeGene in genome.nodes if nodeGene.nodeNum == connection.x][0]
             layer = 1 if node.layer == float('-inf') else node.layer + 1

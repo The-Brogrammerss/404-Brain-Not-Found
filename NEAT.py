@@ -122,7 +122,7 @@ def run_game():
 
 
 if '__main__' == __name__:
-    game = XOR
+    game = MountainCar
     # game = cartpole
     popCap = 100
     population = Population()
@@ -134,7 +134,7 @@ if '__main__' == __name__:
     population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
     run_game()
 
-    for i in range(25):
+    for i in range(50):
         print(i)
         next_gen = Population()
         # print(len(population.currentPop))
