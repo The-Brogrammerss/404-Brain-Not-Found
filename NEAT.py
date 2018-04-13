@@ -59,15 +59,16 @@ def inbreed():
     #   our best genome cant handle every situation in cartpole.
     for listy in population.currentPop:
         iter_pop = iter(listy)
-        print(type(listy))
-        print(type(iter_pop))
         if len(listy) >= 5:
             # iter_pop = iter(listy)
             next_gen.currentPop.append(next(iter_pop))
 
         for gnome in iter_pop:
-            inbred_genome = (crossbreed(gnome,
-                             random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
+            if len(listy) > 2:
+                inbred_genome = (crossbreed(gnome,
+                                 random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
+            else:
+                inbred_genome = gnome
 
             # with smaller populations .03 was used in the paper.
             #   There needs to be a greater chance of adding a connection than a new node
@@ -103,18 +104,18 @@ def speciate():
         for index, representative in enumerate(species):
             # print("delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
-                print("below threshold")
+                # print("below threshold")
                 next_species[index].append(genome)
                 continue
             elif index == len(species):
-                print("above threshold")
+                # print("above threshold")
                 next_species.append([genome])
             else:
                 "something went wrong"
     next_gen.currentPop = next_species
 
 def run_game():
-
+    # print("length of cur_pop in run_game: ", len(population.currentPop))
     for species in population.currentPop:
         for genome in species:
             neuralNet = NeuralNet(genome)
@@ -146,7 +147,7 @@ if '__main__' == __name__:
     run_game()
 
     for i in range(50):
-        print(i)
+        print("epoch:", i)
         next_gen = Population()
         # print(len(population.currentPop))
 
@@ -160,31 +161,35 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         start_time = time.time()
         inbreed()
+        speciate()
         population = next_gen
         run_game()
         #print("\nepoch:", i + 1)
         #print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
         #print("fitness:", population.currentPop[0].fitness)
-        if i == 0:
-            old_fitness = population.currentPop[0].fitness
-        if population.currentPop[0].fitness > old_fitness + 5:
-            #game.render_game(population.currentPop[0])
-            old_fitness = population.currentPop[0].fitness
+        # if i == 0:
+        #     old_fitness = population.currentPop[0].fitness
+        # if population.currentPop[0].fitness > old_fitness + 5:
+        #     #game.render_game(population.currentPop[0])
+        #     old_fitness = population.currentPop[0].fitness
         # to_json(population.currentPop[0])
 
-    print(population.currentPop[0])
+    print("num species:", len(population.currentPop))
     print("____________________Population Fitness__________________________")
-    population.currentPop.sort(key=lambda x: x.fitness, reverse=True)
-    print(len(population.currentPop))
-    for guy in population.currentPop:
-        print(guy.fitness)
+
+    for listy in population.currentPop:
+        listy.sort(key=lambda x: x.fitness, reverse=True)
+    for listy in population.currentPop:
+        print("num genomes:", len(listy))
+        for guy in listy:
+            print(guy.fitness)
 
     # for guy in population.currentPop:
     #     #print(guy)
     #     pass
     # input("play last genome hit key")
     #game.render_game(population.currentPop[0])
-    print("_____________________Connection list___________________")
-    for con in range (len(next_gen.connectionList)):
-        print(next_gen.connectionList[con])
+    # print("_____________________Connection list___________________")
+    # for con in range (len(next_gen.connectionList)):
+    #     print(next_gen.connectionList[con])

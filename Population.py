@@ -199,7 +199,7 @@ def get_delta(genome, genome2):
     # print(genome)
     # print("genome2_________________________")
     # print(genome2)
-    print("len g1:", len(genome.connections), "len g2", len(genome2.connections))
-    print("num sims:", num_similarities)
-    print("E", E)
+    # print("len g1:", len(genome.connections), "len g2", len(genome2.connections))
+    # print("num sims:", num_similarities)
+    # print("E", E)
     return (c1 * E / N) + c3 * W
