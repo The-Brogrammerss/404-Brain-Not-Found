@@ -18,6 +18,7 @@ class Population(object):
 
 
     def mutate_weight(self, genome):
+        # TODO change so it mutates all weights
         perturb_rate = 0.9
         perturb_chance = random.random()
         random_connection = random.randint(0, len(genome.connections) - 1)
