@@ -58,13 +58,16 @@ def inbreed():
     # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
     #   our best genome cant handle every situation in cartpole.
     for listy in population.currentPop:
+        iter_pop = iter(listy)
+        print(type(listy))
+        print(type(iter_pop))
         if len(listy) >= 5:
-            iter_pop = iter(listy)
+            # iter_pop = iter(listy)
             next_gen.currentPop.append(next(iter_pop))
 
         for gnome in iter_pop:
-            inbred_genome = (crossbreed(population.currentPop[gnome],
-                             random.choice(population.currentPop[:popCap - int(round(len(listy) * .8))])))
+            inbred_genome = (crossbreed(gnome,
+                             random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
 
             # with smaller populations .03 was used in the paper.
             #   There needs to be a greater chance of adding a connection than a new node
@@ -113,7 +116,7 @@ def speciate():
 def run_game():
 
     for species in population.currentPop:
-        for genome in list:
+        for genome in species:
             neuralNet = NeuralNet(genome)
             try:
                 neuralNet.build_neural_net()
