@@ -101,7 +101,7 @@ def speciate():
                 next_species[index].append(genome)
                 continue
             elif index == len(species):
-                print("above threashold")
+                print("above threshold")
                 next_species.append([genome])
             else:
                 "something went wrong"
