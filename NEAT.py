@@ -94,10 +94,10 @@ def speciate():
         species.append(random.choice(listy))
 
     next_species = [[] for _ in range(len(species))]
-
+    #print("speciate(): len(species): ",len(species))
     for genome in next_gen.currentPop:
         for index, representative in enumerate(species):
-            # print("delta:", get_delta(genome, representative))
+            #print("speciate(): delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
                 # print("below threshold")
                 next_species[index].append(genome)
@@ -151,9 +151,7 @@ if '__main__' == __name__:
     numInputs, numY = game.get_xy()
     numY = int(numY)
     generate_initial_population()
-    run_game()
-    for listy in population.currentPop:
-        listy.sort(key = lambda x: x.fitness, reverse = True)
+
 
 
     for i in range(2):
@@ -168,6 +166,8 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
+        for i, x in enumerate(population.currentPop):
+            print("main(): species " + str(i) + " has a length of " + str(len(x)))
         inbreed()
         speciate()
 
