@@ -141,9 +141,29 @@ def run_game():
             genome.fitness = game.get_fitness(neuralNet)
 
 
+def update_species_info():
+    to_delete = []
+    for index, species in enumerate(population.species):
+
+        if species.max_fitness < population.currentPop[index][0].fitness:
+            species.max_fitness = population.currentPop[index][0].fitness
+        elif species.epochs_lived is not 0:
+            species.epochs_stagnant += 1
+
+        species.epochs_lived += 1
+
+        if species.epochs_stagnant == 15:
+            to_delete.append(index)
+
+
+    list.reverse(to_delete)
+    for index in to_delete:
+        del population.species[index]
+        del population.currentPop[index]
+
 if '__main__' == __name__:
-    game = XOR
-    # game = MountainCar
+    # game = XOR
+    game = MountainCar
     # game = cartpole
     popCap = 100
     population = Population()
@@ -154,10 +174,9 @@ if '__main__' == __name__:
 
 
 
-    for i in range(2):
+    for i in range(50):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
-        print("main(), len(cur_pop):", len(population.currentPop))
         print("main(), num species:", len(population.species))
 
         next_gen.maxNodes = population.maxNodes
@@ -166,23 +185,28 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-        for i, x in enumerate(population.currentPop):
-            print("main(): species " + str(i) + " has a length of " + str(len(x)))
+        # for i, x in enumerate(population.currentPop):
+        #     print("main(): species " + str(i) + " has a length of " + str(len(x)))
         inbreed()
         speciate()
-
         population = next_gen
         run_game()
+
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
 
+
+        update_species_info()
         population.calc_pop_adjusted_fitness()
-        for listy in population.currentPop:
-            for genome in listy:
-                print("main(), adjusted fitness", genome.adjusted_fitness)
-        #print("\nepoch:", i + 1)
-        #print("con length", len(population.connectionList))
-        # print("winner con length", len(population.currentPop[0].connections))
+
+        # for listy in population.currentPop:
+        #     for guy in listy:
+        #         print("main() adj_fitness:", guy.adjusted_fitness)
+
+
+        # for species in population.species:
+        #     print("main(),\n", species)
+
         #print("fitness:", population.currentPop[0].fitness)
         # if i == 0:
         #     old_fitness = population.currentPop[0].fitness
