@@ -6,10 +6,24 @@ import random
 #
 
 
-listy1 = [1, 2, 7, 6]
-listy2 = [1, 2, 4, 7]
-num_similarities = sum([1 for x in listy1 for y in listy2 if x == y])
-print(num_similarities)
+# listy1 = [1, 2, 7, 6, 1, 2]
+# listy2 = [1, 2, 3, 4, 5, 6]
+# to_delete = []
+# for index, num in enumerate(listy1):
+#     if num == 1:
+#         to_delete.append(index)
+# list.reverse(to_delete)
+# for index in to_delete:
+#     del listy2[index]
+# print(listy2)
+
+listy1 = [1, 2, 7, 6, 1, 2]
+listy2 = [1, 2, 3, 4, 5, 6]
+listy2[:] = [del listy2[index] for index, spec in enumerate(listy2) for listy in listy1 if listy != 0]
+print(listy2)
+
+# num_similarities = sum([1 for x in listy1 for y in listy2 if x == y])
+# print(num_similarities)
 # whatever = [abs(x - y) for x in listy1 for y in listy2 if x == y]
 # print("whatever:", whatever)
 # W = sum(whatever) / len(whatever)

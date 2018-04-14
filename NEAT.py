@@ -14,6 +14,7 @@ from Config import Config
 from BuildNeuralNet import NeuralNet
 from Population import crossbreed
 from Population import get_delta
+from Species import Species
 
 
 import cartpole
@@ -50,6 +51,7 @@ def generate_initial_population():
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.currentPop = [population.currentPop]
+    population.species.append(Species(epochs=0))
     population.maxNodes = numInputs + numY + 1
 
 
@@ -88,7 +90,6 @@ def inbreed():
 
 def speciate():
     species = []
-
     for listy in population.currentPop:
         species.append(random.choice(listy))
 
@@ -100,11 +101,27 @@ def speciate():
             if get_delta(genome, representative) < population.delta_threshold:
                 # print("below threshold")
                 next_species[index].append(genome)
+                break
 
             elif index == len(species) - 1:
                 # print("above threshold")
                 species.append(genome)
                 next_species.append([genome])
+                population.species.append(Species(epochs=0))
+                break
+
+    # TODO im going to remove any empty lists here we are going to have to remember to blow off that species object also
+    to_delete = []
+    for index, listy in enumerate(next_species):
+        if len(listy) == 0:
+            to_delete.append(index)
+    list.reverse(to_delete)
+    for index in to_delete:
+        del population.species[index]
+        del next_species[index]
+
+
+    # next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all empty lists
 
     next_gen.currentPop = next_species
 
@@ -137,17 +154,20 @@ if '__main__' == __name__:
 
 
 
-    for i in range(5):
+    for i in range(20):
         next_gen = Population()
-        print("\n")
-        print("main(), epoch:", i)
+        print("\nmain(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
+        print("main(), num species:", len(population.species))
 
         run_game()
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
-        next_gen = copy.deepcopy(population)
-        next_gen.currentPop = []
+        next_gen.maxNodes = population.maxNodes
+        next_gen.innovationCounter = population.innovationCounter
+        next_gen.connectionList = population.connectionList
+        next_gen.pair = population.pair
+        next_gen.species = population.species
 
         for i, x in enumerate(population.currentPop):
             print("main(): species " + str(i) + " has a length of " + str(len(x)))
@@ -167,15 +187,19 @@ if '__main__' == __name__:
         #     old_fitness = population.currentPop[0].fitness
         # to_json(population.currentPop[0])
 
-    print("num species:", len(population.currentPop))
-    # print("____________________Population Fitness__________________________")
-    #
-    # for listy in population.currentPop:
-    #     listy.sort(key=lambda x: x.fitness, reverse=True)
-    # for listy in population.currentPop:
-    #     print("num genomes:", len(listy))
-    #     for guy in listy:
-    #         print(guy.fitness)
+
+    print("____________________Population Fitness__________________________")
+    print("main(), num species", len(population.currentPop))
+    sum = 0
+    for listy in population.currentPop:
+        sum += len(listy)
+        listy.sort(key=lambda x: x.fitness, reverse=True)
+    print("main(), num genomes", sum)
+    for species_num, listy in enumerate(population.currentPop):
+        print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
+        print("main(), fitness of champion:", listy[0].fitness)
+        # for guy in listy:
+        #     print("fitness:", guy.fitness)
 
     # for guy in population.currentPop:
     #     #print(guy)

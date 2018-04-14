@@ -14,22 +14,23 @@ class Population(object):
         self.connectionList = []
         self.pair = 1
         self.delta_threshold = 3
+        self.species = []
 
 
     def mutate_weight(self, genome):
         # TODO change so it mutates all weights
         perturb_rate = 0.9
-        perturb_chance = random.random()
-        random_connection = random.randint(0, len(genome.connections) - 1)
-        if perturb_chance <= perturb_rate:
-            genome.connections[random_connection].weight = round(
-                genome.connections[random_connection].weight * random.uniform(0.8, 1.2))
-            if genome.connections[random_connection].weight > 100:
-                genome.connections[random_connection].weight = 100
-            elif genome.connections[random_connection].weight < -100:
-                genome.connections[random_connection].weight = -100
-        else:
-            genome.connections[random_connection].weight = random.randrange(-100, 100, 1)
+        for connection in genome.connections:
+            perturb_chance = random.random()
+            if perturb_chance <= perturb_rate:
+                connection.weight = round(
+                    connection.weight * random.uniform(0.8, 1.2))
+                if connection.weight > 100:
+                    connection.weight = 100
+                elif connection.weight < -100:
+                    connection.weight = -100
+            else:
+                connection.weight = random.randrange(-100, 100, 1)
 
 
 
@@ -130,8 +131,7 @@ class Population(object):
     def calc_pop_adjusted_fitness(self):
         for list in self.currentPop:
             for genome in list:
-                num_in_species = sum([1 if get_delta(genome, genome2) < delta_threshhold else 0 for genome2 in self.currentPop ]) - 1
-                genome.adjusted_fitness = genome.fitness / num_in_species
+                genome.adjusted_fitness = genome.fitness / len(list)
 
 
 def crossbreed(genome_one, genome_two):
