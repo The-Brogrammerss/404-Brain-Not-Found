@@ -52,7 +52,7 @@ def generate_initial_population():
 
     population.currentPop = [population.currentPop]
     population.species.append(Species(epochs=0))
-    population.maxNodes = numInputs + numY + 1
+    population.maxNodes = numInputs + numY
 
 
 def inbreed():
@@ -153,8 +153,7 @@ if '__main__' == __name__:
     generate_initial_population()
 
 
-
-    for i in range(2):
+    for i in range(100):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
@@ -177,13 +176,13 @@ if '__main__' == __name__:
             listy.sort(key=lambda x: x.fitness, reverse=True)
 
         population.calc_pop_adjusted_fitness()
-        for listy in population.currentPop:
-            for genome in listy:
-                print("main(), adjusted fitness", genome.adjusted_fitness)
-        #print("\nepoch:", i + 1)
-        #print("con length", len(population.connectionList))
+        # for listy in population.currentPop:
+        #     for genome in listy:
+        #         print("main(), adjusted fitness", genome.adjusted_fitness)
+        # print("\nepoch:", i + 1)
+        # print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
-        #print("fitness:", population.currentPop[0].fitness)
+        # print("fitness:", population.currentPop[0].fitness)
         # if i == 0:
         #     old_fitness = population.currentPop[0].fitness
         # if population.currentPop[0].fitness > old_fitness + 5:
@@ -192,16 +191,28 @@ if '__main__' == __name__:
         # to_json(population.currentPop[0])
 
 
-    print("____________________Population Fitness__________________________")
-    print("main(), num species", len(population.currentPop))
-    sum = 0
-    for listy in population.currentPop:
-        sum += len(listy)
-        listy.sort(key=lambda x: x.fitness, reverse=True)
-    print("main(), num genomes", sum)
-    for species_num, listy in enumerate(population.currentPop):
-        print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
-        print("main(), fitness of champion:", listy[0].fitness)
+    # population.mutate_add_node(population.currentPop[0][0])
+    # population.mutate_add_node(population.currentPop[0][0])
+    # population.mutate_add_node(population.currentPop[0][0])
+    # population.mutate_add_node(population.currentPop[0][1])
+    #
+    # print("printing genome afer crossbreed")
+    # g = crossbreed(population.currentPop[0][0], population.currentPop[0][1])
+    # print(g)
+    # nn = NeuralNet(g)
+    # nn.build_neural_net()
+    # nn.predict([1,0,1])
+    # print(nn.output)
+    # print("____________________Population Fitness__________________________")
+    # print("main(), num species", len(population.currentPop))
+    # sum = 0
+    # for listy in population.currentPop:
+    #     sum += len(listy)
+    #     listy.sort(key=lambda x: x.fitness, reverse=True)
+    # print("main(), num genomes", sum)
+    # for species_num, listy in enumerate(population.currentPop):
+    #     print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
+    #     print("main(), fitness of champion:", listy[0].fitness)
         # for guy in listy:
         #     print("fitness:", guy.fitness)
 
