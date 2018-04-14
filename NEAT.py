@@ -108,9 +108,8 @@ def speciate():
                 break
 
     # TODO im going to remove any empty lists here we are going to have to remember to blow off that species object also
-    for index, listy in enumerate(next_species):
-        if len(listy) == 0:
-            del(next_species[index])
+    next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all lists
+
     next_gen.currentPop = next_species
 
 
@@ -144,10 +143,9 @@ if '__main__' == __name__:
         listy.sort(key = lambda x: x.fitness, reverse = True)
 
 
-    for i in range(5):
+    for i in range(20):
         next_gen = Population()
-        print("\n")
-        print("main(), epoch:", i + 1)
+        print("\nmain(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
 
         for listy in population.currentPop:
@@ -176,11 +174,14 @@ if '__main__' == __name__:
 
     print("____________________Population Fitness__________________________")
     print("main(), num species", len(population.currentPop))
+    sum = 0
     for listy in population.currentPop:
+        sum += len(listy)
         listy.sort(key=lambda x: x.fitness, reverse=True)
+    print("main(), num genomes", sum)
     for species_num, listy in enumerate(population.currentPop):
-        print("species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
-        print("fitness of champion:", listy[0].fitness)
+        print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
+        print("main(), fitness of champion:", listy[0].fitness)
         # for guy in listy:
         #     print("fitness:", guy.fitness)
 
