@@ -156,14 +156,12 @@ if '__main__' == __name__:
         listy.sort(key = lambda x: x.fitness, reverse = True)
 
 
-    for i in range(20):
+    for i in range(2):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
         print("main(), num species:", len(population.species))
 
-        for listy in population.currentPop:
-            listy.sort(key=lambda x: x.fitness, reverse=True)
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
         next_gen.connectionList = population.connectionList
@@ -175,6 +173,13 @@ if '__main__' == __name__:
 
         population = next_gen
         run_game()
+        for listy in population.currentPop:
+            listy.sort(key=lambda x: x.fitness, reverse=True)
+
+        population.calc_pop_adjusted_fitness()
+        for listy in population.currentPop:
+            for genome in listy:
+                print("main(), adjusted fitness", genome.adjusted_fitness)
         #print("\nepoch:", i + 1)
         #print("con length", len(population.connectionList))
         # print("winner con length", len(population.currentPop[0].connections))
