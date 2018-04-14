@@ -5,6 +5,7 @@ from ConnectGene import ConnectGene
 from Config import Config
 from NodeGene import NodeGene
 
+
 class Population(object):
 
     def __init__(self):

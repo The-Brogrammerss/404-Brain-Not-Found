@@ -60,7 +60,6 @@ def inbreed():
     for listy in population.currentPop:
         iter_pop = iter(listy)
         if len(listy) >= 5:
-            # iter_pop = iter(listy)
             next_gen.currentPop.append(next(iter_pop))
 
         for gnome in iter_pop:
@@ -85,37 +84,32 @@ def inbreed():
             #   with larger populations it was .03 because they can handle greater diversity.
             #   this seems like a typo but i cross checked the paper.
             next_gen.currentPop.append(inbred_genome)
-    # print("inbreed, len(cur_pop of first list):", len(population.currentPop[0]))
+
 
 def speciate():
     species = []
-    # print("speciate, len(cur_pop):", len(population.currentPop))
-
 
     for listy in population.currentPop:
-        # print("speciate, len(listy in cur_pop):", len(listy))
         species.append(random.choice(listy))
 
     next_species = [[] for _ in range(len(species))]
     #print("speciate(): len(species): ",len(species))
     for genome in next_gen.currentPop:
-        # print("genome:", genome)
         for index, representative in enumerate(species):
             #print("speciate(): delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
                 # print("below threshold")
                 next_species[index].append(genome)
-            else:
-                print("above threshold")
-                #next_species.append([genome])
 
+            elif index == len(species) - 1:
+                # print("above threshold")
+                species.append(genome)
+                next_species.append([genome])
 
     next_gen.currentPop = next_species
-    # print("speciate, len(listy in cur_pop):", len(population.currentPop[0]))
 
 
 def run_game():
-    # print("length of cur_pop in run_game: ", len(population.currentPop))
     for species in population.currentPop:
         for genome in species:
             neuralNet = NeuralNet(genome)
@@ -142,27 +136,24 @@ if '__main__' == __name__:
     generate_initial_population()
 
 
-    # population.currentPop.sort(key = lambda x: x.fitness, reverse = True)
-
 
     for i in range(5):
-        print("epoch:", i)
         next_gen = Population()
-        print(len(next_gen.currentPop))
-        print("main, len(cur_pop):", len(population.currentPop[0]))
+        print("\n")
+        print("main(), epoch:", i)
+        print("main(), len(cur_pop):", len(population.currentPop))
 
         run_game()
-        # np.random.shuffle(population.currentPop)
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
         next_gen = copy.deepcopy(population)
         next_gen.currentPop = []
-        print("main(): len(next_gen.currentPop):", len(next_gen.currentPop))
+
         for i, x in enumerate(population.currentPop):
-            print("main(): species " + str(i) + " has a population of " + str(len(x)))
-        start_time = time.time()
+            print("main(): species " + str(i) + " has a length of " + str(len(x)))
         inbreed()
         speciate()
+
         population = next_gen
 
         #print("\nepoch:", i + 1)
