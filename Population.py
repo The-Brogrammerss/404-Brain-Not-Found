@@ -14,6 +14,7 @@ class Population(object):
         self.connectionList = []
         self.pair = 1
         self.delta_threshold = 3
+        self.species = []
 
 
     def mutate_weight(self, genome):

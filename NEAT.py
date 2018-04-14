@@ -14,6 +14,7 @@ from Config import Config
 from BuildNeuralNet import NeuralNet
 from Population import crossbreed
 from Population import get_delta
+from Species import Species
 
 
 import cartpole
@@ -50,6 +51,7 @@ def generate_initial_population():
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.currentPop = [population.currentPop]
+    population.species.append(Species(epochs=0))
     population.maxNodes = numInputs + numY + 1
 
 
@@ -105,10 +107,21 @@ def speciate():
                 # print("above threshold")
                 species.append(genome)
                 next_species.append([genome])
+                population.species.append(Species(epochs=0))
                 break
 
     # TODO im going to remove any empty lists here we are going to have to remember to blow off that species object also
-    next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all lists
+    to_delete = []
+    for index, listy in enumerate(next_species):
+        if len(listy) == 0:
+            to_delete.append(index)
+    list.reverse(to_delete)
+    for index in to_delete:
+        del population.species[index]
+        del next_species[index]
+
+
+    # next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all empty lists
 
     next_gen.currentPop = next_species
 
@@ -147,6 +160,7 @@ if '__main__' == __name__:
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         print("main(), len(cur_pop):", len(population.currentPop))
+        print("main(), num species:", len(population.species))
 
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
@@ -154,6 +168,7 @@ if '__main__' == __name__:
         next_gen.innovationCounter = population.innovationCounter
         next_gen.connectionList = population.connectionList
         next_gen.pair = population.pair
+        next_gen.species = population.species
 
         inbreed()
         speciate()
