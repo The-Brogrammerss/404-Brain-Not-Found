@@ -6,3 +6,10 @@ class Species(object):
         self.max_fitness = max_fitness
         self.epochs_stagnant = stagnant
         self.allowed_offspring = offspring
+
+    def __str__(self):
+        return ('epochs_lives: {epochs_lived}\n'
+                'max_fitness: {max_fitness}\n'
+                'epochs_stagnant: {epochs_stagnant}\n'
+                'allowed_offspring: {allowed_offspring}\n'
+                ).format(**self.__dict__)
