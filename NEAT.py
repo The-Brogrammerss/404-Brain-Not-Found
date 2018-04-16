@@ -59,6 +59,7 @@ def inbreed():
 
     # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
     #   our best genome cant handle every situation in cartpole.
+
     reproduced = 0
     for species_index, listy in enumerate(population.currentPop):
         # iter_pop = iter(listy)
@@ -117,6 +118,7 @@ def inbreed():
             next_gen.currentPop.append(inbred_genome)
 
 
+
 def speciate():
     species = []
     for listy in population.currentPop:
@@ -144,10 +146,7 @@ def speciate():
         del population.species[index]
         del next_species[index]
     # next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all empty lists
-
     next_gen.currentPop = next_species
-    for species in population.species:
-        species.allowed_offspring = int(round(popCap / len(population.species)))
 
 
 def run_game():
@@ -176,7 +175,7 @@ def update_species_info():
 
         species.epochs_lived += 1
 
-        if species.epochs_stagnant == 15:
+        if species.epochs_stagnant == 15 and population.currentPop[index][0].fitness < min_fitness_to_keep_living:
             to_delete.append(index)
 
 
@@ -185,11 +184,16 @@ def update_species_info():
         del population.species[index]
         del population.currentPop[index]
 
+    # TODO real cheeky fix right here
+    if len(population.currentPop) == 0:
+        generate_initial_population()
+
 if '__main__' == __name__:
     # game = XOR
-    # game = MountainCar
-    game = cartpole
-    popCap = 100
+    game = MountainCar
+    # game = cartpole
+    min_fitness_to_keep_living = 0
+    popCap = 500
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -198,7 +202,7 @@ if '__main__' == __name__:
 
 
 
-    for i in range(50):
+    for i in range(20):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         # print("main(), num species:", len(population.species))
@@ -209,37 +213,31 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
+
         for i, x in enumerate(population.currentPop):
-            print("main(): species " + str(i) + " has a length of " + str(len(x)))
+            print("main(): species " + str(i) + " has a pop of " + str(len(x)))
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
         inbreed()
         speciate()
+        for species in next_gen.species:
+            species.allowed_offspring = int(round(popCap / len(next_gen.species)))
+
         population = next_gen
         run_game()
-
-
-
-
         update_species_info()
         population.calc_pop_adjusted_fitness()
 
-        # summ = 0
-        # for species in population.currentPop:
-        #     for genome in species:
-        #         # print (genome.fitness)
-        #         summ += genome.fitness
-        #     avg = summ / len(species)
-        #
-        #     print (avg)
-
-        # for listy in population.currentPop:
-        #     for guy in listy:
-        #         print("main() adj_fitness:", guy.adjusted_fitness)
+        for listy in population.currentPop:
+            listy.sort(key=lambda x: x.fitness, reverse=True)
+            # for guy in listy:
+            #     print("main() fitness:", guy.fitness)
+            print("main(), champ fitness", listy[0].fitness)
 
 
         # for species in population.species:
         #     print("main(),\n", species)
+
 
         #print("fitness:", population.currentPop[0].fitness)
         # if i == 0:
@@ -253,13 +251,16 @@ if '__main__' == __name__:
     print("____________________Population Fitness__________________________")
     print("main(), num species", len(population.currentPop))
     sum = 0
-    for listy in population.currentPop:
-        sum += len(listy)
-        listy.sort(key=lambda x: x.fitness, reverse=True)
-    print("main(), num genomes", sum)
+    # for listy in population.currentPop:
+    #     sum += len(listy)
+    #     listy.sort(key=lambda x: x.fitness, reverse=True)
+    # print("main(), num genomes", sum)
     for species_num, listy in enumerate(population.currentPop):
         print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
         print("main(), fitness of champion:", listy[0].fitness)
+        print("main(), num nodes in champion:", len(listy[0].nodes))
+        input("press key to render game")
+        game.render_game(listy[0])
         # for guy in listy:
         #     print("fitness:", guy.fitness)
 
