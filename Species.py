@@ -1,11 +1,11 @@
 
 
 class Species(object):
-    def __init__(self, epochs=0, max_fitness=0, stagnant=0, offspring=0):
+    def __init__(self, epochs=0, max_fitness=0, stagnant=0, allowed_offspring=0):
         self.epochs_lived = epochs
         self.max_fitness = max_fitness
         self.epochs_stagnant = stagnant
-        self.allowed_offspring = offspring
+        self.allowed_offspring = allowed_offspring
 
     def __str__(self):
         return ('epochs_lives: {epochs_lived}\n'

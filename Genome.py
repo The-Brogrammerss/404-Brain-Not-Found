@@ -9,6 +9,7 @@ class Genome(object):
         self.nodes = nodes
         self.fitness = fitness
         self.adjusted_fitness = 0
+        self.other_adjusted_fitness = 0
 
     def __str__(self):
         result = "fitness: " + str(self.fitness) + '\n'

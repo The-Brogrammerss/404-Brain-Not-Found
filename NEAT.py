@@ -51,7 +51,7 @@ def generate_initial_population():
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.currentPop = [population.currentPop]
-    population.species.append(Species(epochs=0))
+    population.species.append(Species(epochs=0, allowed_offspring=popCap))
     population.maxNodes = numInputs + numY + 1
 
 
@@ -59,15 +59,23 @@ def inbreed():
 
     # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
     #   our best genome cant handle every situation in cartpole.
-    for listy in population.currentPop:
-        iter_pop = iter(listy)
+    reproduced = 0
+    for species_index, listy in enumerate(population.currentPop):
+        # iter_pop = iter(listy)
         if len(listy) >= 5:
-            next_gen.currentPop.append(next(iter_pop))
+            # next_gen.currentPop.append(next(iter_pop))
+            next_gen.currentPop.append(listy[0])
+            reproduced += 1
 
-        for gnome in iter_pop:
+        if len(listy) > 5:
+            for kill in range(int(round(len(listy) * .2))):
+                del listy[-1]
+
+        # for gnome in iter_pop:
+        for gnome in listy:
             if len(listy) > 2:
-                inbred_genome = (crossbreed(gnome,
-                                 random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
+                inbred_genome = (crossbreed(gnome, random.choice(listy)))
+                                 # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
             else:
                 inbred_genome = gnome
 
@@ -85,6 +93,27 @@ def inbreed():
             # TODO the probability of adding a new link will be .05 for smaller populations
             #   with larger populations it was .03 because they can handle greater diversity.
             #   this seems like a typo but i cross checked the paper.
+            reproduced += 1
+            if reproduced > population.species[species_index].allowed_offspring:
+                break
+            next_gen.currentPop.append(inbred_genome)
+
+        # being lazy here, need to refactor.
+        while reproduced < population.species[species_index].allowed_offspring:
+            if len(listy) > 2:
+                inbred_genome = (crossbreed(random.choice(listy), random.choice(listy)))
+                                 # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
+            else:
+                inbred_genome = gnome
+
+            if random.random() < .03:
+                next_gen.mutate_add_node(inbred_genome)
+            elif random.random() < .05: # the probability of adding a new link will be .05 for smaller populations
+                next_gen.mutate_add_connection(inbred_genome)
+            elif random.random() < .8:  # 80% chance of having is connection weights mutated
+                next_gen.mutate_weight(inbred_genome)
+
+            reproduced += 1
             next_gen.currentPop.append(inbred_genome)
 
 
@@ -94,23 +123,18 @@ def speciate():
         species.append(random.choice(listy))
 
     next_species = [[] for _ in range(len(species))]
-    #print("speciate(): len(species): ",len(species))
     for genome in next_gen.currentPop:
         for index, representative in enumerate(species):
-            #print("speciate(): delta:", get_delta(genome, representative))
             if get_delta(genome, representative) < population.delta_threshold:
-                # print("below threshold")
                 next_species[index].append(genome)
                 break
 
             elif index == len(species) - 1:
-                # print("above threshold")
                 species.append(genome)
                 next_species.append([genome])
                 population.species.append(Species(epochs=0))
                 break
 
-    # TODO im going to remove any empty lists here we are going to have to remember to blow off that species object also
     to_delete = []
     for index, listy in enumerate(next_species):
         if len(listy) == 0:
@@ -119,11 +143,11 @@ def speciate():
     for index in to_delete:
         del population.species[index]
         del next_species[index]
-
-
     # next_species[:] = [listy for listy in next_species if len(listy) != 0]  # I remove all empty lists
 
     next_gen.currentPop = next_species
+    for species in population.species:
+        species.allowed_offspring = int(round(popCap / len(population.species)))
 
 
 def run_game():
@@ -163,8 +187,8 @@ def update_species_info():
 
 if '__main__' == __name__:
     # game = XOR
-    game = MountainCar
-    # game = cartpole
+    # game = MountainCar
+    game = cartpole
     popCap = 100
     population = Population()
     # next_gen = Population()
@@ -177,7 +201,7 @@ if '__main__' == __name__:
     for i in range(50):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
-        print("main(), num species:", len(population.species))
+        # print("main(), num species:", len(population.species))
 
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
@@ -185,19 +209,29 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-        # for i, x in enumerate(population.currentPop):
-        #     print("main(): species " + str(i) + " has a length of " + str(len(x)))
+        for i, x in enumerate(population.currentPop):
+            print("main(): species " + str(i) + " has a length of " + str(len(x)))
+        for listy in population.currentPop:
+            listy.sort(key=lambda x: x.fitness, reverse=True)
         inbreed()
         speciate()
         population = next_gen
         run_game()
 
-        for listy in population.currentPop:
-            listy.sort(key=lambda x: x.fitness, reverse=True)
+
 
 
         update_species_info()
         population.calc_pop_adjusted_fitness()
+
+        # summ = 0
+        # for species in population.currentPop:
+        #     for genome in species:
+        #         # print (genome.fitness)
+        #         summ += genome.fitness
+        #     avg = summ / len(species)
+        #
+        #     print (avg)
 
         # for listy in population.currentPop:
         #     for guy in listy:

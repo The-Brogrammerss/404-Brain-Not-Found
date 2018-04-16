@@ -125,7 +125,7 @@ class Population(object):
             # print("New node: ", self.maxNodes)
             # print(genome)
             # input()
-            #return genome
+            # return genome
 
 
     def calc_pop_adjusted_fitness(self):
