@@ -179,6 +179,7 @@ def update_species_info():
 
         if species.epochs_stagnant == 15 and population.currentPop[index][0].fitness < min_fitness_to_keep_living:
             to_delete.append(index)
+
     if len(to_delete) == len(population.currentPop):
         for speciess in population.species:
             speciess.epochs_stagnant = 7
@@ -193,14 +194,20 @@ def update_species_info():
     #     generate_initial_population()
 
 if '__main__' == __name__:
-    game = XOR
-    # game = MountainCar
+    # game = XOR
+    game = MountainCar
     # game = cartpole
-    min_fitness_to_keep_living = 4
-    popCap = 1000
+    """
+    4 for xor
+    -110 for MountainCar
+    200 for cartpole
+    """
+    min_fitness_to_keep_living = -110
+    popCap = 100
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
+    # print(numInputs, numY)
     numY = int(numY)
     generate_initial_population()
 
