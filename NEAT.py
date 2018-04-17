@@ -203,7 +203,7 @@ if '__main__' == __name__:
     200 for cartpole
     """
     min_fitness_to_keep_living = -110
-    popCap = 100
+    popCap = 250
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
