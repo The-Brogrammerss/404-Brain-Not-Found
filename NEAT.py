@@ -62,6 +62,7 @@ def inbreed():
 
     reproduced = 0
     for species_index, listy in enumerate(population.currentPop):
+        print("inbreed(), allowed population:", population.species[species_index].allowed_offspring)
         # iter_pop = iter(listy)
         if len(listy) >= 5:
             # next_gen.currentPop.append(next(iter_pop))
@@ -69,7 +70,7 @@ def inbreed():
             reproduced += 1
 
         if len(listy) > 5:
-            for kill in range(int(round(len(listy) * .2))):
+            for _ in range(int(round(len(listy) * .2))):
                 del listy[-1]
 
         # for gnome in iter_pop:
@@ -213,15 +214,16 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-
         for i, x in enumerate(population.currentPop):
             print("main(): species " + str(i) + " has a pop of " + str(len(x)))
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
-        inbreed()
-        speciate()
         for species in next_gen.species:
             species.allowed_offspring = int(round(popCap / len(next_gen.species)))
+
+        inbreed()
+        speciate()
+
 
         population = next_gen
         run_game()
