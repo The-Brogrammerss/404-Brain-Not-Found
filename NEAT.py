@@ -53,6 +53,7 @@ def generate_initial_population():
     population.currentPop = [population.currentPop]
     population.species.append(Species(epochs=0, allowed_offspring=popCap))
     population.maxNodes = numInputs + numY + 1
+    # Todo check if plus 1 is needed or not. there was a merge conflict
 
 
 def inbreed():
@@ -214,8 +215,8 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-        for i, x in enumerate(population.currentPop):
-            print("main(): species " + str(i) + " has a pop of " + str(len(x)))
+        # for i, x in enumerate(population.currentPop):
+        #     print("main(): species " + str(i) + " has a pop of " + str(len(x)))
         for listy in population.currentPop:
             listy.sort(key=lambda x: x.fitness, reverse=True)
         for species in next_gen.species:

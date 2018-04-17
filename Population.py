@@ -17,6 +17,11 @@ class Population(object):
         self.species = []
 
 
+
+        #TODO set this to equal inputs + outputs at the start
+
+
+
     def mutate_weight(self, genome):
         # TODO change so it mutates all weights
         perturb_rate = 0.9
@@ -63,8 +68,10 @@ class Population(object):
         generate new connection
         '''
         # genome = self.currentPop[index]
-
-        connection = genome.connections[random.randint(0, len(genome.connections) - 1)]
+        possible_connections = [x for x in genome.connections if x.enabled]
+        if possible_connections == 0:
+            print("something broke in mutate_add_node")
+        connection = possible_connections[random.randint(0, len(possible_connections) - 1)]
         # print("Connection to add node between____________")
         # print(connection)
 
@@ -142,14 +149,16 @@ def crossbreed(genome_one, genome_two):
     g1 = copy.deepcopy(genome_one.connections)
     g2 = copy.deepcopy(genome_two.connections)
 
-
     for i, gene1 in enumerate(g1):
+        enabled = True
         gene2 = next((x for x in g2 if x.innovation == gene1.innovation), None)
         if gene2 != None:
+            if  not (gene2.enabled and gene1.enabled) :
+                enabled = False if random.randint(1, 100) > 25 else True
             if random.randint(0,1):
-                child_connections.append(gene1)
+                child_connections.append(ConnectGene(x = gene1.x, Y = gene1.Y, weight = gene1.weight, enabled = enabled, innovation = gene1.innovation, pair = gene1.pairNumber))
             else:
-                child_connections.append(gene2)
+                child_connections.append(ConnectGene(x = gene2.x, Y = gene2.Y, weight = gene2.weight, enabled = enabled, innovation = gene2.innovation, pair = gene2.pairNumber))
                 if not any(x.nodeNum == gene2.x for x in child_nodes):
                     child_nodes.append(next(x for x in genome_two.nodes if x.nodeNum == gene2.x))
                 if not any(x.nodeNum == gene2.Y for x in child_nodes):
@@ -157,7 +166,9 @@ def crossbreed(genome_one, genome_two):
             #This might cause issues later
             g2.remove(gene2)
         else:
-            child_connections.append(gene1)
+            if not gene1.enabled:
+                enabled = False if random.randint(1, 100) > 25 else True
+            child_connections.append(ConnectGene(x = gene1.x, Y = gene1.Y, weight = gene1.weight, enabled = enabled, innovation = gene1.innovation, pair = gene1.pairNumber))
         if not any(x.nodeNum == gene1.x for x in child_nodes):
             child_nodes.append(next(x for x in genome_one.nodes if x.nodeNum == gene1.x))
         if not any(x.nodeNum == gene1.Y for x in child_nodes):
