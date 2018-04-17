@@ -24,7 +24,7 @@ class Population(object):
             perturb_chance = random.random()
             if perturb_chance <= perturb_rate:
                 connection.weight = round(
-                    connection.weight * random.uniform(0.8, 1.2))
+                    connection.weight * random.uniform(0.9, 1.1))
                 if connection.weight > 100:
                     connection.weight = 100
                 elif connection.weight < -100:
