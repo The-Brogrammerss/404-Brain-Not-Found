@@ -52,7 +52,7 @@ def generate_initial_population():
 
     population.currentPop = [population.currentPop]
     population.species.append(Species(epochs=0, allowed_offspring=popCap))
-    population.maxNodes = numInputs + numY + 1
+    population.maxNodes = numInputs + numY
 
 
 def inbreed():
