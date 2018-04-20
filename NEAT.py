@@ -82,13 +82,13 @@ def inbreed():
                 inbred_genome = (crossbreed(gnome, random.choice(listy)))
                                  # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
             else:
-                inbred_genome = gnome
+                inbred_genome = copy.deepcopy(gnome)
 
-            # with smaller populations .03 was used in the paper.
+
             #   There needs to be a greater chance of adding a connection than a new node
             if len(listy) == 1:
                 next_gen.currentPop.append(inbred_genome)
-            elif random.random() < .005:
+            elif random.random() < .005: # with smaller populations .03 was used in the paper.
                 next_gen.mutate_add_node(inbred_genome)
             elif random.random() < .01: # the probability of adding a new link will be .05 for smaller populations
                 next_gen.mutate_add_connection(inbred_genome)
@@ -111,7 +111,7 @@ def inbreed():
                 inbred_genome = (crossbreed(random.choice(listy), random.choice(listy)))
                                  # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
             else:
-                inbred_genome = gnome
+                inbred_genome = copy.deepcopy(gnome)
 
             if random.random() < .005: # default is .03
                 next_gen.mutate_add_node(inbred_genome)
@@ -125,19 +125,19 @@ def inbreed():
 
 
 def speciate():
-    local_species = []
+    representatives = []
     for listy in population.currentPop:
-        local_species.append(random.choice(listy))
+        representatives.append(random.choice(listy))
 
-    next_species = [[] for _ in range(len(local_species))]
+    next_species = [[] for _ in range(len(representatives))]
     for genome in next_gen.currentPop:
-        for index, representative in enumerate(local_species):
+        for index, representative in enumerate(representatives):
             if get_delta(genome, representative) < population.delta_threshold:
                 next_species[index].append(genome)
                 break
 
-            elif index == len(local_species) - 1:
-                local_species.append(genome)
+            elif index == len(representatives) - 1:
+                representatives.append(genome)
                 next_species.append([genome])
                 population.species.append(Species(epochs=0, stagnant=0))
                 break
