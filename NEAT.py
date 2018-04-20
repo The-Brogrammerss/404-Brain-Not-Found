@@ -217,7 +217,7 @@ if '__main__' == __name__:
     numY = int(numY)
     generate_initial_population()
 
-    for i in range(25):
+    for i in range(50):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         print("main(), num species", len(population.currentPop))
