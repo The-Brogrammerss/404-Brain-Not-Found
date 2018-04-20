@@ -2,7 +2,7 @@ import gym
 
 from BuildNeuralNet import NeuralNet
 
-env = gym.make('MountainCar-v0')
+env = gym.make('Pitfall-ram-v0')
 
 def get_xy():
     env.reset()
@@ -31,7 +31,7 @@ def get_fitness(NN):
 
 
 def render_game(gnome):
-    env = gym.make('MountainCar-v0')
+    env = gym.make('Pitfall-ram-v0')
     NN = NeuralNet(gnome)
     NN.build_neural_net()
     observation = env.reset()
