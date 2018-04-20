@@ -20,7 +20,7 @@ from Species import Species
 import cartpole
 import MountainCar
 import XOR
-import Pitfall_ram
+# import Pitfall_ram
 from misc.Json import to_json
 
 population = Population()
@@ -86,9 +86,11 @@ def inbreed():
 
             # with smaller populations .03 was used in the paper.
             #   There needs to be a greater chance of adding a connection than a new node
-            if random.random() < .015:
+            if len(listy) == 1:
+                next_gen.currentPop.append(inbred_genome)
+            elif random.random() < .005:
                 next_gen.mutate_add_node(inbred_genome)
-            elif random.random() < .025: # the probability of adding a new link will be .05 for smaller populations
+            elif random.random() < .01: # the probability of adding a new link will be .05 for smaller populations
                 next_gen.mutate_add_connection(inbred_genome)
             elif random.random() < .8:  # 80% chance of having is connection weights mutated
                 next_gen.mutate_weight(inbred_genome)
@@ -111,9 +113,9 @@ def inbreed():
             else:
                 inbred_genome = gnome
 
-            if random.random() < .015: # default is .03
+            if random.random() < .005: # default is .03
                 next_gen.mutate_add_node(inbred_genome)
-            elif random.random() < .025: # the probability of adding a new link will be .05 for smaller populations
+            elif random.random() < .01: # the probability of adding a new link will be .05 for smaller populations
                 next_gen.mutate_add_connection(inbred_genome)
             elif random.random() < .8:  # 80% chance of having is connection weights mutated
                 next_gen.mutate_weight(inbred_genome)
@@ -123,19 +125,19 @@ def inbreed():
 
 
 def speciate():
-    species = []
+    local_species = []
     for listy in population.currentPop:
-        species.append(random.choice(listy))
+        local_species.append(random.choice(listy))
 
-    next_species = [[] for _ in range(len(species))]
+    next_species = [[] for _ in range(len(local_species))]
     for genome in next_gen.currentPop:
-        for index, representative in enumerate(species):
+        for index, representative in enumerate(local_species):
             if get_delta(genome, representative) < population.delta_threshold:
                 next_species[index].append(genome)
                 break
 
-            elif index == len(species) - 1:
-                species.append(genome)
+            elif index == len(local_species) - 1:
+                local_species.append(genome)
                 next_species.append([genome])
                 population.species.append(Species(epochs=0, stagnant=0))
                 break
@@ -171,6 +173,7 @@ def update_species_info():
     to_delete = []
     for index, species in enumerate(population.species):
         population.currentPop[index].sort(key=lambda x: x.fitness, reverse=True)
+        
         if species.max_fitness < population.currentPop[index][0].fitness:
             species.max_fitness = population.currentPop[index][0].fitness
         elif species.epochs_lived is not 0:
@@ -179,11 +182,12 @@ def update_species_info():
         species.epochs_lived += 1
 
         if species.epochs_stagnant == 10 and population.currentPop[index][0].fitness < min_fitness_to_keep_living:
+            print("u_s_i(), max fitness deleted", population.currentPop[index][0].fitness)
             to_delete.append(index)
 
     if len(to_delete) == len(population.currentPop):
         for speciess in population.species:
-            speciess.epochs_stagnant = 7
+            speciess.epochs_stagnant = 5
     else:
         list.reverse(to_delete)
         for index in to_delete:
@@ -195,8 +199,8 @@ def update_species_info():
     #     generate_initial_population()
 
 if '__main__' == __name__:
-    # game = XOR
-    game = MountainCar
+    game = XOR
+    # game = MountainCar
     # game = cartpole
     # game = Pitfall_ram
     """
@@ -204,8 +208,8 @@ if '__main__' == __name__:
     -110 for MountainCar
     200 for cartpole
     """
-    min_fitness_to_keep_living = -110
-    popCap = 500
+    min_fitness_to_keep_living = 4
+    popCap = 1000
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -216,6 +220,7 @@ if '__main__' == __name__:
     for i in range(25):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
+        print("main(), num species", len(population.currentPop))
         # print("main(), num species:", len(population.species))
 
         next_gen.maxNodes = population.maxNodes
@@ -224,8 +229,8 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-        for i, x in enumerate(population.currentPop):
-            print("main(): species " + str(i) + " has a pop of " + str(len(x)))
+        # for i, x in enumerate(population.currentPop):
+        #     print("main(): species " + str(i) + " has a pop of " + str(len(x)))
 
         for species in next_gen.species:
             species.allowed_offspring = int(round(popCap / len(next_gen.species)))
@@ -243,11 +248,11 @@ if '__main__' == __name__:
         update_species_info()
         population.calc_pop_adjusted_fitness()
 
-        for listy in population.currentPop:
-            listy.sort(key=lambda x: x.fitness, reverse=True)
-            # for guy in listy:
-            #     print("main() fitness:", guy.fitness)
-            print("main(), champ fitness", listy[0].fitness)
+        # for listy in population.currentPop:
+        #     listy.sort(key=lambda x: x.fitness, reverse=True)
+        #     # for guy in listy:
+        #     #     print("main() fitness:", guy.fitness)
+        #     print("main(), champ fitness", listy[0].fitness)
 
 
         # for species in population.species:
@@ -274,7 +279,7 @@ if '__main__' == __name__:
         print("main(), fitness of champion:", listy[0].fitness)
         print("main(), num nodes in champion:", len(listy[0].nodes))
         input("press key to render game")
-        game.render_game(listy[0])
+        # game.render_game(listy[0])
         # for guy in listy:
         #     print("fitness:", guy.fitness)
 
