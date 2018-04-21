@@ -199,8 +199,8 @@ def update_species_info():
     #     generate_initial_population()
 
 if '__main__' == __name__:
-    game = XOR
-    # game = MountainCar
+    # game = XOR
+    game = MountainCar
     # game = cartpole
     # game = Pitfall_ram
     """
@@ -208,8 +208,8 @@ if '__main__' == __name__:
     -110 for MountainCar
     200 for cartpole
     """
-    min_fitness_to_keep_living = 4
-    popCap = 1000
+    min_fitness_to_keep_living = -110
+    popCap = 500
     population = Population()
     # next_gen = Population()
     numInputs, numY = game.get_xy()
@@ -217,11 +217,11 @@ if '__main__' == __name__:
     numY = int(numY)
     generate_initial_population()
 
-    for i in range(50):
+    for i in range(30):
         next_gen = Population()
         print("\nmain(), epoch:", i + 1)
         print("main(), num species", len(population.currentPop))
-        # print("main(), num species:", len(population.species))
+        print("main(), num species:", len(population.species))
 
         next_gen.maxNodes = population.maxNodes
         next_gen.innovationCounter = population.innovationCounter
@@ -279,7 +279,7 @@ if '__main__' == __name__:
         print("main(), fitness of champion:", listy[0].fitness)
         print("main(), num nodes in champion:", len(listy[0].nodes))
         input("press key to render game")
-        # game.render_game(listy[0])
+        game.render_game(listy[0])
         # for guy in listy:
         #     print("fitness:", guy.fitness)
 
