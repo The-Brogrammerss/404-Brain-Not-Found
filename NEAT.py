@@ -58,17 +58,10 @@ def generate_initial_population():
 
 def inbreed():
 
-    # Elitism is working with this implementation, it may not look like it when the code is ran, that is because
-    #   our best genome cant handle every situation in cartpole.
-
-    # print("inebreed(), num species", len(population.currentPop))
     for species_index, listy in enumerate(population.currentPop):
         reproduced = 0
 
-        # print("inbreed(), allowed population:", population.species[species_index].allowed_offspring)
-        # iter_pop = iter(listy)
         if len(listy) >= 5:
-            # next_gen.currentPop.append(next(iter_pop))
             next_gen.currentPop.append(copy.deepcopy(listy[0]))
             reproduced += 1
 
@@ -80,7 +73,6 @@ def inbreed():
         for gnome in listy:
             if len(listy) > 2:
                 inbred_genome = (crossbreed(gnome, random.choice(listy)))
-                                 # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
             else:
                 inbred_genome = copy.deepcopy(gnome)
 
@@ -109,7 +101,6 @@ def inbreed():
         while reproduced < population.species[species_index].allowed_offspring:
             if len(listy) > 2:
                 inbred_genome = (crossbreed(random.choice(listy), random.choice(listy)))
-                                 # random.choice(listy[:len(listy) - int(round(len(listy) * .8))])))
             else:
                 inbred_genome = copy.deepcopy(gnome)
 
@@ -194,9 +185,6 @@ def update_species_info():
             del population.species[index]
             del population.currentPop[index]
 
-    # # TODO real cheeky fix right here
-    # if len(population.currentPop) == 0:
-    #     generate_initial_population()
 
 if '__main__' == __name__:
     # game = XOR
@@ -211,9 +199,7 @@ if '__main__' == __name__:
     min_fitness_to_keep_living = -110
     popCap = 500
     population = Population()
-    # next_gen = Population()
     numInputs, numY = game.get_xy()
-    # print(numInputs, numY)
     numY = int(numY)
     generate_initial_population()
 
@@ -237,57 +223,19 @@ if '__main__' == __name__:
 
         inbreed()
         speciate()
-
-        # summ = 0
-        # for listy in next_gen.currentPop:
-        #     summ += len(listy)
-        # print("main(), population", summ)
-
         population = next_gen
         run_game()
         update_species_info()
         population.calc_pop_adjusted_fitness()
 
-        # for listy in population.currentPop:
-        #     listy.sort(key=lambda x: x.fitness, reverse=True)
-        #     # for guy in listy:
-        #     #     print("main() fitness:", guy.fitness)
-        #     print("main(), champ fitness", listy[0].fitness)
-
-
-        # for species in population.species:
-        #     print("main(),\n", species)
-
-
-        #print("fitness:", population.currentPop[0].fitness)
-        # if i == 0:
-        #     old_fitness = population.currentPop[0].fitness
-        # if population.currentPop[0].fitness > old_fitness + 5:
-        #     #game.render_game(population.currentPop[0])
-        #     old_fitness = population.currentPop[0].fitness
-        # to_json(population.currentPop[0])
-
-
     print("____________________Population Fitness__________________________")
     print("main(), num species", len(population.currentPop))
     sum = 0
 
-    #     listy.sort(key=lambda x: x.fitness, reverse=True)
-    # print("main(), num genomes", sum)
     for species_num, listy in enumerate(population.currentPop):
         print("main(), species num: " + str(species_num + 1) + ", num genomes: " + str(len(listy)))
         print("main(), fitness of champion:", listy[0].fitness)
         print("main(), num nodes in champion:", len(listy[0].nodes))
         input("press key to render game")
         game.render_game(listy[0])
-        # for guy in listy:
-        #     print("fitness:", guy.fitness)
 
-    # for guy in population.currentPop:
-    #     #print(guy)
-    #     pass
-    # input("play last genome hit key")
-    #game.render_game(population.currentPop[0])
-    # print("_____________________Connection list___________________")
-    # for con in range (len(next_gen.connectionList)):
-    #     print(next_gen.connectionList[con])

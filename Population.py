@@ -67,31 +67,18 @@ class Population(object):
             grab all connections with correct x
         generate new connection
         '''
-        # genome = self.currentPop[index]
         possible_connections = [x for x in genome.connections if x.enabled]
         if possible_connections == 0:
             print("something broke in mutate_add_node")
         connection = possible_connections[random.randint(0, len(possible_connections) - 1)]
-        # print("Connection to add node between____________")
-        # print(connection)
 
         startingNodesToCheck = [conGene for conGene in self.connectionList if conGene.x == connection.x]
 
-
-        # print("Starting Nodes to check__________________")
-        # for con in startingNodesToCheck:
-        #     print(con)
         nodesToCheck = [conGene.Y for conGene in startingNodesToCheck]
         back_half = [conGene for conGene in self.connectionList if conGene.x in nodesToCheck and conGene.Y == connection.Y]
         connection.enabled = False
-        # print("length of back_half: ", len(back_half))
-        # for con in back_half:
-        #     print(con)
         if len(back_half) >= 1:
             back_half = back_half[random.randint(0, len(back_half)-1)]
-            # print("Node Exists_________________________________________________________")
-            # print(genome)
-            #input()
             front_half = [conGene for conGene in startingNodesToCheck if conGene.Y == back_half.x][0]
 
 
@@ -104,15 +91,8 @@ class Population(object):
             genome.connections.append(ConnectGene(x = back_half.x, Y = back_half.Y, innovation = back_half.innovation,
                                                   weight = connection.weight, enabled = True))
             genome.nodes.append(NodeGene(nodeNum = front_half.Y, t ="Hidden", layer = layer))
-            # print("Genome after add Node__________________________________________________")
-            # print(genome)
-            # #input()
-            # #return genome
-        else:
 
-            # print("Creating new node__________________________________________________")
-            # print(genome)
-            # input()
+        else:
             self.maxNodes += 1
             self.innovationCounter += 1
 
@@ -129,11 +109,6 @@ class Population(object):
                                                   innovation = self.innovationCounter, enabled = True, pair = self.pair))
             self.connectionList.append(ConnectGene(x = self.maxNodes, Y = connection.Y, innovation = self.innovationCounter))
             self.pair += 1
-            # print("New node: ", self.maxNodes)
-            # print(genome)
-            # input()
-            # return genome
-
 
     def calc_pop_adjusted_fitness(self):
         for list in self.currentPop:
@@ -205,11 +180,4 @@ def get_delta(genome, genome2):
         W = sum(list_weight_diffs)/len(list_weight_diffs)
     num_similarities = sum([1 for x in genome.connections for y in genome2.connections if x.innovation == y.innovation])
     E = len(genome.connections) + len(genome2.connections) - 2 * num_similarities
-    # print("genome1__________________________")
-    # print(genome)
-    # print("genome2_________________________")
-    # print(genome2)
-    # print("len g1:", len(genome.connections), "len g2", len(genome2.connections))
-    # print("num sims:", num_similarities)
-    # print("E", E)
     return (c1 * E / N) + c3 * W
