@@ -1,5 +1,6 @@
 import math
 
+
 class NeuralNet(object):
 
 
@@ -83,7 +84,10 @@ class NeuralNet(object):
             self.output.append(self.sigmoid(theta))
 
     def sigmoid(self, x):
-        return (1 / ( 1 + math.exp(-x)))
+        if x < 0:
+            return 1 - 1 / (1 + math.exp(x))
+        else:
+            return 1 / (1 + math.exp(-x))
         # return (1 / (1 + math.exp(-4.9 * x)))
 
 

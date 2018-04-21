@@ -2,8 +2,8 @@ import unittest
 
 from Genome import Genome
 from BuildNeuralNet import NeuralNet
-from ConnectGenes import ConnectGenes
-from NodeGenes import NodeGenes
+from ConnectGene import ConnectGene
+from NodeGene import NodeGene
 
 
 class test_build_neural_net(unittest.TestCase):
@@ -11,21 +11,21 @@ class test_build_neural_net(unittest.TestCase):
     connections = []
     nodes = []
 
-    nodes.append(NodeGenes(nodeNum = 1, t = 'Sensor'))
-    nodes.append(NodeGenes(nodeNum = 2, t = 'Sensor'))
-    nodes.append(NodeGenes(nodeNum = 3, t = 'Sensor'))
-    nodes.append(NodeGenes(nodeNum = 4, t = 'Hidden'))
-    nodes.append(NodeGenes(nodeNum = 5, t = 'Hidden'))
-    nodes.append(NodeGenes(nodeNum = 6, t = 'Output'))
-    connections.append(ConnectGenes(x = 1, Y = 4, weight = -10, enabled = True))
-    connections.append(ConnectGenes(x = 1, Y = 6, weight = -30, enabled = True))
-    connections.append(ConnectGenes(x = 1, Y = 5, weight = 30, enabled = True))
-    connections.append(ConnectGenes(x = 2, Y = 4, weight = 20, enabled = True))
-    connections.append(ConnectGenes(x = 2, Y = 5, weight = -20, enabled = True))
-    connections.append(ConnectGenes(x = 3, Y = 4, weight = 20, enabled = True))
-    connections.append(ConnectGenes(x = 3, Y = 5, weight = -20, enabled = True))
-    connections.append(ConnectGenes(x = 4, Y = 6, weight = 20, enabled = True))
-    connections.append(ConnectGenes(x = 5, Y = 6, weight = 20, enabled = True))
+    nodes.append(NodeGene(nodeNum = 1, t ='Sensor'))
+    nodes.append(NodeGene(nodeNum = 2, t ='Sensor'))
+    nodes.append(NodeGene(nodeNum = 3, t ='Sensor'))
+    nodes.append(NodeGene(nodeNum = 4, t ='Hidden'))
+    nodes.append(NodeGene(nodeNum = 5, t ='Hidden'))
+    nodes.append(NodeGene(nodeNum = 6, t ='Output'))
+    connections.append(ConnectGene(x = 1, Y = 4, weight = -10, enabled = True))
+    connections.append(ConnectGene(x = 1, Y = 6, weight = -30, enabled = True))
+    connections.append(ConnectGene(x = 1, Y = 5, weight = 30, enabled = True))
+    connections.append(ConnectGene(x = 2, Y = 4, weight = 20, enabled = True))
+    connections.append(ConnectGene(x = 2, Y = 5, weight = -20, enabled = True))
+    connections.append(ConnectGene(x = 3, Y = 4, weight = 20, enabled = True))
+    connections.append(ConnectGene(x = 3, Y = 5, weight = -20, enabled = True))
+    connections.append(ConnectGene(x = 4, Y = 6, weight = 20, enabled = True))
+    connections.append(ConnectGene(x = 5, Y = 6, weight = 20, enabled = True))
 
     genome = Genome(connections = connections, nodes = nodes)
     nn = NeuralNet(genome = genome)

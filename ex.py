@@ -1,52 +1,43 @@
-from src.ConnectGenes import ConnectGenes
-from src.NodeGenes import NodeGenes
-
-from BuildNeuralNet import NeuralNet
-from Genome import Genome
-connections = []
-nodes = []
-
-
-nodes.append(NodeGenes(nodeNum = 1, t = 'Sensor'))
-nodes.append(NodeGenes(nodeNum = 2, t = 'Sensor'))
-nodes.append(NodeGenes(nodeNum = 3, t = 'Sensor'))
-nodes.append(NodeGenes(nodeNum = 4, t = 'Hidden'))
-nodes.append(NodeGenes(nodeNum = 5, t = 'Hidden'))
-nodes.append(NodeGenes(nodeNum = 6, t = 'Output'))
+import random
+# a = [1]
+#
+# if a:
+#     print("empty?")
+#
 
 
-connections.append(ConnectGenes(x = 1, Y = 4, weight = -10, enabled = True))
-connections.append(ConnectGenes(x = 1, Y = 6, weight = -30, enabled = True))
-connections.append(ConnectGenes(x = 1, Y = 5, weight = 30, enabled = True))
-connections.append(ConnectGenes(x = 2, Y = 4, weight = 20, enabled = True))
-connections.append(ConnectGenes(x = 2, Y = 5, weight = -20, enabled = True))
-connections.append(ConnectGenes(x = 3, Y = 4, weight = 20, enabled = True))
-connections.append(ConnectGenes(x = 3, Y = 5, weight = -20, enabled = True))
-connections.append(ConnectGenes(x = 4, Y = 6, weight = 20, enabled = True))
-connections.append(ConnectGenes(x = 5, Y = 6, weight = 20, enabled = True))
+# listy1 = [1, 2, 7, 6, 1, 2]
+# listy2 = [1, 2, 3, 4, 5, 6]
+# to_delete = []
+# for index, num in enumerate(listy1):
+#     if num == 1:
+#         to_delete.append(index)
+# list.reverse(to_delete)
+# for index in to_delete:
+#     del listy2[index]
+# print(listy2)
+
+# listy1 = [1, 2, 7, 6, 1, 2]
+# listy2 = [1, 2, 3, 4, 5, 6]
+# listy2[:] = [del listy2[index] for index, spec in enumerate(listy2) for listy in listy1 if listy != 0]
+# print(listy2)
+
+# num_similarities = sum([1 for x in listy1 for y in listy2 if x == y])
+# print(num_similarities)
+# whatever = [abs(x - y) for x in listy1 for y in listy2 if x == y]
+# print("whatever:", whatever)
+# W = sum(whatever) / len(whatever)
+# print(W)
+
+#
+# num = sum([1 if x%2 == 0 else 0 for x in listy1])
+# print(num)
+
+#
+#
+# a = [11, 22, 33, 44]
+# for index, genome in enumerate(a):
+#     print(index, genome)
+#
 
 
-g = Genome()
-g.connections = connections
-g.nodes = nodes
-
-nn = NeuralNet(g)
-
-nn.build_neural_net()
-
-for key, value in nn.inputLayer.items():
-    print(str(key) +': '+ str(value))
-
-for key, value in nn.hiddenLayers.items():
-    print(str(key) +': '+ str(value))
-
-for key, value in nn.outputLayer.items():
-    print(str(key) +': '+ str(value))
-nn.predict([1,0,0])
-print("0 0 ", nn.output)
-nn.predict([1,1,1])
-print("1 1 ", nn.output)
-nn.predict([1,0,1])
-print("0 1 ", nn.output)
-nn.predict([1,1,0])
-print("1 0 ", nn.output)

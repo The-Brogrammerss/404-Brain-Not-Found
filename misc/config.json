@@ -1,0 +1,5 @@
+{
+  "max_weight": 100,
+  "min_weight": -100,
+  "test": "respond"
+}

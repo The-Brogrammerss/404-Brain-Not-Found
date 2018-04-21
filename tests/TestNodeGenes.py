@@ -1,12 +1,12 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
 
-import NodeGenes
+import NodeGene
 
 
 class test_node_attributes(unittest.TestCase):
     global ng
-    ng = NodeGenes.NodeGenes()
+    ng = NodeGene.NodeGene()
     ng.nodeNum = 1
     ng.type = "Sensor"
 

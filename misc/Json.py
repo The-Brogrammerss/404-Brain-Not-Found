@@ -8,6 +8,9 @@ def to_json(gnome):
         jsonfile.close()
 
 
-def from_jason():
-    print (json.loads('coolpole.json'))
-    # return json.loads('coolpole.json')
+def load_config(str):
+    # with open('config.json', 'r') as obj:
+    #     obj = json.load(obj)
+    #     print(obj)
+    obj = open("config.json")
+    return obj

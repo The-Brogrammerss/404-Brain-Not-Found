@@ -1,12 +1,12 @@
 # Kinda silly to pretty much test python but needed for code coverage
 import unittest
 
-import ConnectGenes
+import ConnectGene
 
 
 class test_connect_attributes(unittest.TestCase):
     global cg
-    cg = ConnectGenes.ConnectGenes()
+    cg = ConnectGene.ConnectGene()
     cg.x = 1
     cg.Y = 2
     cg.weight = 0.7
