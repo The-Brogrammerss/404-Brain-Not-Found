@@ -7,7 +7,7 @@ def get_xy():
 def get_fitness(NN):
 
     fitness = 0
-    _input = [[0,0,1],[1,1,1],[1,0,1],[0,1,1]]
+    _input = [[1,0,0],[1,1,1],[1,1,0],[1,0,1]]
     _output = [0,0,1,1]
     for i, inp in enumerate(_input):
         NN.predict(inp)

@@ -36,6 +36,7 @@ def generate_initial_population():
         for i in range(1, numY + 1):
             nodes.append(NodeGene(nodeNum =numInputs + i, t ='Output', layer = float('inf')))
 
+        nodes.append(NodeGenes(nodeNum = numInputs + numY + 1, t = 'Hidden', layer = 1))
         connections = []
 
         for i in range(1, numInputs + 1):
@@ -49,6 +50,12 @@ def generate_initial_population():
                     population.connectionList.append(ConnectGene(x = i, Y = j, innovation = innovation))
                 connections.append(ConnectGene(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
+
+        connections.append(ConnectGenes(x = 1, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter))
+        connections.append(ConnectGenes(x = 2, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 1))
+        connections.append(ConnectGenes(x = 3, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 2))
+
+        connections.append(ConnectGenes(x = numInputs + numY + 1, Y = 4 , weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 3))
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.currentPop = [population.currentPop]
@@ -164,7 +171,7 @@ def update_species_info():
     to_delete = []
     for index, species in enumerate(population.species):
         population.currentPop[index].sort(key=lambda x: x.fitness, reverse=True)
-        
+
         if species.max_fitness < population.currentPop[index][0].fitness:
             species.max_fitness = population.currentPop[index][0].fitness
         elif species.epochs_lived is not 0:
@@ -238,4 +245,3 @@ if '__main__' == __name__:
         print("main(), num nodes in champion:", len(listy[0].nodes))
         input("press key to render game")
         game.render_game(listy[0])
-
