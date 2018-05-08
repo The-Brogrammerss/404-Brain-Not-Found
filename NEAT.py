@@ -36,7 +36,7 @@ def generate_initial_population():
         for i in range(1, numY + 1):
             nodes.append(NodeGene(nodeNum =numInputs + i, t ='Output', layer = float('inf')))
 
-        nodes.append(NodeGenes(nodeNum = numInputs + numY + 1, t = 'Hidden', layer = 1))
+        nodes.append(NodeGene(nodeNum = numInputs + numY + 1, t = 'Hidden', layer = 1))
         connections = []
 
         for i in range(1, numInputs + 1):
@@ -51,11 +51,11 @@ def generate_initial_population():
                 connections.append(ConnectGene(x = i, Y = j, weight = random.randrange(-100, 100, 1), enabled = True, innovation=innovation))
 
 
-        connections.append(ConnectGenes(x = 1, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter))
-        connections.append(ConnectGenes(x = 2, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 1))
-        connections.append(ConnectGenes(x = 3, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 2))
+        connections.append(ConnectGene(x = 1, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter))
+        connections.append(ConnectGene(x = 2, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 1))
+        connections.append(ConnectGene(x = 3, Y = numInputs + numY + 1, weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 2))
 
-        connections.append(ConnectGenes(x = numInputs + numY + 1, Y = 4 , weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 3))
+        connections.append(ConnectGene(x = numInputs + numY + 1, Y = 4 , weight = random.randrange(-100, 100, 1), enabled = True, innovation=population.innovationCounter + 3))
         population.currentPop.append(Genome(connections = connections, nodes = nodes))
 
     population.currentPop = [population.currentPop]
@@ -204,7 +204,7 @@ if '__main__' == __name__:
     200 for cartpole
     """
     min_fitness_to_keep_living = -110
-    popCap = 500
+    popCap = 10
     population = Population()
     numInputs, numY = game.get_xy()
     numY = int(numY)
@@ -222,8 +222,7 @@ if '__main__' == __name__:
         next_gen.pair = population.pair
         next_gen.species = population.species
 
-        # for i, x in enumerate(population.currentPop):
-        #     print("main(): species " + str(i) + " has a pop of " + str(len(x)))
+
 
         for species in next_gen.species:
             species.allowed_offspring = int(round(popCap / len(next_gen.species)))
@@ -234,6 +233,9 @@ if '__main__' == __name__:
         run_game()
         update_species_info()
         population.calc_pop_adjusted_fitness()
+        for i, x in enumerate(population.currentPop):
+            print("main(): species " + str(i) + " champion has a fitness of " +
+                  str(population.currentPop[i][0].fitness))
 
     print("____________________Population Fitness__________________________")
     print("main(), num species", len(population.currentPop))

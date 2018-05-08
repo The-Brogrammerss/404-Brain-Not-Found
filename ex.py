@@ -1,4 +1,5 @@
 import random
+import math
 # a = [1]
 #
 # if a:
@@ -40,4 +41,11 @@ import random
 #     print(index, genome)
 #
 
+
+
+x = int(input("input number"))
+if x < -10000:
+    print (1 - 1 / (1 + math.exp(x)))
+else:
+    print( 1 / (1 + math.exp(-x)))
 
