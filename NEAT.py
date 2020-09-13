@@ -4,7 +4,7 @@ import random
 import gc
 import sys
 import time
-import numpy as np
+#import numpy as np
 
 from ConnectGene import ConnectGene
 from Genome import Genome
